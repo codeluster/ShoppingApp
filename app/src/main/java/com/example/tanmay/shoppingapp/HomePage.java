@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class HomePage extends AppCompatActivity {
 
 
@@ -26,14 +29,9 @@ public class HomePage extends AppCompatActivity {
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.homePageToolBar);
         setSupportActionBar(toolbar);
 
-        startService(new Intent(HomePage.this, ProductList.class));
+        ArrayList<Product> productList  =  new ProductList().getProductList();
 
-/*        ProductList productList = new ProductList();
-        Product someProduct = productList.productArrayList.get(0);
-        Integer Name = someProduct.getNameID();
 
-        TextView textView = (TextView)findViewById(R.id.textView);
-        textView.setText(Name.toString());*/
 
         Button button = findViewById(R.id.DummyProductPage);
         button.setOnClickListener(new View.OnClickListener() {
