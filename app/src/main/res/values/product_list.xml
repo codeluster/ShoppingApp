@@ -2,8 +2,13 @@
 <resources>
 
     <!-- Product 1 -->
-    <string name="product1Name">Beats Solo 3 Wireless</string>
+    <string name="product1Name">Beats Solo3 Wireless</string>
     <integer name="product1Price">15357</integer>
-    <string name="product1Description">With up to 40 hours of battery life, Beats Solo3 Wireless is your perfect everyday headphone. Get the most out of your music with an award-winning, emotionally charged Beats listening experience. Beats and Apple are changing the way you listen to music with the introduction of Apple W1 technology in Beats Solo3 Wireless. Incorporating the incredible W1 chip brings seamless setup and switching for your Apple devices*, amazing battery life, and 5-minute Fast Fuel charging.</string>
+    <string name="product1Description">With up to 40 hours of battery life, Beats Solo3 Wireless is your perfect everyday headphone. Get the most out of your music with an award-winning, emotionally charged Beats listening experience. Beats and Apple are changing the way you listen to music with the introduction of Apple W1 technology in Beats Solo3 Wireless. Incorporating the incredible W1 chip brings seamless setup and switching for your Apple devices, amazing battery life, and 5-minute Fast Fuel charging.</string>
+
+    <!-- Product 2 -->
+    <string name="product2Name">BeatsX</string>
+    <integer name="product2Price">7669</integer>
+    <string name="product2Description">Fit for your life, Beatsx earphones are the perfect wireless companion. With up to 8 hours of battery life and Fast Fuel technology, you can experience authentic, clear sound throughout your day.With Fast Fuel, 5 minutes of charging gets you 2 hours of playback when battery is low. With Siri-compatible RemoteTalk, you can take calls with an on-cable mic and play music with easy-to-use controls, seamlessly switching back and forth as you go about your day. </string>
 
 </resources>

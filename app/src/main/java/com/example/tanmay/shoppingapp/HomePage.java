@@ -24,13 +24,24 @@ import java.util.List;
 
 public class HomePage extends AppCompatActivity {
 
-    ListView productListView;
+    ArrayList<Product> productList;
 
+    ListView productListView;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.home_page, menu);
+
+
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        productList.clear();
+        finish();
+
     }
 
     @Override
@@ -41,7 +52,17 @@ public class HomePage extends AppCompatActivity {
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.homePageToolBar);
         setSupportActionBar(toolbar);
 
-        final ArrayList<Product> productList = new ProductList().getProductList();
+        ProductList co = new ProductList();
+        productList = co.getProductList();
+/*
+
+        Button YourCart = (Button) findViewById(R.id.YourCartAppBar);
+        YourCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomePage.this, com.example.tanmay.shoppingapp.YourCart.class));
+            }
+        });*/
 
         productListView = (ListView) findViewById(R.id.HomePageProductList);
 
@@ -52,11 +73,11 @@ public class HomePage extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Intent io = new Intent(HomePage.this, ProductPage.class);
-                io.putParcelableArrayListExtra("productList", productList);
+                io.putExtra("productInfo", productList.get(i));
                 startActivity(io);
+
             }
         });
-
 
     }
 
@@ -90,15 +111,9 @@ class ProductListAdapter extends ArrayAdapter<Product> {
         TextView productName = (TextView) convertView.findViewById(R.id.productListElementProductNameTextView);
         productName.setText(contentList.get(position).nameID);
 
-      /*  TextView priceView = (TextView) convertView.findViewById(R.id.productListElementPriceTextView);
-        priceView.setText(contentList.get(position).getPriceID());
-
-
-*/
-
-
         return convertView;
 
 
     }
+
 }

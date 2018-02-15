@@ -17,8 +17,7 @@ class ProductPage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_page)
 
-        val productList : ArrayList<Product> = intent.getParcelableArrayListExtra("productList");
-        val displayProduct : Product = productList.get(0)
+        val displayProduct: Product = intent.getParcelableExtra("productInfo")
 
 
         var seeMore: TextView
@@ -111,10 +110,12 @@ class ProductPage : AppCompatActivity() {
 
     fun expandDescription(seeMore: TextView, productDescription: TextView) {
 
+        productDescription.maxLines = 100;
+        seeMore.text = "SEE LESS"
+
         seeMore.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
-                productDescription.maxLines = 100;
-                seeMore.text = "SEE LESS"
+
                 collapseDescription(seeMore, productDescription)
 
             }
@@ -145,10 +146,13 @@ class ProductPage : AppCompatActivity() {
     }
 
     fun collapseDescription(seeMore: TextView, productDescription: TextView) {
+
+        productDescription.maxLines = 5;
+        seeMore.text = "SEE MORE"
+
         seeMore.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
-                productDescription.maxLines = 5;
-                seeMore.text = "SEE MORE"
+
                 expandDescription(seeMore, productDescription)
             }
         })

@@ -12,8 +12,6 @@ import java.util.ArrayList
 
 class ProductList {
 
-    internal var initialized = false
-
     companion object {
 
         internal val productArrayList = ArrayList<Product>()
@@ -22,28 +20,20 @@ class ProductList {
     private fun initialize() {
 
         productArrayList.add(Product(R.string.product1Name, R.integer.product1Price, R.drawable.product1image, R.drawable.product1thumbnail, R.string.product1Description))
+        productArrayList.add(Product(R.string.product2Name, R.integer.product2Price, R.drawable.product2image, R.drawable.product2thumbnail, R.string.product2Description))
 
     }
 
     fun getProductList(): ArrayList<Product> {
-
-        if (initialized != true) {
-            initialize()
-        }
-
+        initialize()
         return productArrayList
     }
 
 
     fun getProduct(index: Int): Product {
 
-        if (initialized != true) {
-            initialize()
-        }
-
         return productArrayList.get(index)
     }
-
 
 }
 
