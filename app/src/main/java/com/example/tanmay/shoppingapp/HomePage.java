@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -25,15 +26,24 @@ import java.util.List;
 public class HomePage extends AppCompatActivity {
 
     ArrayList<Product> productList;
+    ArrayList<CartElement> cartList;
 
     ListView productListView;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         getMenuInflater().inflate(R.menu.home_page, menu);
 
-
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.YourCartAppBar) {
+            startActivityForResult(sendCart(new Intent(HomePage.this, com.example.tanmay.shoppingapp.YourCart.class)), 457);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -54,16 +64,9 @@ public class HomePage extends AppCompatActivity {
 
         ProductList co = new ProductList();
         productList = co.getProductList();
-/*
 
-        Button YourCart = (Button) findViewById(R.id.YourCartAppBar);
-        YourCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(HomePage.this, com.example.tanmay.shoppingapp.YourCart.class));
-            }
-        });*/
 
+        cartList = new ArrayList<>();
 
         productListView = (ListView) findViewById(R.id.HomePageProductList);
 
@@ -75,12 +78,33 @@ public class HomePage extends AppCompatActivity {
 
                 Intent io = new Intent(HomePage.this, ProductPage.class);
                 io.putExtra("productInfo", productList.get(i));
-                startActivity(io);
+                startActivityForResult(sendCart(io), 999);
 
             }
         });
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 999 && resultCode == RESULT_OK) {
+            cartList = data.getParcelableArrayListExtra("Cart");
+        }
+
+        if (requestCode == 457 && resultCode == RESULT_OK){
+            cartList = data.getParcelableArrayListExtra("Cart");
+        }
+    }
+
+    private Intent sendCart(Intent intent) {
+
+        intent.putParcelableArrayListExtra("Cart", cartList);
+
+        return intent;
+
+    }
+
+
 
 }
 

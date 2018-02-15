@@ -1,26 +1,37 @@
 package com.example.tanmay.shoppingapp
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.Snackbar
+import android.view.Menu
 import android.view.View
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_product_page.*
 import org.w3c.dom.Text
+import java.util.ArrayList
 
 class ProductPage : AppCompatActivity() {
+    var cartList : ArrayList<CartElement> = ArrayList()
 
+    override fun onBackPressed() {
+        val intent:Intent = Intent()
+        intent.putExtra("Cart", cartList)
+        setResult(Activity.RESULT_OK, intent)
+        finish()
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_page)
 
         val displayProduct: Product = intent.getParcelableExtra("productInfo")
-
-
-        var seeMore: TextView
+        cartList = receiveCart(intent)
+        val seeMore: TextView
         val productDescription: TextView
         val productPrice: TextView
         val productImage: ImageView
@@ -60,11 +71,14 @@ class ProductPage : AppCompatActivity() {
 
                 if (canPurchase(quantityTextView, this@ProductPage)) {
 
+                    cartList.add(CartElement(displayProduct, quantityTextView.text.toString().toInt()))
+
                     //Create snackbar wuth option to Undo
                     Snackbar.make(coordinatorLayout, "Added To Cart", Snackbar.LENGTH_SHORT).setAction("UNDO", object : View.OnClickListener {
 
                         override fun onClick(p0: View?) {
 
+                            cartList.removeAt(cartList.size-1)
                             Toast.makeText(this@ProductPage, "Removed from Cart", Toast.LENGTH_SHORT).show()
 
                         }
@@ -106,7 +120,6 @@ class ProductPage : AppCompatActivity() {
         })
 
     }
-
 
     fun expandDescription(seeMore: TextView, productDescription: TextView) {
 
@@ -156,6 +169,20 @@ class ProductPage : AppCompatActivity() {
                 expandDescription(seeMore, productDescription)
             }
         })
+
+    }
+
+    private fun sendCart(intent: Intent, cartList: ArrayList<CartElement>): Intent {
+
+        intent.putParcelableArrayListExtra("Cart", cartList)
+
+        return intent
+
+    }
+
+    private fun receiveCart(intent: Intent): ArrayList<CartElement> {
+
+        return intent.getParcelableArrayListExtra<CartElement>("Cart")
 
     }
 
