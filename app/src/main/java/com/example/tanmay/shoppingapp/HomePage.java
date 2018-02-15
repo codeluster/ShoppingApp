@@ -64,6 +64,7 @@ public class HomePage extends AppCompatActivity {
             }
         });*/
 
+
         productListView = (ListView) findViewById(R.id.HomePageProductList);
 
         productListView.setAdapter(new ProductListAdapter(this, productList));
