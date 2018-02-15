@@ -48,8 +48,12 @@ class ProductPage : AppCompatActivity() {
         buyButton = ProductPageBuyButton
         addToCartButton = ProductPageAddToCartButton
 
-        productName.text = displayProduct.nameID.toString()
-        productPrice.text = displayProduct.priceID.toString()
+        productName.text = resources.getString(displayProduct.nameID)
+        productPrice.text = resources.getInteger(displayProduct.priceID).toString()
+        productDescription.text = resources.getString(displayProduct.descriptionID)
+        productImage.setImageResource(displayProduct.imageID)
+
+
 
         addToCartButton.setOnClickListener(object : View.OnClickListener {
 
