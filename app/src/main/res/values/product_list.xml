@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Product 1 -->
+    <string name="product1Name">Beats Solo 3 Wireless</string>
+    <integer name="product1Price">15357</integer>
+    <string name="product1Description">With up to 40 hours of battery life, Beats Solo3 Wireless is your perfect everyday headphone. Get the most out of your music with an award-winning, emotionally charged Beats listening experience. Beats and Apple are changing the way you listen to music with the introduction of Apple W1 technology in Beats Solo3 Wireless. Incorporating the incredible W1 chip brings seamless setup and switching for your Apple devices*, amazing battery life, and 5-minute Fast Fuel charging.</string>
+
+</resources>

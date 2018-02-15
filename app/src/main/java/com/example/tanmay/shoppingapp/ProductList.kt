@@ -21,7 +21,7 @@ class ProductList {
 
     private fun initialize() {
 
-        productArrayList.add(Product(0, 0, 0, 0, 0))
+        productArrayList.add(Product(R.string.product1Name, R.integer.product1Price, R.drawable.product1image, R.drawable.product1thumbnail, R.string.product1Description))
 
     }
 

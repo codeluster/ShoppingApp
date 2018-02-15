@@ -29,17 +29,19 @@ public class HomePage extends AppCompatActivity {
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.homePageToolBar);
         setSupportActionBar(toolbar);
 
-        ArrayList<Product> productList  =  new ProductList().getProductList();
-
+        final ArrayList<Product> productList = new ProductList().getProductList();
 
 
         Button button = findViewById(R.id.DummyProductPage);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomePage.this, ProductPage.class));
+                Intent intent = new Intent(HomePage.this, ProductPage.class);
+                intent.putParcelableArrayListExtra("productList", productList);
+                startActivity(intent);
             }
         });
+
 
 
     }
