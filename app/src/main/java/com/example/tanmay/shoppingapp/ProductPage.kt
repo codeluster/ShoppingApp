@@ -15,22 +15,30 @@ import org.w3c.dom.Text
 import java.util.ArrayList
 
 class ProductPage : AppCompatActivity() {
-    var cartList : ArrayList<CartElement> = ArrayList()
+
+    var cartList: ArrayList<CartElement> = ArrayList()
 
     override fun onBackPressed() {
-        val intent:Intent = Intent()
+
+        val intent: Intent = Intent()
+
         intent.putExtra("Cart", cartList)
+
         setResult(Activity.RESULT_OK, intent)
+
         finish()
 
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_product_page)
 
-        val displayProduct: Product = intent.getParcelableExtra("productInfo")
         cartList = receiveCart(intent)
+
+        val displayProduct: Product = intent.getParcelableExtra("productInfo")
         val seeMore: TextView
         val productDescription: TextView
         val productPrice: TextView
@@ -42,7 +50,6 @@ class ProductPage : AppCompatActivity() {
         val buyButton: Button
         val addToCartButton: Button
         val toolbar: android.support.v7.widget.Toolbar
-
 
         toolbar = productPageToolBar
         setSupportActionBar(toolbar)
@@ -63,8 +70,6 @@ class ProductPage : AppCompatActivity() {
         productDescription.text = resources.getString(displayProduct.descriptionID)
         productImage.setImageResource(displayProduct.imageID)
 
-
-
         addToCartButton.setOnClickListener(object : View.OnClickListener {
 
             override fun onClick(v: View?) {
@@ -78,10 +83,11 @@ class ProductPage : AppCompatActivity() {
 
                         override fun onClick(p0: View?) {
 
-                            cartList.removeAt(cartList.size-1)
+                            cartList.removeAt(cartList.size - 1)
                             Toast.makeText(this@ProductPage, "Removed from Cart", Toast.LENGTH_SHORT).show()
 
                         }
+
                     }).show()
 
                 }
@@ -91,14 +97,17 @@ class ProductPage : AppCompatActivity() {
         })
 
         seeMore.setOnClickListener(object : View.OnClickListener {
+
             override fun onClick(p0: View?) {
+
                 expandDescription(seeMore, productDescription)
+
             }
+
         })
 
         //Changes the quantity text according to Seekbar
         quantitySeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-
 
             override fun onStartTrackingTouch(p0: SeekBar?) {
 
@@ -117,6 +126,7 @@ class ProductPage : AppCompatActivity() {
                 quantityTextView.text = p1.toString()
 
             }
+
         })
 
     }
@@ -124,24 +134,30 @@ class ProductPage : AppCompatActivity() {
     fun expandDescription(seeMore: TextView, productDescription: TextView) {
 
         productDescription.maxLines = 100;
+
         seeMore.text = "SEE LESS"
 
         seeMore.setOnClickListener(object : View.OnClickListener {
+
             override fun onClick(p0: View?) {
 
                 collapseDescription(seeMore, productDescription)
 
             }
+
         })
+
     }
 
     fun canPurchase(quantity: TextView, context: Context): Boolean {
 
         if (QuantityIsNull(quantity)) {
-            nullQuantityToast(context)
-            return false
-        } else return true
 
+            nullQuantityToast(context)
+
+            return false
+
+        } else return true
 
     }
 
@@ -152,8 +168,11 @@ class ProductPage : AppCompatActivity() {
     }
 
     fun QuantityIsNull(quantity: TextView): Boolean {
+
         if (quantity.text == "0") {
+
             return true
+
         } else return false
 
     }
@@ -161,13 +180,17 @@ class ProductPage : AppCompatActivity() {
     fun collapseDescription(seeMore: TextView, productDescription: TextView) {
 
         productDescription.maxLines = 5;
+
         seeMore.text = "SEE MORE"
 
         seeMore.setOnClickListener(object : View.OnClickListener {
+
             override fun onClick(p0: View?) {
 
                 expandDescription(seeMore, productDescription)
+
             }
+
         })
 
     }

@@ -91,7 +91,7 @@ public class HomePage extends AppCompatActivity {
             cartList = data.getParcelableArrayListExtra("Cart");
         }
 
-        if (requestCode == 457 && resultCode == RESULT_OK){
+        if (requestCode == 457 && resultCode == RESULT_OK) {
             cartList = data.getParcelableArrayListExtra("Cart");
         }
     }
@@ -103,7 +103,6 @@ public class HomePage extends AppCompatActivity {
         return intent;
 
     }
-
 
 
 }

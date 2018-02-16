@@ -6,15 +6,14 @@ import android.os.IBinder
 import java.lang.reflect.Array
 import java.util.ArrayList
 
-/**
- * Created by tanmay on 13/2/18.
- */
+// Created by tanmay on 13/2/18.
 
 class ProductList {
 
     companion object {
 
         internal val productArrayList = ArrayList<Product>()
+
     }
 
     private fun initialize() {
@@ -25,16 +24,17 @@ class ProductList {
     }
 
     fun getProductList(): ArrayList<Product> {
-        initialize()
-        return productArrayList
-    }
 
+        initialize()
+
+        return productArrayList
+
+    }
 
     fun getProduct(index: Int): Product {
 
         return productArrayList.get(index)
+
     }
 
 }
-
-
