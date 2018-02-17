@@ -1,5 +1,6 @@
 package com.example.tanmay.shoppingapp;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -74,9 +75,14 @@ public class HomePage extends AppCompatActivity {
         ProductList co = new ProductList();
         productList = co.getProductList();
 
-        ProductListContract.PetDbHelper petDbHelper = new ProductListContract.PetDbHelper(HomePage.this, null, null,1);
+        //Create an instance of Database Helper
+        ProductListContract.PetDbHelper petDbHelper = new ProductListContract.PetDbHelper(HomePage.this, null, null, 1);
 
+        //getReadableDataBase creates or accesses one database
         SQLiteDatabase db = petDbHelper.getReadableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+
 
         cartList = new ArrayList<>();
 

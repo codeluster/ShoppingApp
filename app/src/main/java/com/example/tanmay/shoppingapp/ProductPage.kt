@@ -167,11 +167,7 @@ class ProductPage : AppCompatActivity() {
 
     fun QuantityIsNull(quantity: TextView): Boolean {
 
-        if (quantity.text == "0") {
-
-            return true
-
-        } else return false
+        return quantity.text == "0"
 
     }
 
