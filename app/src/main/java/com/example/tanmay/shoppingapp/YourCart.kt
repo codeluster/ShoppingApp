@@ -20,19 +20,17 @@ class YourCart : AppCompatActivity() {
 
         if (CartList.size > 0) {
             receivedCartElement = CartList.get(CartList.size - 1)
-        }
-        else{
-            receivedCartElement = CartElement(Product(0,0,0,0,0),0)
-        }
 
 
-        val prod: Product = receivedCartElement.getProduct()
+            val prod: Product = receivedCartElement.getProduct()
 
-        tv1.text = resources.getString(prod.nameID)
+            /*  tv1.text = resources.getString(prod.nameID)
         tv2.text = resources.getInteger(prod.priceID).toString()
         tv3.text = resources.getString(prod.descriptionID)
         tv4.text = resources.getInteger(receivedCartElement.quantityOrdered).toString()
+*/
+            tv1.text = CartList.size.toString()
+        }
 
-        tv1.text = CartList.size.toString()
     }
 }

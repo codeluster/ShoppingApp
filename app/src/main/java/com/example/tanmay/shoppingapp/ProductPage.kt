@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.constraint.ConstraintLayout
 import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.Snackbar
 import android.view.Menu
@@ -45,16 +46,14 @@ class ProductPage : AppCompatActivity() {
         val productImage: ImageView
         val productName: TextView
         val quantityTextView: TextView
-        val coordinatorLayout: CoordinatorLayout
+        val coordinatorLayout: ConstraintLayout
         val quantitySeekBar: SeekBar
-        val buyButton: Button
-        val addToCartButton: Button
         val toolbar: android.support.v7.widget.Toolbar
 
         toolbar = productPageToolBar
         setSupportActionBar(toolbar)
 
-        coordinatorLayout = ProductPageCoordinatorLayout
+        coordinatorLayout = ProductPageConstraintLayout
         productName = ProductPageProductName
         productImage = ProductPageProductImage
         productPrice = ProductPageProductPrice
@@ -62,15 +61,14 @@ class ProductPage : AppCompatActivity() {
         seeMore = ProductPageDescriptionSeeMore
         quantitySeekBar = ProductPageProductQuantitySeekBar
         quantityTextView = ProductPageProductQuantityTextView
-        buyButton = ProductPageBuyButton
-        addToCartButton = ProductPageAddToCartButton
+
 
         productName.text = resources.getString(displayProduct.nameID)
         productPrice.text = resources.getInteger(displayProduct.priceID).toString()
         productDescription.text = resources.getString(displayProduct.descriptionID)
         productImage.setImageResource(displayProduct.imageID)
 
-        addToCartButton.setOnClickListener(object : View.OnClickListener {
+/*        addToCartButton.setOnClickListener(object : View.OnClickListener {
 
             override fun onClick(v: View?) {
 
@@ -94,7 +92,7 @@ class ProductPage : AppCompatActivity() {
 
             }
 
-        })
+        })*/
 
         seeMore.setOnClickListener(object : View.OnClickListener {
 

@@ -2,6 +2,7 @@ package com.example.tanmay.shoppingapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -36,20 +37,28 @@ public class HomePage extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.home_page, menu);
 
         return true;
+
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         if (item.getItemId() == R.id.YourCartAppBar) {
+
             startActivityForResult(sendCart(new Intent(HomePage.this, com.example.tanmay.shoppingapp.YourCart.class)), 457);
+
         }
-        return super.onOptionsItemSelected(item);
+
+        //   return super.onOptionsItemSelected(item);
+        return true;
+
     }
 
     @Override
     public void onBackPressed() {
 
         productList.clear();
+
         finish();
 
     }
@@ -65,6 +74,9 @@ public class HomePage extends AppCompatActivity {
         ProductList co = new ProductList();
         productList = co.getProductList();
 
+        ProductListContract.PetDbHelper petDbHelper = new ProductListContract.PetDbHelper(HomePage.this, null, null,1);
+
+        SQLiteDatabase db = petDbHelper.getReadableDatabase();
 
         cartList = new ArrayList<>();
 
