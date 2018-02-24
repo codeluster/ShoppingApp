@@ -5,4 +5,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="cart">Cart</string>
+    <string name="listitem">Placeholder</string>
+    <string name="thumbnail_photo_of_product">Thumbnail photo of Product</string>
+    <string name="textview">TextView</string>
 </resources>
