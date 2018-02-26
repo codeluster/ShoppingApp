@@ -20,6 +20,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toolbar;
+import com.example.tanmay.shoppingapp.DataSet.ProductListContract;
+
+import com.example.tanmay.shoppingapp.DataSet.ProductListContract;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -72,14 +75,12 @@ public class HomePage extends AppCompatActivity {
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.homePageToolBar);
         setSupportActionBar(toolbar);
 
+        ProductListContract.ProductReaderDbHelper productReaderDbHelper  new ProductListContract.ProductReaderDbHelper(this, null, null, 1);
+
         ProductList co = new ProductList();
         productList = co.getProductList();
 
-        //Create an instance of Database Helper
-        ProductListContract.PetDbHelper petDbHelper = new ProductListContract.PetDbHelper(HomePage.this, null, null, 1);
 
-        //getReadableDataBase creates or accesses one database
-        SQLiteDatabase db = petDbHelper.getReadableDatabase();
 
         ContentValues contentValues = new ContentValues();
 
