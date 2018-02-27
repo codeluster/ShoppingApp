@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toolbar;
+
 import com.example.tanmay.shoppingapp.DataSet.ProductListContract;
 
 import com.example.tanmay.shoppingapp.DataSet.ProductListContract;
@@ -75,15 +77,24 @@ public class HomePage extends AppCompatActivity {
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.homePageToolBar);
         setSupportActionBar(toolbar);
 
-        ProductListContract.ProductReaderDbHelper productReaderDbHelper  new ProductListContract.ProductReaderDbHelper(this, null, null, 1);
+        ProductListContract.ProductReaderDbHelper productReaderDbHelper = new ProductListContract.ProductReaderDbHelper(this, null, null, 1);
+        SQLiteDatabase db = productReaderDbHelper.getWritableDatabase();
 
+        ContentValues values = new ContentValues();
+
+        values.put(ProductListContract.ProductListPrimary.COLUMN_NAME_PRODUCT_NAME, R.string.product1Name);
+
+        long newRowId = db.insert(ProductListContract.ProductListPrimary.TABLE_NAME, null, values);
+        Log.i("whateve", "onCreate: " + newRowId);
+
+        values.put(ProductListContract.ProductListPrimary.COLUMN_NAME_PRODUCT_NAME, R.string.product2Name);
+
+        long newRowId2 = db.insert(ProductListContract.ProductListPrimary.TABLE_NAME, null, values);
+        Log.i("whateve", "onCreate: " + newRowId2);
+
+        //ArrayList ProductList
         ProductList co = new ProductList();
         productList = co.getProductList();
-
-
-
-        ContentValues contentValues = new ContentValues();
-
 
         cartList = new ArrayList<>();
 
