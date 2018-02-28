@@ -3,7 +3,9 @@ package com.example.tanmay.shoppingapp;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -92,6 +94,34 @@ public class HomePage extends AppCompatActivity {
         long newRowId2 = db.insert(ProductListContract.ProductListPrimary.TABLE_NAME, null, values);
         Log.i("whateve", "onCreate: " + newRowId2);
 
+        //Projection is just the name of the columns we would like to receive
+        String[] projection = {
+
+                BaseColumns._ID,
+                ProductListContract.ProductListPrimary.COLUMN_NAME_PRODUCT_NAME
+
+        };
+
+        Cursor cursor = db.query(
+                ProductListContract.ProductListPrimary.TABLE_NAME,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                null
+
+        );
+
+        Integer count = cursor.getCount();
+
+        TextView co = findViewById(R.id.tvcount);
+        co.setText("No of rows in cursor : " + count.toString());
+
+        cursor.moveToPosition(0);
+        Integer name = cursor.getInt(cursor.getColumnIndex(ProductListContract.ProductListPrimary.COLUMN_NAME_PRODUCT_NAME));
+        co.append("\n " + getResources().getString(name));
+        /*
         //ArrayList ProductList
         ProductList co = new ProductList();
         productList = co.getProductList();
@@ -112,6 +142,9 @@ public class HomePage extends AppCompatActivity {
 
             }
         });
+*/
+
+        cursor.close();
 
     }
 
@@ -133,7 +166,6 @@ public class HomePage extends AppCompatActivity {
         return intent;
 
     }
-
 
 }
 
