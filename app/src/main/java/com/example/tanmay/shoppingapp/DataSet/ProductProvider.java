@@ -10,8 +10,6 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.example.tanmay.shoppingapp.ProductList;
-
 /**
  * Created by tanmay on 28/2/18.
  */
@@ -29,11 +27,13 @@ public class ProductProvider extends ContentProvider {
 
         sUriMatcher.addURI(ProductListContract.CONTENT_AUTHORITY, ProductListContract.ProductListPrimary.TABLE_NAME, ProductListTable);
         sUriMatcher.addURI(ProductListContract.CONTENT_AUTHORITY, ProductListContract.ProductListPrimary.TABLE_NAME + "/#", ProductListRow);
+
     }
 
     @Override
     public boolean onCreate() {
 
+        //Creates a new DbHelper object
         productReaderDbHelper = new ProductListContract.ProductReaderDbHelper(getContext(), null, null, 1);
 
         return true;
@@ -43,15 +43,20 @@ public class ProductProvider extends ContentProvider {
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
 
+        //  Obtain a copy of the database
         SQLiteDatabase sqLiteDatabase = productReaderDbHelper.getReadableDatabase();
 
+        //  This cursor holds the result from the query.
         Cursor cursor = null;
 
+        //  Switch to perform specific kind of query based on type of Uri
         switch (sUriMatcher.match(uri)) {
 
+            //  Uri demanding entire table with the criteria defined in the fundtion params
             case ProductListTable:
-                cursor = sqLiteDatabase.query(
 
+                //  All the argumnets are the ones passed
+                cursor = sqLiteDatabase.query(
                         ProductListContract.ProductListPrimary.TABLE_NAME,
                         projection,
                         selection,
@@ -63,10 +68,10 @@ public class ProductProvider extends ContentProvider {
 
                 break;
 
-
-
+            //  Uri demanding a particular row item.
             case ProductListRow:
 
+                //  "?" is a wildcard which gets replaced by any integer
                 selection = ProductListContract.ProductListPrimary._ID + "=?";
                 selectionArgs = new String[]{String.valueOf((ContentUris.parseId(uri)))};
 
