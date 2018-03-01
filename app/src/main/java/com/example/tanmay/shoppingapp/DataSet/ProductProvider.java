@@ -1,6 +1,7 @@
 package com.example.tanmay.shoppingapp.DataSet;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -49,11 +50,78 @@ public class ProductProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Cursor query(@NonNull Uri uri, @Nullable String[] strings, @Nullable String s, @Nullable String[] strings1, @Nullable String s1) {
+    public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
 
         SQLiteDatabase sqLiteDatabase = productReaderDbHelper.getReadableDatabase();
 
-        Cursor cursor;
+        Cursor cursor = null;
+
+        switch (sUriMatcher.match(uri)) {
+
+            case tableproductListPrimary:
+                cursor = sqLiteDatabase.query(
+
+                        ProductListContract.ProductListPrimary.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+
+                break;
+
+            case tableproddutcListMetaData:
+                cursor = sqLiteDatabase.query(
+
+                        ProductListContract.ProductListMetaData.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+
+                break;
+
+            case tableproductImages:
+
+                cursor = sqLiteDatabase.query(
+
+                        ProductListContract.ProductListProductImages.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+
+                break;
+
+
+            case tableproductListPrimary_ID:
+
+                selection = ProductListContract.ProductListPrimary._ID + "=?";
+                selectionArgs = new String[]{String.valueOf((ContentUris.parseId(uri)))};
+
+                cursor = sqLiteDatabase.query(
+
+                        ProductListContract.ProductListPrimary.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+
+                break;
+
+
+        }
 
         return cursor;
     }
