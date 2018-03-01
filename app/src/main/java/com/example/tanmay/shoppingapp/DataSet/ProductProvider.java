@@ -20,24 +20,15 @@ public class ProductProvider extends ContentProvider {
 
     ProductListContract.ProductReaderDbHelper productReaderDbHelper;
 
-    private static final int tableproductListPrimary = 1;
-    private static final int tableproddutcListMetaData = 2;
-    private static final int tableproductImages = 3;
-
-    private static final int tableproductListPrimary_ID = 4;
-    private static final int tableproddutcListMetaData_ID = 5;
-    private static final int tableproductImages_ID = 6;
+    private static final int ProductListTable = 1;
+    private static final int ProductListRow = 2;
 
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
 
-        sUriMatcher.addURI(ProductListContract.CONTENT_AUTHORITY, ProductListContract.ProductListPrimary.TABLE_NAME, tableproductListPrimary);
-        sUriMatcher.addURI(ProductListContract.CONTENT_AUTHORITY, ProductListContract.ProductListMetaData.TABLE_NAME, tableproddutcListMetaData);
-        sUriMatcher.addURI(ProductListContract.CONTENT_AUTHORITY, ProductListContract.ProductListProductImages.TABLE_NAME, tableproductImages);
-        sUriMatcher.addURI(ProductListContract.CONTENT_AUTHORITY, ProductListContract.ProductListPrimary.TABLE_NAME + "/#", tableproductListPrimary_ID);
-        sUriMatcher.addURI(ProductListContract.CONTENT_AUTHORITY, ProductListContract.ProductListMetaData.TABLE_NAME + "/#", tableproddutcListMetaData_ID);
-        sUriMatcher.addURI(ProductListContract.CONTENT_AUTHORITY, ProductListContract.ProductListProductImages.TABLE_NAME + "/#", tableproductImages_ID);
+        sUriMatcher.addURI(ProductListContract.CONTENT_AUTHORITY, ProductListContract.ProductListPrimary.TABLE_NAME, ProductListTable);
+        sUriMatcher.addURI(ProductListContract.CONTENT_AUTHORITY, ProductListContract.ProductListPrimary.TABLE_NAME + "/#", ProductListRow);
     }
 
     @Override
@@ -58,7 +49,7 @@ public class ProductProvider extends ContentProvider {
 
         switch (sUriMatcher.match(uri)) {
 
-            case tableproductListPrimary:
+            case ProductListTable:
                 cursor = sqLiteDatabase.query(
 
                         ProductListContract.ProductListPrimary.TABLE_NAME,
@@ -72,37 +63,9 @@ public class ProductProvider extends ContentProvider {
 
                 break;
 
-            case tableproddutcListMetaData:
-                cursor = sqLiteDatabase.query(
-
-                        ProductListContract.ProductListMetaData.TABLE_NAME,
-                        projection,
-                        selection,
-                        selectionArgs,
-                        null,
-                        null,
-                        sortOrder
-                );
-
-                break;
-
-            case tableproductImages:
-
-                cursor = sqLiteDatabase.query(
-
-                        ProductListContract.ProductListProductImages.TABLE_NAME,
-                        projection,
-                        selection,
-                        selectionArgs,
-                        null,
-                        null,
-                        sortOrder
-                );
-
-                break;
 
 
-            case tableproductListPrimary_ID:
+            case ProductListRow:
 
                 selection = ProductListContract.ProductListPrimary._ID + "=?";
                 selectionArgs = new String[]{String.valueOf((ContentUris.parseId(uri)))};
