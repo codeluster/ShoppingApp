@@ -33,7 +33,6 @@ public class HomePage extends AppCompatActivity {
 
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,16 +49,20 @@ public class HomePage extends AppCompatActivity {
         //Projection is just the name of the columns we would like to receive
         String[] projection = {
 
-                BaseColumns._ID,
+                ProductEntry._ID,
                 ProductEntry.COLUMN_NAME_PRODUCT_NAME
 
         };
 
 
         Cursor cursorNew = getContentResolver().query(ProductEntry.CONTENT_URI, projection, null, null, null);
+        cursorNew.moveToNext();
+        int uweh = cursorNew.getInt(cursorNew.getColumnIndex(ProductEntry.COLUMN_NAME_PRODUCT_NAME));
+        TextView coco = findViewById(R.id.e83957);
+        coco.getResources().getString(uweh);
 
         ListView listView = findViewById(R.id.productList_homepage);
-        listView.setAdapter(new productListAdapter(HomePage.this, cursorNew));
+    //    listView.setAdapter(new productListAdapter(HomePage.this, cursorNew));
 
 
     }
@@ -70,7 +73,11 @@ public class HomePage extends AppCompatActivity {
         ContentValues values = new ContentValues();
 
         //The values contains all the data to be entered into the table
+        values.put(ProductEntry._ID, 67);
         values.put(ProductEntry.COLUMN_NAME_PRODUCT_NAME, R.string.product1Name);
+        values.put(ProductEntry.COLUMN_NAME_PRODUCT_PRICE, R.integer.product1Price);
+        values.put(ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL, R.drawable.product1thumbnail);
+        values.put(ProductEntry.COLUMN_NAME_PRODUCT_IMAGE, R.drawable.product1image);
 
         // values.put(ProductEntry.COLUMN_NAME_PRODUCT_NAME, R.string.product2Name);
 
@@ -78,7 +85,6 @@ public class HomePage extends AppCompatActivity {
 
 
     }
-
 
     private class productListAdapter extends CursorAdapter {
 
@@ -111,6 +117,5 @@ public class HomePage extends AppCompatActivity {
         }
 
     }
-
 
 }
