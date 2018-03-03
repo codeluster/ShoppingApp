@@ -9,6 +9,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
+
+import com.example.tanmay.shoppingapp.ProductList;
 
 /**
  * Created by tanmay on 28/2/18.
@@ -43,7 +46,7 @@ public class ProductProvider extends ContentProvider {
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
 
-        //  Obtain a copy of the database
+        //  Obtain a read-only copy of the database
         SQLiteDatabase sqLiteDatabase = productReaderDbHelper.getReadableDatabase();
 
         //  This cursor holds the result from the query.
@@ -88,10 +91,10 @@ public class ProductProvider extends ContentProvider {
 
                 break;
 
-
         }
 
         return cursor;
+
     }
 
     @Nullable
@@ -103,7 +106,40 @@ public class ProductProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues contentValues) {
-        return null;
+
+        SQLiteDatabase sqLiteDatabase = ProductListContract.ProductReaderDbHelper.
+
+        final int match = sUriMatcher.match(uri);
+
+        switch (match) {
+
+            case ProductListTable:
+                return insertProduct(uri, contentValues);
+
+            default:
+                throw new IllegalArgumentException("Insertion is not supported for " + uri);
+
+        }
+
+    }
+
+    public Uri insertProduct(Uri uri, ContentValues contentValues) {
+
+        ProductListContract.ProductReaderDbHelper mDbHelpwe = new ProductListContract.ProductReaderDbHelper(getContext(), null, null, 1);
+
+        SQLiteDatabase db = mDbHelpwe.getWritableDatabase();
+
+        long id = db.insert(ProductListContract.ProductListPrimary.TABLE_NAME, null, contentValues);
+
+        if (id == -1) {
+
+            Log.e("com.whatever.tag", "Failed to insert row for " + uri);
+
+            return null;
+
+        }
+
+        return ContentUris.withAppendedId(uri, id);
     }
 
     @Override
