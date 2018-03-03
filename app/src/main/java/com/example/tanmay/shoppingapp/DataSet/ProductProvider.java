@@ -90,7 +90,7 @@ public class ProductProvider extends ContentProvider {
 
         final int match = sUriMatcher.match(uri);
 
-        switch () {
+        switch (match) {
 
             case ProductListTable:
                 return ProductEntry.CONTENT_LIST_TYPE;
@@ -113,7 +113,7 @@ public class ProductProvider extends ContentProvider {
 
             case ProductListTable:
 
-                return insertProduct(uri, contentValues)
+                return insertProduct(uri, contentValues);
 
             default:
                 throw new IllegalArgumentException("Insertion is not supported for " + uri);
