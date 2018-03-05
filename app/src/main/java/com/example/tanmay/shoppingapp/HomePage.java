@@ -24,6 +24,7 @@ public class HomePage extends AppCompatActivity {
 
     String TAG = "com.whatever.tag";
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -59,10 +60,10 @@ public class HomePage extends AppCompatActivity {
         cursorNew.moveToNext();
         int uweh = cursorNew.getInt(cursorNew.getColumnIndex(ProductEntry.COLUMN_NAME_PRODUCT_NAME));
         TextView coco = findViewById(R.id.e83957);
-        coco.getResources().getString(uweh);
+        coco.setText(uweh);
 
         ListView listView = findViewById(R.id.productList_homepage);
-    //    listView.setAdapter(new productListAdapter(HomePage.this, cursorNew));
+        listView.setAdapter(new productListAdapter(HomePage.this, cursorNew));
 
 
     }
@@ -73,7 +74,6 @@ public class HomePage extends AppCompatActivity {
         ContentValues values = new ContentValues();
 
         //The values contains all the data to be entered into the table
-        values.put(ProductEntry._ID, 67);
         values.put(ProductEntry.COLUMN_NAME_PRODUCT_NAME, R.string.product1Name);
         values.put(ProductEntry.COLUMN_NAME_PRODUCT_PRICE, R.integer.product1Price);
         values.put(ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL, R.drawable.product1thumbnail);
@@ -111,8 +111,8 @@ public class HomePage extends AppCompatActivity {
             /*id.setText(cursor.getInt(cursor.getColumnIndexOrThrow(ProductEntry._ID)));
             name.setText(getResources().getString(cursor.getInt(cursor.getColumnIndexOrThrow(ProductEntry.COLUMN_NAME_PRODUCT_NAME))));*/
 
-            idBox.setText("efui");
-            nameBox.setText("awefui");
+            /*idBox.setText("efui");
+            nameBox.setText("awefui");*/
 
         }
 
