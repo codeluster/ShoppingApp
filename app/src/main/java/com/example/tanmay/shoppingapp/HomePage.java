@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -56,11 +57,6 @@ public class HomePage extends AppCompatActivity {
         };
 
         Cursor cursorNew = getContentResolver().query(ProductEntry.CONTENT_URI, projection, null, null, null);
-        cursorNew.moveToNext();
-
-         int uweh = cursorNew.getInt(cursorNew.getColumnIndex(ProductEntry.COLUMN_NAME_PRODUCT_NAME));
-        TextView coco = findViewById(R.id.e83957);
-        coco.setText(uweh);
 
         ListView listView = findViewById(R.id.productList_homepage);
         listView.setAdapter(new productListAdapter(HomePage.this, cursorNew));
@@ -93,6 +89,7 @@ public class HomePage extends AppCompatActivity {
         @Override
         public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
 
+            Log.i(TAG, "newView: View created");
             return LayoutInflater.from(context).inflate(R.layout.dummy_item, viewGroup, false);
 
         }
