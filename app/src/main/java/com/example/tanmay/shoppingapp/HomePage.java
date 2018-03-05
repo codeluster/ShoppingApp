@@ -55,21 +55,19 @@ public class HomePage extends AppCompatActivity {
 
         };
 
-
         Cursor cursorNew = getContentResolver().query(ProductEntry.CONTENT_URI, projection, null, null, null);
         cursorNew.moveToNext();
-        int uweh = cursorNew.getInt(cursorNew.getColumnIndex(ProductEntry.COLUMN_NAME_PRODUCT_NAME));
+
+         int uweh = cursorNew.getInt(cursorNew.getColumnIndex(ProductEntry.COLUMN_NAME_PRODUCT_NAME));
         TextView coco = findViewById(R.id.e83957);
         coco.setText(uweh);
 
         ListView listView = findViewById(R.id.productList_homepage);
         listView.setAdapter(new productListAdapter(HomePage.this, cursorNew));
 
-
     }
 
     private void insertProduct() {
-
 
         ContentValues values = new ContentValues();
 
@@ -79,17 +77,16 @@ public class HomePage extends AppCompatActivity {
         values.put(ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL, R.drawable.product1thumbnail);
         values.put(ProductEntry.COLUMN_NAME_PRODUCT_IMAGE, R.drawable.product1image);
 
-        // values.put(ProductEntry.COLUMN_NAME_PRODUCT_NAME, R.string.product2Name);
-
         Uri newUri = getContentResolver().insert(ProductEntry.CONTENT_URI, values);
-
 
     }
 
     private class productListAdapter extends CursorAdapter {
 
         public productListAdapter(Context context, Cursor c) {
+
             super(context, c);
+
         }
 
         //Returns a new blank view
@@ -104,15 +101,8 @@ public class HomePage extends AppCompatActivity {
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
 
-
             idBox = (TextView) findViewById(R.id.dummy_item_id_box);
             nameBox = (TextView) findViewById(R.id.dummy_item_name_box);
-
-            /*id.setText(cursor.getInt(cursor.getColumnIndexOrThrow(ProductEntry._ID)));
-            name.setText(getResources().getString(cursor.getInt(cursor.getColumnIndexOrThrow(ProductEntry.COLUMN_NAME_PRODUCT_NAME))));*/
-
-            /*idBox.setText("efui");
-            nameBox.setText("awefui");*/
 
         }
 
