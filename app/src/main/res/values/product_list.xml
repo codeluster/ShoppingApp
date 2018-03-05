@@ -11,4 +11,9 @@
     <integer name="product2Price">7669</integer>
     <string name="product2Description">Fit for your life, Beatsx earphones are the perfect wireless companion. With up to 8 hours of battery life and Fast Fuel technology, you can experience authentic, clear sound throughout your day.With Fast Fuel, 5 minutes of charging gets you 2 hours of playback when battery is low. With Siri-compatible RemoteTalk, you can take calls with an on-cable mic and play music with easy-to-use controls, seamlessly switching back and forth as you go about your day. </string>
 
+    <!--Product 3-->
+    <string name="product3Name">XTfree BT Sport Earbud</string>
+    <integer name="product3Price">5999</integer>
+    <string name="product3Description">Coming in at just under 16g, it’s not just our most secure and sweat-resistant earbud, it’s also one of the lightest wireless Sport earbuds on the market.6-hour battery life and sweat resistant build keep you and your earbuds going in more ways than one.Switch up the playlist to stay motivated, or take calls using the convenient microphone and remote.</string>
+
 </resources>

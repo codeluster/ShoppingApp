@@ -28,9 +28,10 @@ public class ProductDbHelper extends SQLiteOpenHelper {
     public static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + TABLE_NAME + " (" +
                     _ID + " INTEGER PRIMARY KEY, " +
+                    COLUMN_NAME_PRODUCT_THUMBNAIL + " INTEGER, " +
                     COLUMN_NAME_PRODUCT_NAME + " INTEGER, " +
                     COLUMN_NAME_PRODUCT_PRICE + " INTEGER, " +
-                    COLUMN_NAME_PRODUCT_THUMBNAIL + " INTEGER, " +
+
                     COLUMN_NAME_PRODUCT_IMAGE + " INTEGER)";
     //  Checks if a particular table already exists and then deletes it.
     private static final String SQL_DELETE_ENTRIES =
