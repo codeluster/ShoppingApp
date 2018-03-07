@@ -19,7 +19,7 @@ public class CartContract {
     private CartContract() {
     }
 
-    private static class CartEntry implements BaseColumns {
+    public static class CartEntry implements BaseColumns {
 
         //Name of the table
         public static final String TABLE_NAME = "cart";
