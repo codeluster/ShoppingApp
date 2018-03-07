@@ -67,5 +67,4 @@ public class ProductDbHelper extends SQLiteOpenHelper {
 
     }
 
-
 }
