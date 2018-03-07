@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ShoppingApp.iml" filepath="$PROJECT_DIR$/ShoppingApp.iml" />
+      <module fileurl="file://C:\Users\tanma\AndroidStudioProjects\ShoppingApp\ShoppingApp.iml" filepath="C:\Users\tanma\AndroidStudioProjects\ShoppingApp\ShoppingApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\tanma\AndroidStudioProjects\ShoppingApp\app\app.iml" filepath="C:\Users\tanma\AndroidStudioProjects\ShoppingApp\app\app.iml" />
     </modules>
   </component>
 </project>

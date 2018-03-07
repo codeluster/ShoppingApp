@@ -15,8 +15,7 @@ public class ProductListContract {
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     //Empty constructor to prevent instantiation
-    private ProductListContract() {
-    }
+    private ProductListContract() {}
 
     public static class ProductEntry implements BaseColumns {
 
