@@ -25,7 +25,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.tanmay.shoppingapp.HomePage" />
         </activity>
-        <activity android:name=".YourCart" />
+        <activity
+            android:name=".YourCart"
+            android:label="@string/title_activity_your_cart"
+            android:parentActivityName=".HomePage"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tanmay.shoppingapp.HomePage" />
+        </activity>
 
         <provider
             android:name=".DataSet.ProductProvider"

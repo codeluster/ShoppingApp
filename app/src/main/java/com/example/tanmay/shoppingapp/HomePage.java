@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -36,6 +37,16 @@ public class HomePage extends AppCompatActivity {
 
         return true;
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.YourCartAppBar){
+            startActivity(new Intent(HomePage.this, YourCart.class));
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
