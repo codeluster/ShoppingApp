@@ -47,6 +47,8 @@ public class ProductPage extends AppCompatActivity {
         //Selection and selectionArgs are null becuase they get overriden in the ProductProvider's URI Matcher
         Cursor cursor = getContentResolver().query(xacv, projection, null, null, null);
 
+        cursor.moveToFirst();
+
         prodID = cursor.getInt(cursor.getColumnIndexOrThrow(ProductListContract.ProductEntry._ID));
         prodNameID = cursor.getInt(cursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME));
         prodPriceID = cursor.getInt(cursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE));

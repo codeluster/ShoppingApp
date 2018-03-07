@@ -82,7 +82,6 @@ public class HomePage extends AppCompatActivity {
 
                 TextView fhu = view.findViewById(R.id.f249873);
                 intent.putExtra("itemClicked", fhu.getText().toString());
-                cursorNew.close();
                 startActivity(intent);
             }
         });
