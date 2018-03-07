@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import static com.example.tanmay.shoppingapp.DataSet.ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION;
 import static com.example.tanmay.shoppingapp.DataSet.ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_IMAGE;
 import static com.example.tanmay.shoppingapp.DataSet.ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME;
 import static com.example.tanmay.shoppingapp.DataSet.ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE;
@@ -31,7 +32,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
                     COLUMN_NAME_PRODUCT_THUMBNAIL + " INTEGER, " +
                     COLUMN_NAME_PRODUCT_NAME + " INTEGER, " +
                     COLUMN_NAME_PRODUCT_PRICE + " INTEGER, " +
-
+                    COLUMN_NAME_PRODUCT_DESCRIPTION + " INTEGER, " +
                     COLUMN_NAME_PRODUCT_IMAGE + " INTEGER)";
     //  Checks if a particular table already exists and then deletes it.
     private static final String SQL_DELETE_ENTRIES =

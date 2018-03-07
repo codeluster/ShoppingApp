@@ -27,7 +27,7 @@ public class HomePage extends AppCompatActivity {
 
 
     String TAG = "com.whatever.tag";
-
+    Cursor cursorNew;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,19 +70,23 @@ public class HomePage extends AppCompatActivity {
 
         };
 
-        Cursor cursorNew = getContentResolver().query(ProductEntry.CONTENT_URI, projection, null, null, null);
+        cursorNew = getContentResolver().query(ProductEntry.CONTENT_URI, projection, null, null, null);
 
         ListView listView = findViewById(R.id.productList_homepage);
         listView.setAdapter(new productListAdapter(HomePage.this, cursorNew));
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int itemClicked, long l) {
                 Intent intent = new Intent(HomePage.this, ProductPage.class);
-                intent.putExtra("itemClicked",i);
+
+                TextView fhu = view.findViewById(R.id.f249873);
+                intent.putExtra("itemClicked", fhu.getText().toString());
+                cursorNew.close();
                 startActivity(intent);
             }
         });
+
 
     }
 
@@ -95,6 +99,7 @@ public class HomePage extends AppCompatActivity {
         values.put(ProductEntry.COLUMN_NAME_PRODUCT_PRICE, R.integer.product1Price);
         values.put(ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL, R.drawable.product1thumbnail);
         values.put(ProductEntry.COLUMN_NAME_PRODUCT_IMAGE, R.drawable.product1image);
+        values.put(ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION, R.string.product1Description);
         getContentResolver().insert(ProductEntry.CONTENT_URI, values);
 
         //Product 2
@@ -102,6 +107,7 @@ public class HomePage extends AppCompatActivity {
         values.put(ProductEntry.COLUMN_NAME_PRODUCT_PRICE, R.integer.product2Price);
         values.put(ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL, R.drawable.product2thumbnail);
         values.put(ProductEntry.COLUMN_NAME_PRODUCT_IMAGE, R.drawable.product2image);
+        values.put(ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION, R.string.product2Description);
         getContentResolver().insert(ProductEntry.CONTENT_URI, values);
 
         //Product 3
@@ -109,6 +115,7 @@ public class HomePage extends AppCompatActivity {
         values.put(ProductEntry.COLUMN_NAME_PRODUCT_PRICE, R.integer.product3Price);
         values.put(ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL, R.drawable.product3thumbnail);
         values.put(ProductEntry.COLUMN_NAME_PRODUCT_IMAGE, R.drawable.product3image);
+        values.put(ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION, R.string.product3Description);
         getContentResolver().insert(ProductEntry.CONTENT_URI, values);
 
     }
@@ -139,9 +146,13 @@ public class HomePage extends AppCompatActivity {
 
             name = view.findViewById(R.id.productListElementProductNameTextView);
             thumbnail = view.findViewById(R.id.productListElementImageView);
+            TextView id = view.findViewById(R.id.f249873);
+
+            Integer geihl = cursor.getInt(cursor.getColumnIndexOrThrow(ProductEntry._ID));
 
             name.setText(cursor.getInt(cursor.getColumnIndexOrThrow(ProductEntry.COLUMN_NAME_PRODUCT_NAME)));
             thumbnail.setImageResource(cursor.getInt(cursor.getColumnIndexOrThrow(ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL)));
+            id.setText(geihl.toString());
 
         }
 

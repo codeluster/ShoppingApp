@@ -32,11 +32,12 @@ public class ProductListContract {
         public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + TABLE_NAME;
 
         //  Names of various columns
-        public static final String COLUMN_NAME_PRODUCT_NAME = "name";
         public static final String _ID = BaseColumns._ID;
+        public static final String COLUMN_NAME_PRODUCT_NAME = "name";
         public static final String COLUMN_NAME_PRODUCT_PRICE = "price";
         public static final String COLUMN_NAME_PRODUCT_THUMBNAIL = "thumbnail";
         public static final String COLUMN_NAME_PRODUCT_IMAGE = "image";
+        public static final String COLUMN_NAME_PRODUCT_DESCRIPTION = "description";
 
 
     }

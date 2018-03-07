@@ -16,15 +16,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProductPage" />
-
-        <activity android:name=".YourCart"></activity>
+        <activity
+            android:name=".ProductPage"
+            android:label="@string/title_activity_product_page"
+            android:parentActivityName=".HomePage"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tanmay.shoppingapp.HomePage" />
+        </activity>
+        <activity android:name=".YourCart" />
 
         <provider
             android:name=".DataSet.ProductProvider"
             android:authorities="com.example.tanmay.shoppingapp"
             android:exported="false" />
-
     </application>
 
 </manifest>
