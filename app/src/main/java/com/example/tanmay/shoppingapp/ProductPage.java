@@ -49,7 +49,7 @@ public class ProductPage extends AppCompatActivity {
         // A new Uri with the the row number appended as "/#" wildcard
         Uri xacv = Uri.withAppendedPath(ProductListContract.ProductEntry.CONTENT_URI, getIntent().getStringExtra("itemClicked"));
 
-        //Selection and selectionArgs are null becuase they get overriden in the ProductProvider's URI Matcher
+        //Selection and selectionArgs are null becuase they get overriden in the DataProvider's URI Matcher
         Cursor cursor = getContentResolver().query(xacv, projection, null, null, null);
 
         cursor.moveToFirst();

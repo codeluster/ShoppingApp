@@ -11,31 +11,41 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.example.tanmay.shoppingapp.DataSet.ProductListContract.ProductEntry;
+
 /**
- * Created by tanma on 07-03-2018.
+ * Created by tanmay on 28/2/18.
  */
 
-public class CartProvider extends ContentProvider {
+public class DataProvider extends ContentProvider {
 
-    private static final int CartListTable = 1;
-    private static final int CartListRow = 2;
+    private static final int ProductListTable = 1;
+    private static final int ProductListRow = 2;
+    private static final int CartListTable = 3;
+    private static final int CartListRow = 4;
 
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
 
+        sUriMatcher.addURI(ProductListContract.CONTENT_AUTHORITY, ProductEntry.TABLE_NAME, ProductListTable);
+        sUriMatcher.addURI(ProductListContract.CONTENT_AUTHORITY, ProductEntry.TABLE_NAME + "/#", ProductListRow);
         sUriMatcher.addURI(CartContract.CONTENT_AUTHORITY, CartContract.CartEntry.TABLE_NAME, CartListTable);
         sUriMatcher.addURI(CartContract.CONTENT_AUTHORITY, CartContract.CartEntry.TABLE_NAME + "/#", CartListRow);
 
     }
 
-    private CartDbHelper mDbHelper;
+    private ProductDbHelper mProductDbHelper;
+    private CartDbHelper mCartDbHelper;
 
     @Override
     public boolean onCreate() {
 
-        //Creates a new DbHelper object
-        mDbHelper = new CartDbHelper(getContext());
+        //Creates a new Product List DbHelper object
+        mProductDbHelper = new ProductDbHelper(getContext());
+
+        //Creates a new CartDbHelper
+        mCartDbHelper = new CartDbHelper(getContext());
 
         return true;
     }
@@ -44,8 +54,11 @@ public class CartProvider extends ContentProvider {
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
 
+        //  Obtain a read-only copy of the productlist database
+        SQLiteDatabase productListDataBase = mProductDbHelper.getReadableDatabase();
+
         //  Obtain a read-only copy of the database
-        SQLiteDatabase sqLiteDatabase = mDbHelper.getReadableDatabase();
+        SQLiteDatabase cartDataBase = mCartDbHelper.getReadableDatabase();
 
         //  This cursor holds the result from the query.
         Cursor cursor = null;
@@ -54,10 +67,29 @@ public class CartProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)) {
 
             //  Uri demanding entire table with the criteria defined in the fundtion params
+            case ProductListTable:
+
+                //  All the argumnets are the ones passed
+                cursor = productListDataBase.query(ProductEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+
+                break;
+
+            //  Uri demanding a particular row item.
+            case ProductListRow:
+
+                //  "?" is a wildcard which gets replaced by any integer
+                selection = ProductEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf((ContentUris.parseId(uri)))};
+
+                cursor = productListDataBase.query(ProductEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+
+                break;
+
+            //  Uri demanding entire table with the criteria defined in the fundtion params
             case CartListTable:
 
                 //  All the argumnets are the ones passed
-                cursor = sqLiteDatabase.query(CartContract.CartEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                cursor = cartDataBase.query(CartContract.CartEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
 
                 break;
 
@@ -68,7 +100,7 @@ public class CartProvider extends ContentProvider {
                 selection = CartContract.CartEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf((ContentUris.parseId(uri)))};
 
-                cursor = sqLiteDatabase.query(CartContract.CartEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                cursor = cartDataBase.query(CartContract.CartEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
 
                 break;
 
@@ -90,6 +122,12 @@ public class CartProvider extends ContentProvider {
 
         switch (match) {
 
+            case ProductListTable:
+                return ProductEntry.CONTENT_LIST_TYPE;
+
+            case ProductListRow:
+                return ProductEntry.CONTENT_ITEM_TYPE;
+
             case CartListTable:
                 return CartContract.CartEntry.CONTENT_LIST_TYPE;
 
@@ -109,8 +147,11 @@ public class CartProvider extends ContentProvider {
 
         switch (match) {
 
-            case CartListTable:
+            case ProductListTable:
 
+                return insertProduct(uri, contentValues);
+
+            case CartListTable:
                 return insertCart(uri, contentValues);
 
             default:
@@ -120,11 +161,30 @@ public class CartProvider extends ContentProvider {
 
     }
 
+    //For some reason cart uri falling in the hands o fproductprovider
     public Uri insertCart(Uri uri, ContentValues contentValues) {
 
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        SQLiteDatabase db = mCartDbHelper.getWritableDatabase();
 
         long id = db.insert(CartContract.CartEntry.TABLE_NAME, null, contentValues);
+
+        if (id == -1) {
+
+            Log.e("com.whatever.tag", "Failed to insert row for " + uri);
+
+            return null;
+
+        }
+
+        return ContentUris.withAppendedId(uri, id);
+    }
+
+
+    public Uri insertProduct(Uri uri, ContentValues contentValues) {
+
+        SQLiteDatabase db = mProductDbHelper.getWritableDatabase();
+
+        long id = db.insert(ProductEntry.TABLE_NAME, null, contentValues);
 
         if (id == -1) {
 
@@ -148,4 +208,3 @@ public class CartProvider extends ContentProvider {
     }
 
 }
-
