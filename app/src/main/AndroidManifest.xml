@@ -39,6 +39,8 @@
             android:name=".DataSet.DataProvider"
             android:authorities="com.example.tanmay.shoppingapp"
             android:exported="false" />
+
+        <activity android:name=".SignUp"></activity>
     </application>
 
 </manifest>

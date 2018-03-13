@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,7 +28,7 @@ public class HomePage extends AppCompatActivity {
 
     TextView name;
     ImageView thumbnail;
-
+    DrawerLayout mDrawerLayout;
 
     String TAG = "com.whatever.tag";
     Cursor cursorNew;
@@ -42,7 +45,7 @@ public class HomePage extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == R.id.YourCartAppBar){
+        if (item.getItemId() == R.id.YourCartAppBar) {
             startActivity(new Intent(HomePage.this, YourCart.class));
         }
 
@@ -61,6 +64,24 @@ public class HomePage extends AppCompatActivity {
         //Adding custom toolbar
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.homePageToolBar);
         setSupportActionBar(toolbar);
+
+        //Adding Navigation Drawer
+        mDrawerLayout = findViewById(R.id.home_page_drawer);
+
+        NavigationView navigationView  = findViewById(R.id.home_page_nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                if(item.getItemId() == R.id.nav_drawer_sign_up){
+
+                    startActivity(new Intent(HomePage.this, SignUp.class));
+
+                }
+
+                return true;
+            }
+        });
 
 
         if (!preferences.getBoolean("ProductListCreated", false)) {

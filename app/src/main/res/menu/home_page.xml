@@ -18,11 +18,6 @@
             android:title="Cart"
             app:showAsAction="always" />
 
-        <item
-            android:id="@+id/YourOrders"
-            android:title="Your Orders"
-            app:showAsAction="never" />
-
     </group>
 
 </menu>
