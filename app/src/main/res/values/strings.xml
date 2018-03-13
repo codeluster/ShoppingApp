@@ -10,4 +10,7 @@
     <string name="textview">TextView</string>
     <string name="title_activity_product_page">ProductPage</string>
     <string name="title_activity_your_cart">YourCart</string>
+    <string name="rupee">₹</string>
+    <string name="select_quantity">Select Quantity</string>
+    <string name="see_more">See More</string>
 </resources>

@@ -3,8 +3,10 @@ package com.example.tanmay.shoppingapp;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,12 +18,15 @@ public class ProductPage extends AppCompatActivity {
     TextView prodPrice;
     TextView prodDesc;
     ImageView prodImage;
+    TextView ExpandToggle;
+    FloatingActionButton fab;
 
     int prodID;
     int prodNameID;
     int prodPriceID;
     int prodDescID;
     int prodImageID;
+    Boolean descExpanded = false;
 
     @Override
     public void onBackPressed() {
@@ -32,8 +37,10 @@ public class ProductPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_page);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.homePageToolBar);
+        Toolbar toolbar = findViewById(R.id.homePageToolBar);
         setSupportActionBar(toolbar);
+        ExpandToggle = findViewById(R.id.ProductPageDescriptionSeeMore);
+        fab = findViewById(R.id.add_to_cart);
 
         String[] projection = {
 
@@ -49,7 +56,7 @@ public class ProductPage extends AppCompatActivity {
         // A new Uri with the the row number appended as "/#" wildcard
         Uri xacv = Uri.withAppendedPath(ProductListContract.ProductEntry.CONTENT_URI, getIntent().getStringExtra("itemClicked"));
 
-        //Selection and selectionArgs are null becuase they get overriden in the DataProvider's URI Matcher
+        //Selection and selectionArgs are null because they get overridden in the DataProvider's URI Matcher
         Cursor cursor = getContentResolver().query(xacv, projection, null, null, null);
 
         cursor.moveToFirst();
@@ -71,6 +78,55 @@ public class ProductPage extends AppCompatActivity {
         prodDesc.setText(prodDescID);
         prodPrice.setText(prodPriceID);
         prodImage.setImageResource(prodImageID);
+
+        textToggle();
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+    }
+
+    //Sets an OnClickListener which expands or collapses the description
+    private void textToggle() {
+
+        ExpandToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                descToggler(false);
+            }
+        });
+
+        prodDesc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                descToggler(true);
+            }
+        });
+
+    }
+
+    private void descToggler(Boolean initiated_by_descBox) {
+
+        //Expand the TextView
+        if (descExpanded == false) {
+
+            prodDesc.setMaxLines(Integer.MAX_VALUE);
+            descExpanded = !descExpanded;
+            ExpandToggle.setText("See Less");
+
+            //Collapses the TextView
+        } else if (descExpanded == true && !initiated_by_descBox) {
+
+            prodDesc.setMaxLines(4);
+            descExpanded = !descExpanded;
+            ExpandToggle.setText("See More");
+
+        }
+
     }
 
 }

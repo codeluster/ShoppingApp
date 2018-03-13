@@ -49,8 +49,6 @@ public class YourCart extends AppCompatActivity {
     }
 
     private class cartAdapter extends CursorAdapter {
-
-
         public cartAdapter(Context context, Cursor c) {
             super(context, c);
         }
