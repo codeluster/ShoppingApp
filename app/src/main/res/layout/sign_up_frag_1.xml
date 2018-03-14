@@ -39,7 +39,8 @@
             android:hint="@string/doe"
             android:textSize="18sp" />
 
-        <LinearLayout
+        <RadioGroup
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp">
@@ -63,18 +64,18 @@
                 android:layout_weight="1"
                 android:text="@string/other" />
 
-        </LinearLayout>
+        </RadioGroup>
+
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:backgroundTint="#FFFFFF"
-        android:clickable="true"
-        android:elevation="8dp"
         android:id="@+id/imageButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        app:srcCompat="@drawable/ic_navigate_next_black_24dp" />
+        android:clickable="true"
+        android:elevation="8dp"
+        app:srcCompat="@drawable/ic_arrow_forward_black_24dp" android:focusable="true"/>
 
 </RelativeLayout>
