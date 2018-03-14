@@ -2,11 +2,9 @@ package com.example.tanmay.shoppingapp;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.LinearLayout;
 
 public class SignUp extends AppCompatActivity {
@@ -33,24 +31,7 @@ public class SignUp extends AppCompatActivity {
 
         final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        fragmentManager = getSupportFragmentManager();
-        Fragment  mfrag1 = fragmentManager.findFragmentById(R.id.sign_up_fragment_1);
-
         inflate_step1(transaction);
-
-        container = findViewById(R.id.sign_up_fragment_container);
-        container.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                refreshProgress();
-                if (advance) {
-                    inflate_step2(transaction);
-                } else if (receed) {
-                    inflate_step1(transaction);
-                }
-            }
-        });
-
     }
 
     private void refreshProgress() {
@@ -61,7 +42,7 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void inflate_step1(FragmentTransaction transaction) {
-        transaction.replace(R.id.sign_up_fragment_container, frag1);
+        transaction.replace(R.id.sign_up_fragment_container, new SignUpFrag1());
         transaction.addToBackStack(null);
         transaction.commit();
     }
