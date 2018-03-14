@@ -14,17 +14,17 @@
             android:title="Your Orders" />
 
         <item
-            android:id="@+id/userInfo"
+            android:id="@+id/homepage_drawer_account"
             android:icon="@drawable/ic_account_box_black_24dp"
             android:title="Account" />
 
         <item
-            android:id="@+id/home_page_settings"
+            android:id="@+id/homepage_drawer_settings"
             android:icon="@drawable/ic_settings_black_24dp"
             android:title="Settings" />
 
         <item
-            android:id="@+id/home_page_sign_out"
+            android:id="@+id/homepage_drawer_sign_out"
             android:icon="@drawable/ic_info_black_24dp"
             android:title="About App" />
 

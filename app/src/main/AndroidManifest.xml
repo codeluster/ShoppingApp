@@ -40,7 +40,8 @@
             android:authorities="com.example.tanmay.shoppingapp"
             android:exported="false" />
 
-        <activity android:name=".SignUp"></activity>
+        <activity android:name=".SignUp" />
+        <activity android:name=".UserAccount"></activity>
     </application>
 
 </manifest>

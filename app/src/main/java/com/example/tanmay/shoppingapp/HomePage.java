@@ -8,7 +8,9 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,8 +47,14 @@ public class HomePage extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == R.id.YourCartAppBar) {
-            startActivity(new Intent(HomePage.this, YourCart.class));
+        switch (item.getItemId()) {
+
+            case R.id.YourCartAppBar:
+                startActivity(new Intent(HomePage.this, YourCart.class));
+
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -64,21 +72,32 @@ public class HomePage extends AppCompatActivity {
         //Adding custom toolbar
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.homePageToolBar);
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 
         //Adding Navigation Drawer
         mDrawerLayout = findViewById(R.id.home_page_drawer);
 
-        NavigationView navigationView  = findViewById(R.id.home_page_nav_view);
+        NavigationView navigationView = findViewById(R.id.home_page_nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                if(item.getItemId() == R.id.nav_drawer_sign_up){
+                switch (item.getItemId()) {
 
-                    startActivity(new Intent(HomePage.this, SignUp.class));
+                    case R.id.nav_drawer_sign_up:
 
+                        startActivity(new Intent(HomePage.this, SignUp.class));
+
+                    case R.id.homepage_drawer_your_cart:
+                        startActivity(new Intent(HomePage.this, YourCart.class));
+
+                    case R.id.homepage_drawer_account:
+                        startActivity(new Intent(HomePage.this, UserAccount.class));
                 }
 
+                mDrawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
         });
