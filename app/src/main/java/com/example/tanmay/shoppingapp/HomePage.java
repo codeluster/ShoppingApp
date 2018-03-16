@@ -4,11 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ShortcutInfo;
-import android.content.pm.ShortcutManager;
 import android.database.Cursor;
-import android.graphics.drawable.Icon;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -16,7 +12,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,8 +24,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.tanmay.shoppingapp.DataSet.ProductListContract.ProductEntry;
-
-import java.util.Arrays;
 
 public class HomePage extends AppCompatActivity {
 
@@ -122,11 +115,11 @@ public class HomePage extends AppCompatActivity {
 
                 ProductEntry._ID,
                 ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL,
-                ProductEntry.COLUMN_NAME_PRODUCT_NAME,
-                ProductEntry.COLUMN_NAME_PRODUCT_PRICE
+                ProductEntry.COLUMN_NAME_PRODUCT_NAME
 
         };
 
+        //gets the entire productList
         cursorNew = getContentResolver().query(ProductEntry.CONTENT_URI, projection, null, null, null);
 
         ListView listView = findViewById(R.id.productList_homepage);
@@ -143,7 +136,7 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-        //Will crash app if API level < 25
+       /* //Will crash app if API level < 25
         //Useless shortcut that opens google
         ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
         ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "id1")
@@ -153,7 +146,7 @@ public class HomePage extends AppCompatActivity {
                 .setIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/")))
                 .build();
 
-        shortcutManager.setDynamicShortcuts(Arrays.asList(shortcut));
+        shortcutManager.setDynamicShortcuts(Arrays.asList(shortcut));*/
 
     }
 
@@ -199,11 +192,9 @@ public class HomePage extends AppCompatActivity {
         @Override
         public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
 
-            Log.i(TAG, "newView: View created");
             View v = LayoutInflater.from(context).inflate(R.layout.product_list_element, viewGroup, false);
 
             return v;
-
 
         }
 
@@ -213,8 +204,8 @@ public class HomePage extends AppCompatActivity {
 
             name = view.findViewById(R.id.productListElementProductNameTextView);
             thumbnail = view.findViewById(R.id.productListElementImageView);
-            TextView id = view.findViewById(R.id.f249873);
 
+            TextView id = view.findViewById(R.id.f249873);
             Integer geihl = cursor.getInt(cursor.getColumnIndexOrThrow(ProductEntry._ID));
 
             name.setText(cursor.getInt(cursor.getColumnIndexOrThrow(ProductEntry.COLUMN_NAME_PRODUCT_NAME)));

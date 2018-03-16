@@ -17,7 +17,6 @@ import com.example.tanmay.shoppingapp.DataSet.ProductListContract;
 
 public class YourCart extends AppCompatActivity {
 
-    Cursor cart;
     TextView prodName;
     TextView prodPrice;
 
@@ -26,12 +25,7 @@ public class YourCart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_cart);
 
-        ContentValues values = new ContentValues();
-
-        values.put(CartContract.CartEntry._ID, 2);
-        values.put(CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY, 37);
-
-        getContentResolver().insert(CartContract.CartEntry.CONTENT_URI, values);
+        dummyCart();
 
         String[] projection = {
 
@@ -41,18 +35,40 @@ public class YourCart extends AppCompatActivity {
         };
 
         //gets the entire cart
-        cart = getContentResolver().query(CartContract.CartEntry.CONTENT_URI, projection, null, null, null);
+        Cursor cart = getContentResolver().query(CartContract.CartEntry.CONTENT_URI, projection, null, null, null);
 
         ListView cartList = findViewById(R.id.CartListView);
         cartList.setAdapter(new cartAdapter(YourCart.this, cart));
 
     }
 
+    private void dummyCart() {
+
+        ContentValues values = new ContentValues();
+
+        values.put(CartContract.CartEntry._ID, 2);
+        values.put(CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY, 7);
+
+        getContentResolver().insert(CartContract.CartEntry.CONTENT_URI, values);
+
+        values.put(CartContract.CartEntry._ID, 3);
+        values.put(CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY, 7);
+
+        getContentResolver().insert(CartContract.CartEntry.CONTENT_URI, values);
+
+        values.put(CartContract.CartEntry._ID, 1);
+        values.put(CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY, 7);
+
+        getContentResolver().insert(CartContract.CartEntry.CONTENT_URI, values);
+    }
+
     private class cartAdapter extends CursorAdapter {
+
         public cartAdapter(Context context, Cursor c) {
             super(context, c);
         }
 
+        //Returns a new blank view
         @Override
         public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
 
@@ -61,35 +77,39 @@ public class YourCart extends AppCompatActivity {
             return v;
         }
 
+        //Actually responsible for data binding
         @Override
         public void bindView(View view, Context context, Cursor cart) {
-
 
             prodName = view.findViewById(R.id.cartListElementProductNameTextView);
             prodPrice = view.findViewById(R.id.cartListElementProductPriceTextView);
 
-            //Projection is just the name of the columns we would like to receive
+            Integer id = cart.getInt(cart.getColumnIndexOrThrow(CartContract.CartEntry._ID));
+            Integer quantity = cart.getInt(cart.getColumnIndexOrThrow(CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY));
+
+            //Running a query to fetch meta-data of product with corresponding id
+
+            //Projection is what columns we want
             String[] projection = {
 
-                    ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL,
-                    ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME,
-                    ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE
+                    ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME
 
             };
 
-            Integer ui = cart.getInt(cart.getColumnIndexOrThrow(CartContract.CartEntry._ID));
+            //What is the comparison criteria
+            String[] selectionArgs = {
 
-            String[] hoho = {ui.toString()};
+                    id.toString()
 
-            Cursor productCursor = getContentResolver().query(ProductListContract.ProductEntry.CONTENT_URI, projection, ProductListContract.ProductEntry._ID, hoho, null);
+            };
 
-            prodName.setText(productCursor.getInt(productCursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME)));
+            //gets the relevant product
+            Cursor prodCursor = getContentResolver().query(ProductListContract.ProductEntry.CONTENT_URI, projection,null,null, null);
 
-            ui = productCursor.getInt(productCursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE));
-            prodPrice.setText(ui.toString());
+            prodCursor.move(id);
+            prodName.setText(prodCursor.getInt(prodCursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME)));
 
-            productCursor.close();
-
+            prodCursor.close();
         }
     }
 

@@ -6,4 +6,28 @@
     android:layout_height="match_parent"
     tools:context="com.example.tanmay.shoppingapp.UserAccount">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="130dp"
+        android:layout_height="122dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:srcCompat="@drawable/ic_launcher_background"
+        tools:layout_editor_absoluteY="46dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="154dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="230dp"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
