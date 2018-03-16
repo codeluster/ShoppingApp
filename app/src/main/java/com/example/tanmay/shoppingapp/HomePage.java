@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -20,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,6 +29,7 @@ import com.example.tanmay.shoppingapp.DataSet.ProductListContract.ProductEntry;
 
 public class HomePage extends AppCompatActivity {
 
+    LinearLayout linearLayout;
     TextView name;
     ImageView thumbnail;
     DrawerLayout mDrawerLayout;
@@ -37,7 +40,7 @@ public class HomePage extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.home_page, menu);
+        getMenuInflater().inflate(R.menu.home_page_toolbar, menu);
 
         return true;
 
@@ -60,9 +63,21 @@ public class HomePage extends AppCompatActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 001 && resultCode == RESULT_OK) {
+
+            Snackbar snackbar = Snackbar.make(linearLayout, "Added to Cart", Snackbar.LENGTH_LONG);
+            snackbar.show();
+
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        linearLayout = findViewById(R.id.d68f8);
 
         SharedPreferences preferences = getSharedPreferences("ApplicationState", MODE_PRIVATE);
         SharedPreferences.Editor editor = getSharedPreferences("ApplicationState", MODE_PRIVATE).edit();
@@ -110,6 +125,7 @@ public class HomePage extends AppCompatActivity {
             editor.apply();
         }
 
+
         //Projection is just the name of the columns we would like to receive
         String[] projection = {
 
@@ -132,7 +148,7 @@ public class HomePage extends AppCompatActivity {
 
                 TextView fhu = view.findViewById(R.id.f249873);
                 intent.putExtra("itemClicked", fhu.getText().toString());
-                startActivity(intent);
+                startActivityForResult(intent, 001);
             }
         });
 

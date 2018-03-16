@@ -1,6 +1,5 @@
 package com.example.tanmay.shoppingapp;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -19,13 +18,15 @@ public class YourCart extends AppCompatActivity {
 
     TextView prodName;
     TextView prodPrice;
+    TextView serialNum;
+    Integer snum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_cart);
 
-        dummyCart();
+        snum = 1;
 
         String[] projection = {
 
@@ -40,26 +41,6 @@ public class YourCart extends AppCompatActivity {
         ListView cartList = findViewById(R.id.CartListView);
         cartList.setAdapter(new cartAdapter(YourCart.this, cart));
 
-    }
-
-    private void dummyCart() {
-
-        ContentValues values = new ContentValues();
-
-        values.put(CartContract.CartEntry._ID, 2);
-        values.put(CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY, 7);
-
-        getContentResolver().insert(CartContract.CartEntry.CONTENT_URI, values);
-
-        values.put(CartContract.CartEntry._ID, 3);
-        values.put(CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY, 7);
-
-        getContentResolver().insert(CartContract.CartEntry.CONTENT_URI, values);
-
-        values.put(CartContract.CartEntry._ID, 1);
-        values.put(CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY, 7);
-
-        getContentResolver().insert(CartContract.CartEntry.CONTENT_URI, values);
     }
 
     private class cartAdapter extends CursorAdapter {
@@ -83,6 +64,7 @@ public class YourCart extends AppCompatActivity {
 
             prodName = view.findViewById(R.id.cartListElementProductNameTextView);
             prodPrice = view.findViewById(R.id.cartListElementProductPriceTextView);
+            serialNum = view.findViewById(R.id.cart_serial_number);
 
             Integer id = cart.getInt(cart.getColumnIndexOrThrow(CartContract.CartEntry._ID));
             Integer quantity = cart.getInt(cart.getColumnIndexOrThrow(CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY));
@@ -104,11 +86,13 @@ public class YourCart extends AppCompatActivity {
             };
 
             //gets the relevant product
-            Cursor prodCursor = getContentResolver().query(ProductListContract.ProductEntry.CONTENT_URI, projection,null,null, null);
+            Cursor prodCursor = getContentResolver().query(ProductListContract.ProductEntry.CONTENT_URI, projection, null, null, null);
 
             prodCursor.move(id);
             prodName.setText(prodCursor.getInt(prodCursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME)));
 
+            serialNum.setText(snum.toString() + ".");
+            snum++;
             prodCursor.close();
         }
     }

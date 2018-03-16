@@ -1,5 +1,6 @@
 package com.example.tanmay.shoppingapp;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tanmay.shoppingapp.DataSet.CartContract;
 import com.example.tanmay.shoppingapp.DataSet.ProductListContract;
 
 public class ProductPage extends AppCompatActivity {
@@ -28,6 +30,9 @@ public class ProductPage extends AppCompatActivity {
     int prodPriceID;
     int prodDescID;
     int prodImageID;
+    ImageView favourite;
+    Boolean favourited;
+
     Boolean descExpanded = false;
 
     @Override
@@ -38,7 +43,7 @@ public class ProductPage extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.home_page, menu);
+        getMenuInflater().inflate(R.menu.home_page_toolbar, menu);
 
         return true;
 
@@ -53,11 +58,31 @@ public class ProductPage extends AppCompatActivity {
                 finish();
                 return true;
 
+            case R.id.FavouriteProduct:
+
+                favToggle();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    private void favToggle() {
+
+        if (favourited) {
+
+            //unfavourite
+
+
+        } else {
+
+            //favourite
+
+        }
+
+        //negate the boolean
+        favourited = !favourited;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +139,16 @@ public class ProductPage extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                ContentValues values = new ContentValues();
+
+                values.put(CartContract.CartEntry._ID, prodID);
+                values.put(CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY, 1);
+
+                getContentResolver().insert(CartContract.CartEntry.CONTENT_URI, values);
+
+                setResult(RESULT_OK);
+
                 finish();
             }
         });
