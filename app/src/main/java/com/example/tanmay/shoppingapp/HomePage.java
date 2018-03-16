@@ -4,7 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
 import android.database.Cursor;
+import android.graphics.drawable.Icon;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -25,6 +29,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.tanmay.shoppingapp.DataSet.ProductListContract.ProductEntry;
+
+import java.util.Arrays;
 
 public class HomePage extends AppCompatActivity {
 
@@ -137,6 +143,17 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
+        //Will crash app if API level < 25
+        //Useless shortcut that opens google
+        ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
+        ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "id1")
+                .setShortLabel("Your Cart")
+                .setLongLabel("Open your cart")
+                .setIcon(Icon.createWithResource(this, R.drawable.ic_add_shopping_cart_black_24dp))
+                .setIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/")))
+                .build();
+
+        shortcutManager.setDynamicShortcuts(Arrays.asList(shortcut));
 
     }
 
