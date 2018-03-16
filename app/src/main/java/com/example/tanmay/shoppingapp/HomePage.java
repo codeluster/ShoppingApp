@@ -53,10 +53,12 @@ public class HomePage extends AppCompatActivity {
 
             case R.id.YourCartAppBar:
                 startActivity(new Intent(HomePage.this, YourCart.class));
+                return true;
 
             case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
+            mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
+
         }
 
         return super.onOptionsItemSelected(item);
