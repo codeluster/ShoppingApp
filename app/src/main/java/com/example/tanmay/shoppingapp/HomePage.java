@@ -56,7 +56,7 @@ public class HomePage extends AppCompatActivity {
                 return true;
 
             case android.R.id.home:
-            mDrawerLayout.openDrawer(GravityCompat.START);
+                mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
 
         }
@@ -66,6 +66,7 @@ public class HomePage extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if (requestCode == 001 && resultCode == RESULT_OK) {
 
             Snackbar snackbar = Snackbar.make(linearLayout, "Added to Cart", Snackbar.LENGTH_LONG);
@@ -103,14 +104,16 @@ public class HomePage extends AppCompatActivity {
                 switch (item.getItemId()) {
 
                     case R.id.nav_drawer_sign_up:
-
                         startActivity(new Intent(HomePage.this, SignUp.class));
+                        break;
 
                     case R.id.homepage_drawer_your_cart:
                         startActivity(new Intent(HomePage.this, YourCart.class));
+                        break;
 
                     case R.id.homepage_drawer_account:
                         startActivity(new Intent(HomePage.this, UserAccount.class));
+                        break;
                 }
 
                 mDrawerLayout.closeDrawer(GravityCompat.START);
