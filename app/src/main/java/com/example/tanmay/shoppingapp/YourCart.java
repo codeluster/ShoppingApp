@@ -20,15 +20,17 @@ public class YourCart extends AppCompatActivity {
     TextView prodPrice;
     TextView serialNum;
     TextView prodQuantity;
-    int snum;
+    int serialNumber;
     int total;
+    TextView subtotal;
+    Cursor prodCursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_cart);
 
-        snum = 1;
+        serialNumber = 1;
         total = 0;
 
         String[] projection = {
@@ -41,9 +43,35 @@ public class YourCart extends AppCompatActivity {
         //gets the entire cart
         Cursor cart = getContentResolver().query(CartContract.CartEntry.CONTENT_URI, projection, null, null, null);
 
+        //getSubtotal(cart, prodCursor);
+
         ListView cartList = findViewById(R.id.CartListView);
         cartList.setAdapter(new cartAdapter(YourCart.this, cart));
 
+    }
+
+    private int getSubtotal(Cursor cart, Cursor productList) {
+
+        int subtotal = 0;
+
+        int cartCounter = 1;
+
+        //Travereses the cart
+        while (!cart.isLast()) {
+
+            cart.move(cartCounter);
+            int quan = cart.getInt(cart.getColumnIndexOrThrow(CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY));
+
+            //Traverses the productList
+            //Moves to location as given by the cart ID field
+            productList.move(cart.getInt(cart.getColumnIndexOrThrow(CartContract.CartEntry._ID)));
+
+            subtotal += quan * getResources().getInteger(productList.getInt(productList.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE)));
+
+            cartCounter++;
+        }
+
+        return subtotal;
     }
 
     private class cartAdapter extends CursorAdapter {
@@ -70,10 +98,7 @@ public class YourCart extends AppCompatActivity {
             serialNum = view.findViewById(R.id.cart_serial_number);
             prodQuantity = view.findViewById(R.id.cart_quantity_multiplier);
 
-            Integer id = cart.getInt(cart.getColumnIndexOrThrow(CartContract.CartEntry._ID));
-            int quantity = cart.getInt(cart.getColumnIndexOrThrow(CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY));
 
-            //Running a query to fetch meta-data of product with corresponding id
 
             //Projection is what columns we want
             String[] projectionX = {
@@ -83,28 +108,38 @@ public class YourCart extends AppCompatActivity {
 
             };
 
-            //What is the comparison criteria
-            String[] selectionArgsX = {
-
-                    id.toString()
-
-            };
-
-            //gets the relevant product
-            Cursor prodCursor = getContentResolver().query(ProductListContract.ProductEntry.CONTENT_URI, projectionX, null, null, null);
+            //gets the name and price of everyhting in productList
+            prodCursor = getContentResolver().query(ProductListContract.ProductEntry.CONTENT_URI, projectionX, null, null, null);
 
 
+            //get ID of cart element
+            Integer id = cart.getInt(cart.getColumnIndexOrThrow(CartContract.CartEntry._ID));
+            //get quantity ordered
+            int quantity = cart.getInt(cart.getColumnIndexOrThrow(CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY));
+
+            //move the productCursor to the location corresponding to cart id
             prodCursor.move(id);
 
+            //get the price of one product
             int price = getResources().getInteger(prodCursor.getInt(prodCursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE)));
+
+            //multiply it by number of products ordrered
             int netPrice = price * quantity;
+
+            //set the name of the product
             prodName.setText(prodCursor.getInt(prodCursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME)));
+
+            //set the price
             prodPrice.setText("" + netPrice);
-            serialNum.setText(snum + ".");
+
+            //set the serial number
+            serialNum.setText(serialNumber + ".");
+
+            //set the quantity multiplier
             prodQuantity.setText("X " + quantity);
-            snum++;
-            total += netPrice;
-            prodCursor.close();
+
+            //advance the serial number in preparation of next element
+            serialNumber++;
 
         }
 
