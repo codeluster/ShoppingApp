@@ -90,7 +90,7 @@ public class YourCart extends AppCompatActivity {
 
             prodCursor.move(id);
             prodName.setText(prodCursor.getInt(prodCursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME)));
-
+            prodPrice.setText(prodCursor.getInt(prodCursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE)));
             serialNum.setText(snum.toString() + ".");
             snum++;
             prodCursor.close();
