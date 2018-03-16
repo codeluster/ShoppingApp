@@ -22,7 +22,7 @@ public class CartDbHelper extends SQLiteOpenHelper {
     //SQL command to create the table
     //All columns contain integers because they contain ID and quantity
     public static final String SQL_CREATE_ENTRIES =
-            "CREATE TABLE " + TABLE_NAME + " (" +
+            "CREATE TABLE " + TABLE_NAME + " ( " +
                     _ID + " INTEGER NON NULL, " +
                     COLUMN_NAME_ORDERED_QUANTITY + " INTEGER)";
 

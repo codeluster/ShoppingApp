@@ -32,7 +32,7 @@ public class CartContract {
         public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + TABLE_NAME;
 
         //Name of various columns
-        public static final String _ID = "id";
+        public static final String _ID = "_id";
         public static final String COLUMN_NAME_ORDERED_QUANTITY = "quantity";
 
     }

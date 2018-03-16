@@ -44,7 +44,7 @@ public class YourCart extends AppCompatActivity {
         cart = getContentResolver().query(CartContract.CartEntry.CONTENT_URI, projection, null, null, null);
 
         ListView cartList = findViewById(R.id.CartListView);
-        cartList.setAdapter(new cartAdapter(YourCart.this,cart));
+        cartList.setAdapter(new cartAdapter(YourCart.this, cart));
 
     }
 
@@ -62,7 +62,7 @@ public class YourCart extends AppCompatActivity {
         }
 
         @Override
-        public void bindView(View view, Context context, Cursor cursor) {
+        public void bindView(View view, Context context, Cursor cart) {
 
 
             prodName = view.findViewById(R.id.cartListElementProductNameTextView);
@@ -77,18 +77,18 @@ public class YourCart extends AppCompatActivity {
 
             };
 
-            Integer ui = cursor.getInt(cursor.getColumnIndexOrThrow(CartContract.CartEntry._ID));
+            Integer ui = cart.getInt(cart.getColumnIndexOrThrow(CartContract.CartEntry._ID));
 
             String[] hoho = {ui.toString()};
 
-            Cursor cursorNew = getContentResolver().query(ProductListContract.ProductEntry.CONTENT_URI, projection, ProductListContract.ProductEntry._ID, hoho, null);
+            Cursor productCursor = getContentResolver().query(ProductListContract.ProductEntry.CONTENT_URI, projection, ProductListContract.ProductEntry._ID, hoho, null);
 
-            prodName.setText(cursorNew.getInt(cursorNew.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME)));
+            prodName.setText(productCursor.getInt(productCursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME)));
 
-            ui = cursorNew.getInt(cursorNew.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE));
+            ui = productCursor.getInt(productCursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE));
             prodPrice.setText(ui.toString());
 
-            cursorNew.close();
+            productCursor.close();
 
         }
     }
