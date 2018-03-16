@@ -19,7 +19,9 @@ public class YourCart extends AppCompatActivity {
     TextView prodName;
     TextView prodPrice;
     TextView serialNum;
-    Integer snum;
+    TextView prodQuantity;
+    int snum;
+    int total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class YourCart extends AppCompatActivity {
         setContentView(R.layout.activity_your_cart);
 
         snum = 1;
+        total = 0;
 
         String[] projection = {
 
@@ -65,36 +68,46 @@ public class YourCart extends AppCompatActivity {
             prodName = view.findViewById(R.id.cartListElementProductNameTextView);
             prodPrice = view.findViewById(R.id.cartListElementProductPriceTextView);
             serialNum = view.findViewById(R.id.cart_serial_number);
+            prodQuantity = view.findViewById(R.id.cart_quantity_multiplier);
 
             Integer id = cart.getInt(cart.getColumnIndexOrThrow(CartContract.CartEntry._ID));
-            Integer quantity = cart.getInt(cart.getColumnIndexOrThrow(CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY));
+            int quantity = cart.getInt(cart.getColumnIndexOrThrow(CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY));
 
             //Running a query to fetch meta-data of product with corresponding id
 
             //Projection is what columns we want
-            String[] projection = {
+            String[] projectionX = {
 
-                    ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME
+                    ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME,
+                    ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE
 
             };
 
             //What is the comparison criteria
-            String[] selectionArgs = {
+            String[] selectionArgsX = {
 
                     id.toString()
 
             };
 
             //gets the relevant product
-            Cursor prodCursor = getContentResolver().query(ProductListContract.ProductEntry.CONTENT_URI, projection, null, null, null);
+            Cursor prodCursor = getContentResolver().query(ProductListContract.ProductEntry.CONTENT_URI, projectionX, null, null, null);
+
 
             prodCursor.move(id);
+
+            int price = getResources().getInteger(prodCursor.getInt(prodCursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE)));
+            int netPrice = price * quantity;
             prodName.setText(prodCursor.getInt(prodCursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME)));
-            prodPrice.setText(prodCursor.getInt(prodCursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE)));
-            serialNum.setText(snum.toString() + ".");
+            prodPrice.setText("" + netPrice);
+            serialNum.setText(snum + ".");
+            prodQuantity.setText("X " + quantity);
             snum++;
+            total += netPrice;
             prodCursor.close();
+
         }
+
     }
 
 }
