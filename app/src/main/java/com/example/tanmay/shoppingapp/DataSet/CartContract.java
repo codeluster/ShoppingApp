@@ -4,11 +4,6 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-
-/**
- * Created by tanma on 07-03-2018.
- */
-
 public class CartContract {
 
     //  Refers to this particular application
@@ -16,8 +11,7 @@ public class CartContract {
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     //Empty constructor to prevent instantiation
-    private CartContract() {
-    }
+    private CartContract() {}
 
     public static class CartEntry implements BaseColumns {
 
