@@ -18,11 +18,7 @@ public class YourCart extends AppCompatActivity {
 
     TextView prodName;
     TextView prodPrice;
-    TextView serialNum;
     TextView prodQuantity;
-    int serialNumber;
-    int total;
-    TextView subtotal;
     Cursor prodCursor;
 
     @Override
@@ -30,8 +26,6 @@ public class YourCart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_cart);
 
-        serialNumber = 1;
-        total = 0;
 
         String[] projection = {
 
@@ -43,9 +37,20 @@ public class YourCart extends AppCompatActivity {
         //gets the entire cart
         Cursor cart = getContentResolver().query(CartContract.CartEntry.CONTENT_URI, projection, null, null, null);
 
+        if (cart.getCount() == 0) {
+
+            TextView title = findViewById(R.id.cart_empty_title);
+            TextView text = findViewById(R.id.cart_empty_text);
+
+            title.setVisibility(View.VISIBLE);
+            text.setVisibility(View.VISIBLE);
+
+        }
+
         //getSubtotal(cart, prodCursor);
 
         ListView cartList = findViewById(R.id.CartListView);
+        cartList.setVisibility(View.VISIBLE);
         cartList.setAdapter(new cartAdapter(YourCart.this, cart));
 
     }
@@ -95,9 +100,7 @@ public class YourCart extends AppCompatActivity {
 
             prodName = view.findViewById(R.id.cartListElementProductNameTextView);
             prodPrice = view.findViewById(R.id.cartListElementProductPriceTextView);
-            serialNum = view.findViewById(R.id.cart_serial_number);
             prodQuantity = view.findViewById(R.id.cart_quantity_multiplier);
-
 
 
             //Projection is what columns we want
@@ -132,14 +135,9 @@ public class YourCart extends AppCompatActivity {
             //set the price
             prodPrice.setText("" + netPrice);
 
-            //set the serial number
-            serialNum.setText(serialNumber + ".");
-
             //set the quantity multiplier
             prodQuantity.setText("X " + quantity);
 
-            //advance the serial number in preparation of next element
-            serialNumber++;
 
         }
 

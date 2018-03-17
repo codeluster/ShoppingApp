@@ -4,14 +4,16 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tanmay.shoppingapp.DataSet.CartContract;
 import com.example.tanmay.shoppingapp.DataSet.ProductListContract;
@@ -23,20 +25,51 @@ public class ProductPage extends AppCompatActivity {
     TextView prodDesc;
     ImageView prodImage;
     TextView ExpandToggle;
-    FloatingActionButton fab;
+    TextView CollapseToggle;
+    Button addToCart;
+    Button decrease;
+    Button increase;
+    EditText quantityBox;
 
     int prodID;
     int prodNameID;
     int prodPriceID;
     int prodDescID;
     int prodImageID;
+    int quantity;
     ImageView favourite;
     Boolean favourited;
 
     Boolean descExpanded = false;
 
+    //Expand is true when view to be expanded and false when view to be collapsed
+    private void toggleDescLength(final Boolean expand) {
+
+        if (expand) {
+
+            prodDesc.setMaxLines(Integer.MAX_VALUE);
+            ExpandToggle.setVisibility(View.GONE);
+            CollapseToggle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    toggleDescLength(false);
+                }
+            });
+            CollapseToggle.setVisibility(View.VISIBLE);
+
+        } else {
+
+            prodDesc.setMaxLines(4);
+            CollapseToggle.setVisibility(View.GONE);
+            ExpandToggle.setVisibility(View.VISIBLE);
+
+        }
+
+    }
+
     @Override
     public void onBackPressed() {
+
         finish();
     }
 
@@ -95,7 +128,11 @@ public class ProductPage extends AppCompatActivity {
 
 
         ExpandToggle = findViewById(R.id.ProductPageDescriptionSeeMore);
-        fab = findViewById(R.id.add_to_cart);
+        CollapseToggle = findViewById(R.id.ProductPageDescriptionSeeLess);
+        addToCart = findViewById(R.id.add_to_cart);
+        decrease = findViewById(R.id.productPageQuantityDecrease);
+        increase = findViewById(R.id.productPageQuantityIncrease);
+        quantityBox = findViewById(R.id.productPageQuantity);
 
         String[] projection = {
 
@@ -134,16 +171,30 @@ public class ProductPage extends AppCompatActivity {
         prodPrice.setText(prodPriceID);
         prodImage.setImageResource(prodImageID);
 
-        textToggle();
+        //Expands description on clicking the description text
+        prodDesc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toggleDescLength(true);
+            }
+        });
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        //Expands descrition by clicking on "SEE MORE"
+        ExpandToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toggleDescLength(true);
+            }
+        });
+
+        addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 ContentValues values = new ContentValues();
 
                 values.put(CartContract.CartEntry._ID, prodID);
-                values.put(CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY, 1);
+                values.put(CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY, quantity);
 
                 getContentResolver().insert(CartContract.CartEntry.CONTENT_URI, values);
 
@@ -153,45 +204,36 @@ public class ProductPage extends AppCompatActivity {
             }
         });
 
-    }
+        quantity = 1;
 
-    //Sets an OnClickListener which expands or collapses the description
-    private void textToggle() {
-
-        ExpandToggle.setOnClickListener(new View.OnClickListener() {
+        increase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                descToggler(false);
+                if (quantity < 30) {
+                    quantity++;
+                    quantityBox.setText("" + quantity);
+                } else {
+
+                    Toast.makeText(ProductPage.this, "Cannot order more than 30 products", Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
 
-        prodDesc.setOnClickListener(new View.OnClickListener() {
+        decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                descToggler(true);
+                if (quantity > 1) {
+
+                    quantity--;
+                    quantityBox.setText("" + quantity);
+
+                } else {
+
+                    Toast.makeText(ProductPage.this, "Cannot order less than 1 product", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
-    }
-
-    private void descToggler(Boolean initiated_by_descBox) {
-
-        //Expand the TextView
-        if (descExpanded == false) {
-
-            prodDesc.setMaxLines(Integer.MAX_VALUE);
-            descExpanded = !descExpanded;
-            ExpandToggle.setText("See Less");
-
-            //Collapses the TextView
-        } else if (descExpanded == true && !initiated_by_descBox) {
-
-            prodDesc.setMaxLines(4);
-            descExpanded = !descExpanded;
-            ExpandToggle.setText("See More");
-
-        }
-
     }
 
 }
