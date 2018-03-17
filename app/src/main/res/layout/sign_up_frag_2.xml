@@ -1,68 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:orientation="vertical" android:padding="16dp">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/sign_up_previous_step"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:clickable="true"
-        android:elevation="8dp"
+    <android.support.design.widget.FloatingActionButton android:id="@+id/sign_up_previous_step"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" android:layout_alignParentStart="true"
+        android:clickable="true" android:elevation="8dp"
         app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/user_name"
-            android:textSize="24sp" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_margin="8dp" android:text="@string/user_name" android:textSize="24sp" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="@string/unique_username_here"
+        <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_margin="8dp" android:hint="@string/unique_username_here"
             android:textSize="18sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/password"
-            android:textSize="24sp" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_margin="8dp" android:text="@string/password" android:textSize="24sp" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/super_secure_password_here"
-            android:inputType="textPassword"
+        <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:hint="@string/super_secure_password_here" android:inputType="textPassword"
             android:textSize="18sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/confirm_password"
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_margin="8dp" android:text="@string/confirm_password"
             android:textSize="24sp" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="@string/re_enter_super_secure_password"
-            android:inputType="textPassword"
-            android:textSize="18sp" />
+        <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_margin="8dp" android:hint="@string/re_enter_super_secure_password"
+            android:inputType="textPassword" android:textSize="18sp" />
 
     </LinearLayout>
 </RelativeLayout>
