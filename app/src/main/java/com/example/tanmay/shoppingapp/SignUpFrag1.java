@@ -21,22 +21,11 @@ public class SignUpFrag1 extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.sign_up_fragment_1_layout, container, false);
-
-        next = view.findViewById(R.id.nextStepSignUp);
-
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                advance = true;
-            }
-        });
-
 
         return view;
     }

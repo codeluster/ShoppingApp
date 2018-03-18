@@ -13,10 +13,6 @@ import android.view.ViewGroup;
  */
 public class SignUpFrag2 extends Fragment {
 
-    boolean receed;
-    FloatingActionButton back;
-
-
     public SignUpFrag2() {
         // Required empty public constructor
     }
@@ -26,24 +22,9 @@ public class SignUpFrag2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View nono = inflater.inflate(R.layout.sign_up_frag_2, container, false);
+        View v = inflater.inflate(R.layout.sign_up_frag_2, container, false);
 
-        receed = false;
-
-        back = nono.findViewById(R.id.sign_up_previous_step);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                receed = true;
-            }
-        });
-
-        return nono;
+        return v;
     }
 
-    public boolean getReceed() {
-
-        return receed;
-
-    }
 }
