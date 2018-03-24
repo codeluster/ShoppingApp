@@ -38,8 +38,6 @@ public class SignUp extends AppCompatActivity {
         cancel = findViewById(R.id.sign_up_cancel);
         nextStep = findViewById(R.id.sign_up_next_step);
 
-        editor = getSharedPreferences("UserInformation", MODE_PRIVATE).edit();
-
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,6 +114,7 @@ public class SignUp extends AppCompatActivity {
     private void updateInfo(int step) {
 
         if (step == 1) {
+            editor = getSharedPreferences("UserInformation", MODE_PRIVATE).edit();
             editor.putString("FirstName", fName);
             editor.putString("Last Name", lName);
             editor.putInt("Gender", gender);

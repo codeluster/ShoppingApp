@@ -26,42 +26,6 @@
 
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/sign_up_cancel"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@android:color/transparent"
-        app:srcCompat="@drawable/ic_close_black_24dp" />
-
-    <LinearLayout
-        android:id="@+id/sign_up_next_step"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/fab_margin"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:clickable="true"
-        android:padding="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:minHeight="48dp"
-            android:minWidth="48dp"
-            android:text="Next"
-            android:textAllCaps="true"
-            android:textColor="@color/colorAccent"
-            android:textSize="20sp" />
-
-        <ImageButton
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@android:color/transparent"
-            app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
-
-    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
 
