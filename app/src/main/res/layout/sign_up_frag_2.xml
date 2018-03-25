@@ -1,70 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/user_name"
-        android:textSize="24sp" />
-
-    <EditText
+    <LinearLayout
+        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:hint="@string/unique_username_here"
-        android:textSize="18sp" />
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/password"
-        android:textSize="24sp" />
+        <ImageButton
+            android:id="@+id/sign_up_cancel_step2"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/ic_close_black_24dp" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/super_secure_password_here"
-        android:inputType="textPassword"
-        android:textSize="18sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/user_name"
+            android:textSize="24sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/confirm_password"
-        android:textSize="24sp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="@string/unique_username_here"
+            android:textSize="18sp" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:hint="@string/re_enter_super_secure_password"
-        android:inputType="textPassword"
-        android:textSize="18sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/password"
+            android:textSize="24sp" />
 
-    <ImageButton
-        android:id="@+id/sign_up_cancel"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@android:color/transparent"
-        app:srcCompat="@drawable/ic_close_black_24dp" />
+     sign_up_step_1_cancel   <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/super_secure_password_here"
+            android:inputType="textPassword"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/confirm_password"
+            android:textSize="24sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="@string/re_enter_super_secure_password"
+            android:inputType="textPassword"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/sign_up_next_step"
+        android:id="@+id/sign_up_previous_step"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:layout_marginBottom="@dimen/fab_margin"
         android:layout_marginEnd="@dimen/fab_margin"
-        android:clickable="true"
-        android:padding="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:padding="4dp">
+
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -72,17 +86,13 @@
             android:gravity="center_vertical"
             android:minHeight="48dp"
             android:minWidth="48dp"
-            android:text="Next"
+            android:text="Previous"
             android:textAllCaps="true"
             android:textColor="@color/colorAccent"
             android:textSize="20sp" />
 
-        <ImageButton
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@android:color/transparent"
-            app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
 
     </LinearLayout>
 
-</LinearLayout>
+
+</RelativeLayout>

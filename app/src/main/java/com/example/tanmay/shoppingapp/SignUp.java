@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 
 public class SignUp extends AppCompatActivity {
 
+/*
     private ImageButton cancel;
     private LinearLayout nextStep;
     private SharedPreferences.Editor editor;
@@ -22,64 +23,31 @@ public class SignUp extends AppCompatActivity {
     private int gender;
     EditText firstName;
     EditText lastName;
+*/
 
-    @Override
-    public void onBackPressed() {
-
-        finish();
-
-    }
+    private Bundle step1Bundle;
+    private Bundle step2Bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
 
-        cancel = findViewById(R.id.sign_up_cancel);
-        nextStep = findViewById(R.id.sign_up_next_step);
+        android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        step1Bundle = new Bundle();
 
-        Runnable nextStepRunnable = new Runnable() {
-            @Override
-            public void run() {
-                extractData(1);
-                gender = getGender();
-                updateInfo(1);
-            }
-        };
-
-        final Thread nextStepThread = new Thread(nextStepRunnable);
-
-        nextStep.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                nextStepThread.run();
-
-                android.support.v4.app.Fragment frag1 = getSupportFragmentManager().findFragmentById(R.id.sign_up_step1);
-
-                android.support.v4.app.Fragment step2 = new SignUpFrag2();
-
-                android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-                transaction.remove(frag1);
-
-                transaction.replace(R.id.sign_up_step1, step2);
-
-                transaction.addToBackStack(null);
-                transaction.commit();
-
-            }
-        });
+        //Inflate Step 1
+        SignUpFrag1 step1 = new SignUpFrag1();
+        step1.setArguments(step1Bundle);
+        transaction.replace(android.R.id.content, step1);
+        transaction.commit();
 
     }
 
+
+    //Graveyard of deprecated code
+/*
     private void extractData(int step) {
 
         if (step == 1) {
@@ -123,5 +91,6 @@ public class SignUp extends AppCompatActivity {
         }
 
     }
+*/
 
 }

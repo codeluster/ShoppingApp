@@ -1,89 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/sign_up_fragment_1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/first_name"
-        android:textSize="24sp" />
-
-    <EditText
-        android:id="@+id/sign_up_fragment_1_first_name"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:hint="@string/john"
-        android:textSize="18sp" />
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/last_name"
-        android:textSize="24sp" />
+        <ImageButton
+            android:id="@+id/sign_up_step_1_cancel"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/ic_close_black_24dp" />
 
-    <EditText
-        android:id="@+id/sign_up_fragment_1_last_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:hint="@string/doe"
-        android:textSize="18sp" />
-
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/sign_up_radio_button_male"
-            android:layout_width="0dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/male" />
+            android:layout_margin="8dp"
+            android:text="@string/first_name"
+            android:textSize="24sp" />
 
-        <RadioButton
-            android:id="@+id/sign_up_radio_button_female"
-            android:layout_width="0dp"
+        <EditText
+            android:id="@+id/sign_up_fragment_1_first_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/female" />
+            android:layout_margin="8dp"
+            android:hint="@string/john"
+            android:textSize="18sp" />
 
-        <RadioButton
-            android:id="@+id/sign_up_radio_button_other"
-            android:layout_width="0dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/other" />
+            android:layout_margin="8dp"
+            android:text="@string/last_name"
+            android:textSize="24sp" />
 
-    </RadioGroup>
+        <EditText
+            android:id="@+id/sign_up_fragment_1_last_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="@string/doe"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/sign_up_radio_button_male"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/male" />
+
+            <RadioButton
+                android:id="@+id/sign_up_radio_button_female"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/female" />
+
+            <RadioButton
+                android:id="@+id/sign_up_radio_button_other"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/other" />
+
+        </RadioGroup>
 
 
-    <ImageButton
-        android:id="@+id/sign_up_cancel"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@android:color/transparent"
-        app:srcCompat="@drawable/ic_close_black_24dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/sign_up_next_step"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginBottom="@dimen/fab_margin"
         android:layout_marginEnd="@dimen/fab_margin"
-        android:clickable="true"
-        android:padding="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:padding="4dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -104,4 +110,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>
