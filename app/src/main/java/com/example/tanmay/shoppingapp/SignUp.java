@@ -1,8 +1,5 @@
 package com.example.tanmay.shoppingapp;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +29,12 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        step1();
+
+    }
+
+    public void step1() {
+
         android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
 
@@ -45,49 +48,58 @@ public class SignUp extends AppCompatActivity {
 
     }
 
+    public void step2() {
 
-    //Graveyard of deprecated code
-/*
-    private void extractData(int step) {
+        firstName = findViewById(R.id.sign_up_fragment_1_first_name);
+        lastName = findViewById(R.id.sign_up_fragment_1_last_name);
 
-        if (step == 1) {
-
-            firstName = findViewById(R.id.sign_up_fragment_1_first_name);
-            lastName = findViewById(R.id.sign_up_fragment_1_last_name);
-
-            fName = firstName.getText().toString();
-            lName = lastName.getText().toString();
-
-        }
-
-    }
-
-    public int getGender() {
+        fName = firstName.getText().toString();
+        lName = lastName.getText().toString();
 
         RadioButton male = findViewById(R.id.sign_up_radio_button_male);
         RadioButton female = findViewById(R.id.sign_up_radio_button_female);
         RadioButton other = findViewById(R.id.sign_up_radio_button_other);
 
+        editor = getSharedPreferences("UserInformation", MODE_PRIVATE).edit();
+        editor.putString("FirstName", fName);
+        editor.putString("Last Name", lName);
+
         if (male.isChecked()) {
-            return 0;
+            editor.putInt("Gender", 0);
         } else if (female.isChecked()) {
-            return 1;
+            editor.putInt("Gender", 1);
         } else if (other.isChecked()) {
-            return 2;
-        } else {
-            return -1;
+            editor.putInt("Gender", 2);
         }
+
+        editor.apply();
+
+
+        android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
+
+        step2Bundle = new Bundle();
+
+        //Inflate Step 1
+        SignUpFrag2 step2 = new SignUpFrag2();
+        step2.setArguments(step1Bundle);
+        transaction.replace(android.R.id.content, step2);
+        transaction.commit();
+
+    }
+
+
+    //Graveyard of deprecated code
+
+    public int getGender() {
+
     }
 
     private void updateInfo(int step) {
 
         if (step == 1) {
-            editor = getSharedPreferences("UserInformation", MODE_PRIVATE).edit();
-            editor.putString("FirstName", fName);
-            editor.putString("Last Name", lName);
-            editor.putInt("Gender", gender);
 
-            editor.apply();
+
         }
 
     }
