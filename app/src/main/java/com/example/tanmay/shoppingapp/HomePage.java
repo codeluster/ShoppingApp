@@ -82,8 +82,7 @@ public class HomePage extends AppCompatActivity {
         linearLayout = findViewById(R.id.d68f8);
 
         SharedPreferences preferences = getSharedPreferences("ApplicationState", MODE_PRIVATE);
-        SharedPreferences.Editor editor = getSharedPreferences("ApplicationState", MODE_PRIVATE).edit();
-
+        SharedPreferences.Editor editor = preferences.edit();
 
         //Adding custom toolbar
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.homePageToolBar);

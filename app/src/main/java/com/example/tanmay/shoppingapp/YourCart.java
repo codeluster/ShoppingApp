@@ -1,15 +1,25 @@
 package com.example.tanmay.shoppingapp;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.example.tanmay.shoppingapp.DataSet.CartContract;
 import com.example.tanmay.shoppingapp.DataSet.ProductListContract;
@@ -22,10 +32,46 @@ public class YourCart extends AppCompatActivity {
     Cursor prodCursor;
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.your_cart_toolbar, menu);
+
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.clearCart:
+                return true;
+            case android.R.id.home:
+                finish();
+                return true;
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_cart);
 
+        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.YourCartToolBar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        SharedPreferences preferences = getSharedPreferences("UserInformation", MODE_PRIVATE);
+
+        if (preferences.getString("FirstName", null) != null) {
+            toolbar.setTitle(preferences.getString("FirstName", null) + "'s Cart");
+        }
 
         String[] projection = {
 

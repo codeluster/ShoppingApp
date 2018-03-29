@@ -1,7 +1,9 @@
 package com.example.tanmay.shoppingapp;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 public class SignUp extends AppCompatActivity {
 
@@ -77,5 +79,21 @@ public class SignUp extends AppCompatActivity {
 
     }
 
+    public void signUpComplete() {
+
+        SharedPreferences.Editor editor = getSharedPreferences("UserInformation", MODE_PRIVATE).edit();
+
+        editor.putString("FirstName", step1Bundle.getString("firstName"));
+        editor.putString("LastName", step1Bundle.getString("lastName"));
+        editor.putInt("Gender", step1Bundle.getInt("gender"));
+        editor.putString("UserName", step2Bundle.getString("username"));
+
+        editor.apply();
+
+        Toast.makeText(SignUp.this, "Welcome, " + step1Bundle.getString("firstName"), Toast.LENGTH_SHORT).show();
+
+        finish();
+
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.example.tanmay.shoppingapp;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,9 @@ import android.widget.LinearLayout;
 public class SignUpFrag2 extends Fragment {
     SignUp signUp;
     View rootView;
+    ImageButton cancel;
+    LinearLayout previous;
+    FloatingActionButton done;
 
     public SignUpFrag2() {
         // Required empty public constructor
@@ -27,13 +31,30 @@ public class SignUpFrag2 extends Fragment {
 
         rootView = inflater.inflate(R.layout.sign_up_frag_2, container, false);
 
-        LinearLayout previous = rootView.findViewById(R.id.sign_up_previous_step);
-
-        //Restore state of widgets from previous use
-        restoreState(getArguments().getBundle("bundle"), rootView);
-
+        previous = rootView.findViewById(R.id.sign_up_previous_step);
         signUp = (SignUp) getActivity();
+        cancel = rootView.findViewById(R.id.sign_up_cancel_step2);
+        done = rootView.findViewById(R.id.sign_up_complete);
 
+        return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        if (getArguments() != null)
+            //Restore state of widgets from previous use
+            restoreState(getArguments(), rootView);
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Triggers onBackPressed() of the parent activity
+                signUp.onBackPressed();
+
+            }
+        });
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,20 +66,17 @@ public class SignUpFrag2 extends Fragment {
                 signUp.step1(signUp.getBundle(1));
             }
         });
-
-        ImageButton cancel;
-
-        cancel = rootView.findViewById(R.id.sign_up_cancel_step2);
-        cancel.setOnClickListener(new View.OnClickListener() {
+        done.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                //Triggers onBackPressed() of the parent activity
-                signUp.onBackPressed();
+            public void onClick(View v) {
 
+                //Saves step2
+                signUp.setBundle(2, saveState(rootView));
+
+                //Triggers method to wrap everyting up
+                signUp.signUpComplete();
             }
         });
-
-        return rootView;
     }
 
     private void restoreState(Bundle bundle, View view) {

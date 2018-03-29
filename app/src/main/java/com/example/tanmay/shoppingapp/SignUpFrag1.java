@@ -42,9 +42,8 @@ public class SignUpFrag1 extends Fragment {
         super.onStart();
 
         if (getArguments() != null) {
-            Bundle bundle = getArguments();
             //Restore state of widgets from previous use
-            restoreState(bundle, rootView);
+            restoreState(getArguments(), rootView);
         }
 
         next.setOnClickListener(new View.OnClickListener() {
