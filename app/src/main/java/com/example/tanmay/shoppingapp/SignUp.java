@@ -2,95 +2,80 @@ package com.example.tanmay.shoppingapp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.Toast;
 
 public class SignUp extends AppCompatActivity {
 
-    private Bundle step1Bundle;
-    private Bundle step2Bundle;
+    Bundle step1Bundle;
+    Bundle step2Bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Creating new empty bundles at launch
         step1Bundle = new Bundle();
         step2Bundle = new Bundle();
 
-        step1(true);
+        //And "step" other than 1 or 2 gets a new Bundle
+        step1(getBundle(3));
 
     }
 
-    public void step1(Boolean firstLaunch) {
+    public void step1(Bundle bundle) {
 
-        if (!firstLaunch) {
+        android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
 
-            EditText password = findViewById(R.id.sign_up_step_2_password);
-            EditText confirmPassword = findViewById(R.id.sign_up_step_2_confirm_password);
+        //Inflate Step 1
+        SignUpFrag1 step1 = new SignUpFrag1();
+        step1.setArguments(bundle);
+        transaction.replace(android.R.id.content, step1);
+        transaction.commit();
 
-            if (!password.getText().toString().equals(confirmPassword.getText().toString())) {
-                Toast.makeText(SignUp.this, "Passwords don't match!", Toast.LENGTH_SHORT).show();
-            } else {
-                EditText username = findViewById(R.id.sign_up_step_2_username);
-
-                step2Bundle.putString("username", username.getText().toString());
-                step2Bundle.putString("password", password.getText().toString());
-
-                android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
-                android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
-
-                //Inflate Step 1
-                SignUpFrag1 step1 = new SignUpFrag1();
-                step1.setArguments(step1Bundle);
-                transaction.replace(android.R.id.content, step1);
-                transaction.commit();
-
-            }
-        } else if (firstLaunch) {
-            //No need to check for EditTexts
-            android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
-            android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
-
-            //Inflate Step 1
-            SignUpFrag1 step1 = new SignUpFrag1();
-            step1.setArguments(step1Bundle);
-            transaction.replace(android.R.id.content, step1);
-            transaction.commit();
-        }
     }
 
-    public void step2() {
-
-        //Referencing views in step1
-        EditText firstName = findViewById(R.id.sign_up_fragment_1_first_name);
-        EditText lastName = findViewById(R.id.sign_up_fragment_1_last_name);
-        RadioButton male = findViewById(R.id.sign_up_radio_button_male);
-        RadioButton female = findViewById(R.id.sign_up_radio_button_female);
-        RadioButton other = findViewById(R.id.sign_up_radio_button_other);
-
-        //Saving step 1 data
-        step1Bundle.putString("firstName", firstName.getText().toString());
-        step1Bundle.putString("lastName", lastName.getText().toString());
-        if (male.isChecked()) {
-            step1Bundle.putInt("gender", 0);
-        } else if (female.isChecked()) {
-            step1Bundle.putInt("gender", 1);
-        } else if (other.isChecked()) {
-            step1Bundle.putInt("gender", 2);
-        }
-
+    public void step2(Bundle bundle) {
 
         android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
 
         //Inflate Step 2
         SignUpFrag2 step2 = new SignUpFrag2();
-        step2.setArguments(step2Bundle);
+        step2.setArguments(bundle);
         transaction.replace(android.R.id.content, step2);
         transaction.commit();
 
     }
+
+    public void setBundle(int step, Bundle bundle) {
+
+        switch (step) {
+
+            case 1:
+                step1Bundle = bundle;
+                break;
+            case 2:
+                step2Bundle = bundle;
+                break;
+
+        }
+
+    }
+
+    public Bundle getBundle(int step) {
+
+        switch (step) {
+
+            case 1:
+                return step1Bundle;
+
+            case 2:
+                return step2Bundle;
+
+            default:
+                return new Bundle();
+        }
+
+    }
+
 
 }
