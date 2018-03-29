@@ -6,10 +6,10 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <ImageButton
             android:id="@+id/sign_up_cancel_step2"
@@ -26,6 +26,7 @@
             android:textSize="24sp" />
 
         <EditText
+            android:id="@+id/sign_up_step_2_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -39,7 +40,8 @@
             android:text="@string/password"
             android:textSize="24sp" />
 
-     sign_up_step_1_cancel   <EditText
+        <EditText
+            android:id="@+id/sign_up_step_2_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/super_secure_password_here"
@@ -54,6 +56,7 @@
             android:textSize="24sp" />
 
         <EditText
+            android:id="@+id/sign_up_step_2_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"

@@ -1,26 +1,12 @@
 package com.example.tanmay.shoppingapp;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 public class SignUp extends AppCompatActivity {
-
-/*
-    private ImageButton cancel;
-    private LinearLayout nextStep;
-    private SharedPreferences.Editor editor;
-    private String fName;
-    private String lName;
-    private int gender;
-    EditText firstName;
-    EditText lastName;
-*/
 
     private Bundle step1Bundle;
     private Bundle step2Bundle;
@@ -29,80 +15,82 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        step1();
+        //Creating new empty bundles at launch
+        step1Bundle = new Bundle();
+        step2Bundle = new Bundle();
+
+        step1(true);
 
     }
 
-    public void step1() {
+    public void step1(Boolean firstLaunch) {
 
-        android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
+        if (!firstLaunch) {
 
-        step1Bundle = new Bundle();
+            EditText password = findViewById(R.id.sign_up_step_2_password);
+            EditText confirmPassword = findViewById(R.id.sign_up_step_2_confirm_password);
 
-        //Inflate Step 1
-        SignUpFrag1 step1 = new SignUpFrag1();
-        step1.setArguments(step1Bundle);
-        transaction.replace(android.R.id.content, step1);
-        transaction.commit();
+            if (!password.getText().toString().equals(confirmPassword.getText().toString())) {
+                Toast.makeText(SignUp.this, "Passwords don't match!", Toast.LENGTH_SHORT).show();
+            } else {
+                EditText username = findViewById(R.id.sign_up_step_2_username);
 
+                step2Bundle.putString("username", username.getText().toString());
+                step2Bundle.putString("password", password.getText().toString());
+
+                android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
+
+                //Inflate Step 1
+                SignUpFrag1 step1 = new SignUpFrag1();
+                step1.setArguments(step1Bundle);
+                transaction.replace(android.R.id.content, step1);
+                transaction.commit();
+
+            }
+        } else if (firstLaunch) {
+            //No need to check for EditTexts
+            android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+            android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
+
+            //Inflate Step 1
+            SignUpFrag1 step1 = new SignUpFrag1();
+            step1.setArguments(step1Bundle);
+            transaction.replace(android.R.id.content, step1);
+            transaction.commit();
+        }
     }
 
     public void step2() {
 
-        firstName = findViewById(R.id.sign_up_fragment_1_first_name);
-        lastName = findViewById(R.id.sign_up_fragment_1_last_name);
-
-        fName = firstName.getText().toString();
-        lName = lastName.getText().toString();
-
+        //Referencing views in step1
+        EditText firstName = findViewById(R.id.sign_up_fragment_1_first_name);
+        EditText lastName = findViewById(R.id.sign_up_fragment_1_last_name);
         RadioButton male = findViewById(R.id.sign_up_radio_button_male);
         RadioButton female = findViewById(R.id.sign_up_radio_button_female);
         RadioButton other = findViewById(R.id.sign_up_radio_button_other);
 
-        editor = getSharedPreferences("UserInformation", MODE_PRIVATE).edit();
-        editor.putString("FirstName", fName);
-        editor.putString("Last Name", lName);
-
+        //Saving step 1 data
+        step1Bundle.putString("firstName", firstName.getText().toString());
+        step1Bundle.putString("lastName", lastName.getText().toString());
         if (male.isChecked()) {
-            editor.putInt("Gender", 0);
+            step1Bundle.putInt("gender", 0);
         } else if (female.isChecked()) {
-            editor.putInt("Gender", 1);
+            step1Bundle.putInt("gender", 1);
         } else if (other.isChecked()) {
-            editor.putInt("Gender", 2);
+            step1Bundle.putInt("gender", 2);
         }
-
-        editor.apply();
 
 
         android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
 
-        step2Bundle = new Bundle();
-
-        //Inflate Step 1
+        //Inflate Step 2
         SignUpFrag2 step2 = new SignUpFrag2();
-        step2.setArguments(step1Bundle);
+        step2.setArguments(step2Bundle);
         transaction.replace(android.R.id.content, step2);
         transaction.commit();
 
     }
-
-
-    //Graveyard of deprecated code
-
-    public int getGender() {
-
-    }
-
-    private void updateInfo(int step) {
-
-        if (step == 1) {
-
-
-        }
-
-    }
-*/
 
 }

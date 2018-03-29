@@ -1,6 +1,7 @@
 package com.example.tanmay.shoppingapp;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -91,10 +92,8 @@ public class ProductPage extends AppCompatActivity {
                 finish();
                 return true;
 
-            case R.id.FavouriteProduct:
-
-                favToggle();
-                return true;
+            case R.id.YourCartAppBar:
+                startActivity(new Intent(ProductPage.this, YourCart.class));
         }
 
         return super.onOptionsItemSelected(item);
@@ -179,7 +178,7 @@ public class ProductPage extends AppCompatActivity {
             }
         });
 
-        //Expands descrition by clicking on "SEE MORE"
+        //Expands description by clicking on "SEE MORE"
         ExpandToggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

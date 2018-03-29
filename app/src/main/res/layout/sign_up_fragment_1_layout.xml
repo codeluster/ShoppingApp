@@ -106,6 +106,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@android:color/transparent"
+            android:contentDescription="Next Step"
             app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
 
     </LinearLayout>
