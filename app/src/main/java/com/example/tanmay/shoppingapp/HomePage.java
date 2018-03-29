@@ -34,7 +34,6 @@ public class HomePage extends AppCompatActivity {
     ImageView thumbnail;
     DrawerLayout mDrawerLayout;
 
-    String TAG = "com.whatever.tag";
     Cursor cursorNew;
 
     @Override

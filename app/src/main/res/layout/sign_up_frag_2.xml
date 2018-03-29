@@ -63,7 +63,6 @@
             android:inputType="textPassword"
             android:textSize="18sp" />
 
-
     </LinearLayout>
 
     <LinearLayout
@@ -92,8 +91,6 @@
             android:textColor="@color/colorAccent"
             android:textSize="20sp" />
 
-
     </LinearLayout>
-
 
 </RelativeLayout>
