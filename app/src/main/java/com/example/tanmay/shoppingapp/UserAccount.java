@@ -18,30 +18,30 @@ public class UserAccount extends AppCompatActivity {
 
         SharedPreferences preferences = getSharedPreferences("UserInformation", MODE_PRIVATE);
 
-        String nameConcatenated = preferences.getString("FirstName", "John") + " " + preferences.getString("LastName", "Doe");
-        name.setText(nameConcatenated);
-        String usernameConcat = preferences.getString("UserName", "lol");
-        username.setText(usernameConcat);
-        String genderConcat;
-
+        String nameString = preferences.getString("FirstName", "") + " " + preferences.getString("LastName", "Doe");
+        String usernameString = preferences.getString("UserName", "");
+        String genderString;
         switch (preferences.getInt("Gender", -1)) {
 
             case 0:
-                genderConcat = "Male";
+                genderString = "Male";
                 break;
             case 1:
-                genderConcat = "Female";
+                genderString = "Female";
                 break;
 
             case 2:
-                genderConcat = "Other";
+                genderString = "Other";
                 break;
 
             default:
-                genderConcat = "Oops!";
+                genderString = "";
                 break;
         }
-        gender.setText(genderConcat);
+
+        name.setText(nameString);
+        username.setText(usernameString);
+        gender.setText(genderString);
 
 
     }
