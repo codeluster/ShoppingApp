@@ -94,7 +94,16 @@ public class HomePage extends AppCompatActivity {
         //Adding Navigation Drawer
         mDrawerLayout = findViewById(R.id.home_page_drawer);
 
+        SharedPreferences userInfo = getSharedPreferences("UserInformation", MODE_PRIVATE);
+
         NavigationView navigationView = findViewById(R.id.home_page_nav_view);
+/*
+        View header = navigationView.getHeaderView(navigationView.getHeaderCount());
+        TextView username = header.findViewById(R.id.nav_drawer_header_username);
+        String nameString = userInfo.getString("FirstName", "") + userInfo.getString("LastName", "");
+        username.setText(nameString);
+*/
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -169,6 +178,7 @@ public class HomePage extends AppCompatActivity {
 
     }
 
+    // Only run on first launch
     private void insertProduct() {
 
         ContentValues values = new ContentValues();
@@ -201,7 +211,7 @@ public class HomePage extends AppCompatActivity {
 
     private class productListAdapter extends CursorAdapter {
 
-        public productListAdapter(Context context, Cursor c) {
+        private productListAdapter(Context context, Cursor c) {
 
             super(context, c);
 
@@ -210,11 +220,7 @@ public class HomePage extends AppCompatActivity {
         //Returns a new blank view
         @Override
         public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-
-            View v = LayoutInflater.from(context).inflate(R.layout.product_list_element, viewGroup, false);
-
-            return v;
-
+            return LayoutInflater.from(context).inflate(R.layout.product_list_element, viewGroup, false);
         }
 
         //Actually responsible for the data binding

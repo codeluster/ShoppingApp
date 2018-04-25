@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
@@ -17,6 +18,7 @@ public class SignUpFrag1 extends Fragment {
     View rootView;
     LinearLayout next;
     SignUp signUp;
+    ImageButton cancel;
 
 
     // Required empty public constructor
@@ -32,7 +34,7 @@ public class SignUpFrag1 extends Fragment {
 
         next = rootView.findViewById(R.id.sign_up_next_step);
         signUp = (SignUp) getActivity();
-
+        cancel = rootView.findViewById(R.id.sign_up_step_1_cancel);
         return rootView;
 
     }
@@ -56,6 +58,12 @@ public class SignUpFrag1 extends Fragment {
             }
         });
 
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signUp.onBackPressed();
+            }
+        });
     }
 
     private void restoreState(Bundle bundle, View view) {
