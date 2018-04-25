@@ -1,6 +1,7 @@
 package com.example.tanmay.shoppingapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -103,7 +104,17 @@ public class YourCart extends AppCompatActivity {
     }
 
     private void checkOut() {
-        Toast.makeText(YourCart.this, "Functionality Broken!", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.putExtra(Intent.EXTRA_EMAIL, "tanmaysingal2013@gmail.com");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Email sent from Shopping App");
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "No email client available", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     // Graveyard
