@@ -31,11 +31,8 @@ public class YourCart extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         getMenuInflater().inflate(R.menu.your_cart_toolbar, menu);
-
         return true;
-
     }
 
     @Override
