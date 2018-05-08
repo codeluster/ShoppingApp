@@ -4,6 +4,9 @@ This is an Android Application that allows a user to browse a hardcoded database
 This application is not meant for use by actual customers and is for educational purposes only.
 
 Helps learn and implement
+
           Android Frameworks such as SQLite, Content Providers, Intents, Fragmnets, Bundles
+	
           Design components such as Navigation Drawer, Custom Action Bar
+	
           Material Design UI elements like Floating Action Button and Cards
