@@ -34,7 +34,7 @@ public class SignUpFrag2 extends Fragment {
         previous = rootView.findViewById(R.id.sign_up_previous_step);
         signUp = (SignUp) getActivity();
         cancel = rootView.findViewById(R.id.sign_up_cancel_step2);
-        done = rootView.findViewById(R.id.sign_up_complete);
+        //done = rootView.findViewById(R.id.sign_up_complete);
 
         return rootView;
     }
