@@ -26,7 +26,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.tanmay.shoppingapp.DataSet.Product;
+import com.example.tanmay.shoppingapp.DataSet.ProductDatabase;
 import com.example.tanmay.shoppingapp.DataSet.ProductListContract.ProductEntry;
+
+import static com.example.tanmay.shoppingapp.DataSet.ProductDatabase.getProductList;
 
 public class HomePage extends AppCompatActivity {
 
@@ -98,6 +102,7 @@ public class HomePage extends AppCompatActivity {
         SharedPreferences userInfo = getSharedPreferences("UserInformation", MODE_PRIVATE);
 
         NavigationView navigationView = findViewById(R.id.home_page_nav_view);
+
 /*
         View header = navigationView.getHeaderView(navigationView.getHeaderCount());
         TextView username = header.findViewById(R.id.nav_drawer_header_username);
@@ -187,34 +192,26 @@ public class HomePage extends AppCompatActivity {
 
     }
 
-    // Only run on first launch
+    // Only runs on first launch
     private void insertProduct() {
 
         ContentValues values = new ContentValues();
 
-        //Product 1
-        values.put(ProductEntry.COLUMN_NAME_PRODUCT_NAME, R.string.product1Name);
-        values.put(ProductEntry.COLUMN_NAME_PRODUCT_PRICE, R.integer.product1Price);
-        values.put(ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL, R.drawable.product1thumbnail);
-        values.put(ProductEntry.COLUMN_NAME_PRODUCT_IMAGE, R.drawable.product1image);
-        values.put(ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION, R.string.product1Description);
-        getContentResolver().insert(ProductEntry.CONTENT_URI, values);
+        final Product PRODUCT_LIST[] = ProductDatabase.getProductList();
 
-        //Product 2
-        values.put(ProductEntry.COLUMN_NAME_PRODUCT_NAME, R.string.product2Name);
-        values.put(ProductEntry.COLUMN_NAME_PRODUCT_PRICE, R.integer.product2Price);
-        values.put(ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL, R.drawable.product2thumbnail);
-        values.put(ProductEntry.COLUMN_NAME_PRODUCT_IMAGE, R.drawable.product2image);
-        values.put(ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION, R.string.product2Description);
-        getContentResolver().insert(ProductEntry.CONTENT_URI, values);
+        for (Product x : PRODUCT_LIST){
 
-        //Product 3
-        values.put(ProductEntry.COLUMN_NAME_PRODUCT_NAME, R.string.product3Name);
-        values.put(ProductEntry.COLUMN_NAME_PRODUCT_PRICE, R.integer.product3Price);
-        values.put(ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL, R.drawable.product3thumbnail);
-        values.put(ProductEntry.COLUMN_NAME_PRODUCT_IMAGE, R.drawable.product3image);
-        values.put(ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION, R.string.product3Description);
-        getContentResolver().insert(ProductEntry.CONTENT_URI, values);
+            values.put(ProductEntry.COLUMN_NAME_PRODUCT_NAME, x.getProduct_name());
+            values.put(ProductEntry.COLUMN_NAME_PRODUCT_NAME, x.getProduct_price());
+            values.put(ProductEntry.COLUMN_NAME_PRODUCT_NAME, x.getProduct_thumbnail());
+            values.put(ProductEntry.COLUMN_NAME_PRODUCT_NAME, x.getProduct_image());
+            values.put(ProductEntry.COLUMN_NAME_PRODUCT_NAME, x.getProduct_description());
+
+            getContentResolver().insert(ProductEntry.CONTENT_URI, values);
+
+            values.clear();
+
+        }
 
     }
 
