@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -176,6 +177,14 @@ public class HomePage extends AppCompatActivity {
 
         shortcutManager.setDynamicShortcuts(Arrays.asList(shortcut));*/
 
+        Button button = findViewById(R.id.djid);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomePage.this, SignUp.class));
+            }
+        });
+
     }
 
     // Only run on first launch
@@ -208,6 +217,7 @@ public class HomePage extends AppCompatActivity {
         getContentResolver().insert(ProductEntry.CONTENT_URI, values);
 
     }
+
 
     private class productListAdapter extends CursorAdapter {
 

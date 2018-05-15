@@ -29,5 +29,6 @@
     <string name="subtotal">Subtotal</string>
     <string name="previous">Previous</string>
     <string name="next">Next</string>
-    <string name="next_step">Next Step</string>
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
 </resources>

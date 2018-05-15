@@ -1,6 +1,7 @@
 package com.example.tanmay.shoppingapp;
 
 import android.os.Bundle;
+import android.support.design.button.MaterialButton;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,9 +17,8 @@ import android.widget.LinearLayout;
 public class SignUpFrag2 extends Fragment {
     SignUp signUp;
     View rootView;
-    ImageButton cancel;
-    LinearLayout previous;
-    FloatingActionButton done;
+    MaterialButton previous;
+    MaterialButton done;
 
     public SignUpFrag2() {
         // Required empty public constructor
@@ -29,12 +29,11 @@ public class SignUpFrag2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(R.layout.sign_up_frag_2, container, false);
+        rootView = inflater.inflate(R.layout.sign_up_fragment_2, container, false);
 
-        previous = rootView.findViewById(R.id.sign_up_previous_step);
+        previous = rootView.findViewById(R.id.sign_up_fragment_2_button_previous);
         signUp = (SignUp) getActivity();
-        cancel = rootView.findViewById(R.id.sign_up_cancel_step2);
-        //done = rootView.findViewById(R.id.sign_up_complete);
+        done = rootView.findViewById(R.id.sign_up_fragment_2_button_done);
 
         return rootView;
     }
@@ -47,14 +46,7 @@ public class SignUpFrag2 extends Fragment {
             //Restore state of widgets from previous use
             restoreState(getArguments(), rootView);
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Triggers onBackPressed() of the parent activity
-                signUp.onBackPressed();
 
-            }
-        });
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

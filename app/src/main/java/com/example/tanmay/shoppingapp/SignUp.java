@@ -1,7 +1,10 @@
 package com.example.tanmay.shoppingapp;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -9,6 +12,34 @@ public class SignUp extends AppCompatActivity {
 
     Bundle step1Bundle;
     Bundle step2Bundle;
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(SignUp.this, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(SignUp.this);
+        }
+
+        builder.setTitle("Cancel SignUp")
+                .setMessage("Are you sure you don't want to Sign Up?")
+                .setPositiveButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // Do Nothing
+                    }
+                })
+                .setNegativeButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

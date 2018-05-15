@@ -1,13 +1,12 @@
 package com.example.tanmay.shoppingapp;
 
 import android.os.Bundle;
+import android.support.design.button.MaterialButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 /**
@@ -16,10 +15,8 @@ import android.widget.RadioButton;
 public class SignUpFrag1 extends Fragment {
 
     View rootView;
-    LinearLayout next;
+    MaterialButton next;
     SignUp signUp;
-    ImageButton cancel;
-
 
     // Required empty public constructor
     public SignUpFrag1() {
@@ -30,11 +27,10 @@ public class SignUpFrag1 extends Fragment {
                              Bundle savedInstanceState) {
 
         //Inflate the view
-        rootView = inflater.inflate(R.layout.sign_up_fragment_1_layout, container, false);
+        rootView = inflater.inflate(R.layout.sign_up_fragment_1, container, false);
 
-        next = rootView.findViewById(R.id.sign_up_next_step);
+        next = rootView.findViewById(R.id.sign_up_fragment_1_button_next);
         signUp = (SignUp) getActivity();
-        cancel = rootView.findViewById(R.id.sign_up_step_1_cancel);
         return rootView;
 
     }
@@ -58,12 +54,6 @@ public class SignUpFrag1 extends Fragment {
             }
         });
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signUp.onBackPressed();
-            }
-        });
     }
 
     private void restoreState(Bundle bundle, View view) {
