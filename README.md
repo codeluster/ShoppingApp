@@ -10,3 +10,5 @@ Helps learn and implement
           Design components such as Navigation Drawer, Custom Action Bar
 	
           Material Design UI elements like Floating Action Button and Cards
+
+	  Uses Material Components announced at I/O 2018
