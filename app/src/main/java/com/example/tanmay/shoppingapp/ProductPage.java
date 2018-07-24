@@ -16,8 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tanmay.shoppingapp.Data.Cart.CartContract;
-import com.example.tanmay.shoppingapp.Data.ProductList.ProductListContract;
+import com.example.tanmay.shoppingapp.Data.BaseContract;
 
 public class ProductPage extends AppCompatActivity {
 
@@ -135,28 +134,28 @@ public class ProductPage extends AppCompatActivity {
 
         String[] projection = {
 
-                ProductListContract.ProductEntry._ID,
-                ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL,
-                ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME,
-                ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE,
-                ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_IMAGE,
-                ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION
+                BaseContract.ProductEntry._ID,
+                BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL,
+                BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME,
+                BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE,
+                BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_IMAGE,
+                BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION
 
         };
 
         // A new Uri with the the row number appended as "/#" wildcard
-        Uri xacv = Uri.withAppendedPath(ProductListContract.ProductEntry.CONTENT_URI, getIntent().getStringExtra("itemClicked"));
+        Uri xacv = Uri.withAppendedPath(BaseContract.ProductEntry.CONTENT_URI, getIntent().getStringExtra("itemClicked"));
 
         //Selection and selectionArgs are null because they get overridden in the DataProvider's URI Matcher
         Cursor cursor = getContentResolver().query(xacv, projection, null, null, null);
 
         cursor.moveToFirst();
 
-        prodID = cursor.getInt(cursor.getColumnIndexOrThrow(ProductListContract.ProductEntry._ID));
-        prodNameID = cursor.getInt(cursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME));
-        prodPriceID = cursor.getInt(cursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE));
-        prodDescID = cursor.getInt(cursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION));
-        prodImageID = cursor.getInt(cursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_IMAGE));
+        prodID = cursor.getInt(cursor.getColumnIndexOrThrow(BaseContract.ProductEntry._ID));
+        prodNameID = cursor.getInt(cursor.getColumnIndexOrThrow(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME));
+        prodPriceID = cursor.getInt(cursor.getColumnIndexOrThrow(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE));
+        prodDescID = cursor.getInt(cursor.getColumnIndexOrThrow(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION));
+        prodImageID = cursor.getInt(cursor.getColumnIndexOrThrow(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_IMAGE));
 
         cursor.close();
 
@@ -192,10 +191,10 @@ public class ProductPage extends AppCompatActivity {
 
                 ContentValues values = new ContentValues();
 
-                values.put(CartContract.CartEntry._ID, prodID);
-                values.put(CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY, quantity);
+                values.put(BaseContract.CartEntry._ID, prodID);
+                values.put(BaseContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY, quantity);
 
-                getContentResolver().insert(CartContract.CartEntry.CONTENT_URI, values);
+                getContentResolver().insert(BaseContract.CartEntry.CONTENT_URI, values);
 
                 setResult(RESULT_OK);
 

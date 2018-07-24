@@ -5,15 +5,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.tanmay.shoppingapp.Data.BaseContract;
 import com.example.tanmay.shoppingapp.R;
 
-import static com.example.tanmay.shoppingapp.Data.ProductList.ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION;
-import static com.example.tanmay.shoppingapp.Data.ProductList.ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_IMAGE;
-import static com.example.tanmay.shoppingapp.Data.ProductList.ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME;
-import static com.example.tanmay.shoppingapp.Data.ProductList.ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE;
-import static com.example.tanmay.shoppingapp.Data.ProductList.ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL;
-import static com.example.tanmay.shoppingapp.Data.ProductList.ProductListContract.ProductEntry.TABLE_NAME;
-import static com.example.tanmay.shoppingapp.Data.ProductList.ProductListContract.ProductEntry._ID;
+import static com.example.tanmay.shoppingapp.Data.BaseContract.ProductEntry.*;
 
 /**
  * Created by tanmay on 3/3/18.
@@ -91,13 +86,13 @@ public class ProductDbHelper extends SQLiteOpenHelper {
 
                 ContentValues values = new ContentValues();
 
-                values.put(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME, PRODUCT_NAMES[i]);
-                values.put(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE, PRODUCT_PRICES[i]);
-                values.put(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION, PRODUCT_DESCRIPTIONS[i]);
-                values.put(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_IMAGE, PRODUCT_IMAGES[i]);
-                values.put(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL, PRODUCT_THUMBNAILS[i]);
+                values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME, PRODUCT_NAMES[i]);
+                values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE, PRODUCT_PRICES[i]);
+                values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION, PRODUCT_DESCRIPTIONS[i]);
+                values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_IMAGE, PRODUCT_IMAGES[i]);
+                values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL, PRODUCT_THUMBNAILS[i]);
 
-                context.getContentResolver().insert(ProductListContract.ProductEntry.CONTENT_URI, values);
+                context.getContentResolver().insert(BaseContract.ProductEntry.CONTENT_URI, values);
 
                 values.clear();
 

@@ -18,8 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tanmay.shoppingapp.Data.Cart.CartContract;
-import com.example.tanmay.shoppingapp.Data.ProductList.ProductListContract;
+import com.example.tanmay.shoppingapp.Data.BaseContract;
 
 public class YourCart extends AppCompatActivity {
 
@@ -77,12 +76,12 @@ public class YourCart extends AppCompatActivity {
         });
 
         String[] projection = {
-                CartContract.CartEntry._ID,
-                CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY
+                BaseContract.CartEntry._ID,
+                BaseContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY
         };
 
         // Retrieves the entire cart
-        Cursor cart = getContentResolver().query(CartContract.CartEntry.CONTENT_URI, projection, null, null, null);
+        Cursor cart = getContentResolver().query(BaseContract.CartEntry.CONTENT_URI, projection, null, null, null);
 
         // Display sa message if cart is empty
         if (cart.getCount() == 0) {
@@ -125,13 +124,13 @@ public class YourCart extends AppCompatActivity {
         while (!cart.isLast()) {
 
             cart.move(cartCounter);
-            int quan = cart.getInt(cart.getColumnIndexOrThrow(CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY));
+            int quan = cart.getInt(cart.getColumnIndexOrThrow(BaseContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY));
 
             //Traverses the productList
             //Moves to location as given by the cart ID field
-            productList.move(cart.getInt(cart.getColumnIndexOrThrow(CartContract.CartEntry._ID)));
+            productList.move(cart.getInt(cart.getColumnIndexOrThrow(BaseContract.CartEntry._ID)));
 
-            subtotal += quan * getResources().getInteger(productList.getInt(productList.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE)));
+            subtotal += quan * getResources().getInteger(productList.getInt(productList.getColumnIndexOrThrow(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE)));
 
             cartCounter++;
         }
@@ -166,31 +165,31 @@ public class YourCart extends AppCompatActivity {
             //Projection is what columns we want
             String[] projectionX = {
 
-                    ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME,
-                    ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE
+                    BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME,
+                    BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE
 
             };
 
             //gets the name and price of everything in productList
-            prodCursor = getContentResolver().query(ProductListContract.ProductEntry.CONTENT_URI, projectionX, null, null, null);
+            prodCursor = getContentResolver().query(BaseContract.ProductEntry.CONTENT_URI, projectionX, null, null, null);
 
 
             //get ID of cart element
-            Integer id = cart.getInt(cart.getColumnIndexOrThrow(CartContract.CartEntry._ID));
+            Integer id = cart.getInt(cart.getColumnIndexOrThrow(BaseContract.CartEntry._ID));
             //get quantity ordered
-            int quantity = cart.getInt(cart.getColumnIndexOrThrow(CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY));
+            int quantity = cart.getInt(cart.getColumnIndexOrThrow(BaseContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY));
 
             //move the productCursor to the location corresponding to cart id
             prodCursor.move(id);
 
             //get the price of one product
-            int price = getResources().getInteger(prodCursor.getInt(prodCursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE)));
+            int price = getResources().getInteger(prodCursor.getInt(prodCursor.getColumnIndexOrThrow(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE)));
 
             //multiply it by number of products ordered
             int netPrice = price * quantity;
 
             //set the name of the product
-            prodName.setText(prodCursor.getInt(prodCursor.getColumnIndexOrThrow(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME)));
+            prodName.setText(prodCursor.getInt(prodCursor.getColumnIndexOrThrow(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME)));
 
             //set the price
             prodPrice.setText("" + netPrice);

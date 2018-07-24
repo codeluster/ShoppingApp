@@ -4,9 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import static com.example.tanmay.shoppingapp.Data.Cart.CartContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY;
-import static com.example.tanmay.shoppingapp.Data.Cart.CartContract.CartEntry.TABLE_NAME;
-import static com.example.tanmay.shoppingapp.Data.Cart.CartContract.CartEntry._ID;
+import static com.example.tanmay.shoppingapp.Data.BaseContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY;
+import static com.example.tanmay.shoppingapp.Data.BaseContract.CartEntry.TABLE_NAME;
+import static com.example.tanmay.shoppingapp.Data.BaseContract.CartEntry._ID;
 
 /**
  * Created by tanmay on 07-03-2018.

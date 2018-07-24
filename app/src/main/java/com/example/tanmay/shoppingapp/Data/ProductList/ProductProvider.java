@@ -11,6 +11,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.example.tanmay.shoppingapp.Data.BaseContract;
+
 public class ProductProvider extends ContentProvider {
 
     private static final int PRODUCTS = 1834;
@@ -19,8 +21,8 @@ public class ProductProvider extends ContentProvider {
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        sUriMatcher.addURI(ProductListContract.CONTENT_AUTHORITY, ProductListContract.PATH_PRODUCT_LIST, PRODUCTS);
-        sUriMatcher.addURI(ProductListContract.CONTENT_AUTHORITY, ProductListContract.PATH_PRODUCT_LIST + "/#", PRODUCTS_ID);
+        sUriMatcher.addURI(BaseContract.CONTENT_AUTHORITY, BaseContract.PATH_PRODUCT_LIST, PRODUCTS);
+        sUriMatcher.addURI(BaseContract.CONTENT_AUTHORITY, BaseContract.PATH_PRODUCT_LIST + "/#", PRODUCTS_ID);
     }
 
     private ProductDbHelper mDbHelper;
@@ -41,12 +43,12 @@ public class ProductProvider extends ContentProvider {
 
         switch (sUriMatcher.match(uri)) {
             case PRODUCTS:
-                cursor = database.query(ProductListContract.ProductEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                cursor = database.query(BaseContract.ProductEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             case PRODUCTS_ID:
-                selection = ProductListContract.ProductEntry._ID + "=?";
+                selection = BaseContract.ProductEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                cursor = database.query(ProductListContract.ProductEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                cursor = database.query(BaseContract.ProductEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             default:
                 throw new IllegalArgumentException(invalidUriErrorGenerator(uri));
@@ -63,9 +65,9 @@ public class ProductProvider extends ContentProvider {
     public String getType(@NonNull Uri uri) {
         switch (sUriMatcher.match(uri)) {
             case PRODUCTS:
-                return ProductListContract.ProductEntry.CONTENT_LIST_TYPE;
+                return BaseContract.ProductEntry.CONTENT_LIST_TYPE;
             case PRODUCTS_ID:
-                return ProductListContract.ProductEntry.CONTENT_ITEM_TYPE;
+                return BaseContract.ProductEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new IllegalStateException(invalidUriErrorGenerator(uri));
         }
@@ -87,7 +89,7 @@ public class ProductProvider extends ContentProvider {
 
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
-        long rowID = database.insert(ProductListContract.ProductEntry.TABLE_NAME, null, values);
+        long rowID = database.insert(BaseContract.ProductEntry.TABLE_NAME, null, values);
 
         if (rowID == -1) {
             Log.e(ProductProvider.class.getSimpleName(), rowInsertFailedErrorGenerator(uri));
@@ -111,7 +113,7 @@ public class ProductProvider extends ContentProvider {
                 if (numDeletedRows != 0) getContext().getContentResolver().notifyChange(uri, null);
                 return numDeletedRows;
             case PRODUCTS_ID:
-                selection = ProductListContract.ProductEntry._ID + "=?";
+                selection = BaseContract.ProductEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 int numDeletedRowss = deleteItem(selection, selectionArgs);
                 if (numDeletedRowss != 0) getContext().getContentResolver().notifyChange(uri, null);
@@ -124,7 +126,7 @@ public class ProductProvider extends ContentProvider {
 
     private int deleteItem(String selection, String[] selectionArgs) {
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
-        return database.delete(ProductListContract.ProductEntry.TABLE_NAME, selection, selectionArgs);
+        return database.delete(BaseContract.ProductEntry.TABLE_NAME, selection, selectionArgs);
     }
 
     @Override
@@ -140,7 +142,7 @@ public class ProductProvider extends ContentProvider {
                 if (numItemsUpdated != 0) getContext().getContentResolver().notifyChange(uri, null);
                 return numItemsUpdated;
             case PRODUCTS_ID:
-                selection = ProductListContract.ProductEntry._ID + "=?";
+                selection = BaseContract.ProductEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 int numItemsUpdatedd = updateItem(values, selection, selectionArgs);
                 if (numItemsUpdatedd != 0)
@@ -155,7 +157,7 @@ public class ProductProvider extends ContentProvider {
     private int updateItem(ContentValues values, String selection, String[] selectionArgs) {
 
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
-        return database.update(ProductListContract.ProductEntry.TABLE_NAME, values, selection, selectionArgs);
+        return database.update(BaseContract.ProductEntry.TABLE_NAME, values, selection, selectionArgs);
 
     }
 

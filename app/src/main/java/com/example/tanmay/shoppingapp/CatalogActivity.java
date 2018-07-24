@@ -1,35 +1,9 @@
 package com.example.tanmay.shoppingapp;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.CursorAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import com.example.tanmay.shoppingapp.Data.Product;
-import com.example.tanmay.shoppingapp.Data.ProductDatabase;
 import com.example.tanmay.shoppingapp.Data.ProductList.ProductDbHelper;
-import com.example.tanmay.shoppingapp.Data.ProductList.ProductListContract.ProductEntry;
 
 public class CatalogActivity extends AppCompatActivity {
 
