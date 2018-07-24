@@ -18,8 +18,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tanmay.shoppingapp.DataSet.CartContract;
-import com.example.tanmay.shoppingapp.DataSet.ProductListContract;
+import com.example.tanmay.shoppingapp.Data.CartContract;
+import com.example.tanmay.shoppingapp.Data.ProductListContract;
 
 public class YourCart extends AppCompatActivity {
 
