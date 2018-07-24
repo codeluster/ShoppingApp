@@ -36,7 +36,7 @@
         </activity>
 
         <provider
-            android:name=".Data.DataProvider"
+            android:name=".Data.Cart.DataProvider"
             android:authorities="com.example.tanmay.shoppingapp"
             android:exported="false" />
 

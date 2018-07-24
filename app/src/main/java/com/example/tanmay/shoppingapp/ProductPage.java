@@ -16,8 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tanmay.shoppingapp.Data.CartContract;
-import com.example.tanmay.shoppingapp.Data.ProductListContract;
+import com.example.tanmay.shoppingapp.Data.Cart.CartContract;
+import com.example.tanmay.shoppingapp.Data.ProductList.ProductListContract;
 
 public class ProductPage extends AppCompatActivity {
 
