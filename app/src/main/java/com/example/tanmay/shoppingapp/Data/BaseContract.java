@@ -37,7 +37,6 @@ public class BaseContract {
         public static final String COLUMN_NAME_PRODUCT_IMAGE = "image";
         public static final String COLUMN_NAME_PRODUCT_DESCRIPTION = "description";
 
-
     }
 
     public static class CartEntry implements BaseColumns {

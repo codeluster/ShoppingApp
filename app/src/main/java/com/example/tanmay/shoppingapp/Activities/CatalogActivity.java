@@ -1,12 +1,19 @@
 package com.example.tanmay.shoppingapp.Activities;
 
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.app.LoaderManager;
+import android.content.CursorLoader;
+import android.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.tanmay.shoppingapp.Data.ProductList.ProductDbHelper;
+import com.example.tanmay.shoppingapp.Adapters.CatalogCursorAdapter;
+import com.example.tanmay.shoppingapp.Data.BaseContract;
 import com.example.tanmay.shoppingapp.R;
 
-public class CatalogActivity extends AppCompatActivity {
+public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
 //    LinearLayout linearLayout;
 //    TextView name;
@@ -53,13 +60,16 @@ public class CatalogActivity extends AppCompatActivity {
 //        }
 //    }
 
+    // Identifier for the product data loader
+    private static final int PRODUCT_LOADER = 0;
+
+    // Adapter for the list view
+    CatalogCursorAdapter mCursorAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-
-        ProductDbHelper helper = new ProductDbHelper(this);
-        helper.getReadableDatabase();
 
 //        linearLayout = findViewById(R.id.d68f8);
 
@@ -80,12 +90,10 @@ public class CatalogActivity extends AppCompatActivity {
 
 //        NavigationView navigationView = findViewById(R.id.home_page_nav_view);
 
-/*
-        View header = navigationView.getHeaderView(navigationView.getHeaderCount());
-        TextView username = header.findViewById(R.id.nav_drawer_header_username);
-        String nameString = userInfo.getString("FirstName", "") + userInfo.getString("LastName", "");
-        username.setText(nameString);
-*/
+//        View header = navigationView.getHeaderView(navigationView.getHeaderCount());
+//        TextView username = header.findViewById(R.id.nav_drawer_header_username);
+//        String nameString = userInfo.getString("FirstName", "") + userInfo.getString("LastName", "");
+//        username.setText(nameString);
 
 //        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 //            @Override
@@ -219,6 +227,41 @@ public class CatalogActivity extends AppCompatActivity {
 //
 //        }
 //
+
+        getLoaderManager().initLoader(PRODUCT_LOADER, null, this);
+
+    }
+
+    @NonNull
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
+
+        // Define a projection to specify the rows needed
+        String[] projection = {
+                BaseContract.ProductEntry._ID,
+                BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME,
+                BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL
+        };
+
+        return new CursorLoader(this,
+                BaseContract.ProductEntry.CONTENT_URI,
+                projection,
+                null,
+                null,
+                null);
+
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
+        // Update the cursor with new data
+        mCursorAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+        // Callback when the data needs to be deleted
+        mCursorAdapter.swapCursor(null);
     }
 }
 
