@@ -1,8 +1,11 @@
 package com.example.tanmay.shoppingapp.Data.ProductList;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.tanmay.shoppingapp.R;
 
 import static com.example.tanmay.shoppingapp.Data.ProductList.ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION;
 import static com.example.tanmay.shoppingapp.Data.ProductList.ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_IMAGE;
@@ -20,10 +23,12 @@ public class ProductDbHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "products.db";
     public static final int DATABASE_VERSION = 1;
+    private Context context;
 
     //Default constructor
     public ProductDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
     //  SQL command to create the table
@@ -47,6 +52,10 @@ public class ProductDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //  Creates the database bu executing String as SQL command
         db.execSQL(ProductDbHelper.SQL_CREATE_ENTRIES);
+
+        DatabasePopulater populater = new DatabasePopulater(context);
+        populater.populate();
+
     }
 
     @Override
@@ -59,6 +68,43 @@ public class ProductDbHelper extends SQLiteOpenHelper {
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
+    }
+
+    private static class DatabasePopulater {
+
+        private Context context;
+
+        private DatabasePopulater(Context context) {
+            this.context = context;
+        }
+
+        private final int[] PRODUCT_NAMES = context.getResources().getIntArray(R.array.product_Names);
+        private final int[] PRODUCT_PRICES = context.getResources().getIntArray(R.array.product_Prices);
+        private final int[] PRODUCT_DESCRIPTIONS = context.getResources().getIntArray(R.array.product_Descriptions);
+        private final int[] PRODUCT_IMAGES = context.getResources().getIntArray(R.array.product_Images);
+        private final int[] PRODUCT_THUMBNAILS = context.getResources().getIntArray(R.array.product_Thumbnails);
+
+        // Insert every product into the database
+        private void populate() {
+
+            for (int i = 0; i < PRODUCT_NAMES.length; i++) {
+
+                ContentValues values = new ContentValues();
+
+                values.put(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME, PRODUCT_NAMES[i]);
+                values.put(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE, PRODUCT_PRICES[i]);
+                values.put(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION, PRODUCT_DESCRIPTIONS[i]);
+                values.put(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_IMAGE, PRODUCT_IMAGES[i]);
+                values.put(ProductListContract.ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL, PRODUCT_THUMBNAILS[i]);
+
+                context.getContentResolver().insert(ProductListContract.ProductEntry.CONTENT_URI, values);
+
+                values.clear();
+
+            }
+
+        }
+
     }
 
 }
