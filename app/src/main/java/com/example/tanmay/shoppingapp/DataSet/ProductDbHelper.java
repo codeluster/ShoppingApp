@@ -33,7 +33,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
                     COLUMN_NAME_PRODUCT_NAME + " INTEGER, " +
                     COLUMN_NAME_PRODUCT_PRICE + " INTEGER, " +
                     COLUMN_NAME_PRODUCT_DESCRIPTION + " INTEGER, " +
-                    COLUMN_NAME_PRODUCT_IMAGE + " INTEGER)";
+                    COLUMN_NAME_PRODUCT_IMAGE + " INTEGER);";
     //  Checks if a particular table already exists and then deletes it.
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + TABLE_NAME;

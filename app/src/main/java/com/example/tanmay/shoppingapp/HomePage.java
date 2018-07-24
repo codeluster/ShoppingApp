@@ -71,7 +71,7 @@ public class HomePage extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == 001 && resultCode == RESULT_OK) {
+        if (requestCode == 1 && resultCode == RESULT_OK) {
 
             Snackbar snackbar = Snackbar.make(linearLayout, "Added to Cart", Snackbar.LENGTH_LONG);
             snackbar.show();
@@ -99,7 +99,7 @@ public class HomePage extends AppCompatActivity {
         //Adding Navigation Drawer
         mDrawerLayout = findViewById(R.id.home_page_drawer);
 
-        SharedPreferences userInfo = getSharedPreferences("UserInformation", MODE_PRIVATE);
+//        SharedPreferences userInfo = getSharedPreferences("UserInformation", MODE_PRIVATE);
 
         NavigationView navigationView = findViewById(R.id.home_page_nav_view);
 
@@ -163,24 +163,23 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int itemClicked, long l) {
                 Intent intent = new Intent(HomePage.this, ProductPage.class);
-
                 TextView fhu = view.findViewById(R.id.f249873);
                 intent.putExtra("itemClicked", fhu.getText().toString());
-                startActivityForResult(intent, 001);
+                startActivityForResult(intent, 1);
             }
         });
 
-       /* //Will crash app if API level < 25
-        //Useless shortcut that opens google
-        ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
-        ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "id1")
-                .setShortLabel("Your Cart")
-                .setLongLabel("Open your cart")
-                .setIcon(Icon.createWithResource(this, R.drawable.ic_add_shopping_cart_black_24dp))
-                .setIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/")))
-                .build();
-
-        shortcutManager.setDynamicShortcuts(Arrays.asList(shortcut));*/
+//        //Will crash app if API level < 25
+//        //Useless shortcut that opens google
+//        ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
+//        ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "id1")
+//                .setShortLabel("Your Cart")
+//                .setLongLabel("Open your cart")
+//                .setIcon(Icon.createWithResource(this, R.drawable.ic_add_shopping_cart_black_24dp))
+//                .setIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/")))
+//                .build();
+//
+//        shortcutManager.setDynamicShortcuts(Arrays.asList(shortcut));
 
         Button button = findViewById(R.id.djid);
         button.setOnClickListener(new View.OnClickListener() {
@@ -199,7 +198,7 @@ public class HomePage extends AppCompatActivity {
 
         final Product PRODUCT_LIST[] = ProductDatabase.getProductList();
 
-        for (Product x : PRODUCT_LIST){
+        for (Product x : PRODUCT_LIST) {
 
             values.put(ProductEntry.COLUMN_NAME_PRODUCT_NAME, x.getProduct_name());
             values.put(ProductEntry.COLUMN_NAME_PRODUCT_NAME, x.getProduct_price());
@@ -210,7 +209,6 @@ public class HomePage extends AppCompatActivity {
             getContentResolver().insert(ProductEntry.CONTENT_URI, values);
 
             values.clear();
-
         }
 
     }
@@ -219,9 +217,7 @@ public class HomePage extends AppCompatActivity {
     private class productListAdapter extends CursorAdapter {
 
         private productListAdapter(Context context, Cursor c) {
-
             super(context, c);
-
         }
 
         //Returns a new blank view

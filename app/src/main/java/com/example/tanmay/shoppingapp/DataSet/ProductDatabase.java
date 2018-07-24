@@ -1,8 +1,5 @@
 package com.example.tanmay.shoppingapp.DataSet;
 
-
-import android.content.ContentValues;
-
 import com.example.tanmay.shoppingapp.R;
 
 public class ProductDatabase {
