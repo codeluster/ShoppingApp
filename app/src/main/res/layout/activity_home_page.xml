@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.tanmay.shoppingapp.CatalogActivity">
+    tools:context="com.example.tanmay.shoppingapp.Activities.CatalogActivity">
 
     <LinearLayout
         android:id="@+id/d68f8"

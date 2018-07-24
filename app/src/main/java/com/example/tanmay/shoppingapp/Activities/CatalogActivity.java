@@ -1,9 +1,10 @@
-package com.example.tanmay.shoppingapp;
+package com.example.tanmay.shoppingapp.Activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.tanmay.shoppingapp.Data.ProductList.ProductDbHelper;
+import com.example.tanmay.shoppingapp.R;
 
 public class CatalogActivity extends AppCompatActivity {
 
