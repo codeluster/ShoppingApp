@@ -125,20 +125,20 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
 //        if (!first_run.getBoolean("ProductListCreated", false)) {
 
-        String[] PRODUCT_NAMES = getResources().getStringArray(R.array.product_Names);
-        int[] PRODUCT_PRICES = getResources().getIntArray(R.array.product_Prices);
-        String[] PRODUCT_DESCRIPTIONS = getResources().getStringArray(R.array.product_Descriptions);
+        TypedArray PRODUCT_NAMES = getResources().obtainTypedArray(R.array.product_Names);
+        TypedArray PRODUCT_PRICES = getResources().obtainTypedArray(R.array.product_Prices);
+        TypedArray PRODUCT_DESCRIPTIONS = getResources().obtainTypedArray(R.array.product_Descriptions);
         TypedArray PRODUCT_IMAGES = getResources().obtainTypedArray(R.array.product_Images);
         TypedArray PRODUCT_THUMBNAILS = getResources().obtainTypedArray(R.array.product_Thumbnails);
 
 
-        for (int i = 0; i < PRODUCT_NAMES.length; i++) {
+        for (int i = 0; PRODUCT_NAMES.hasValue(i); i++) {
 
             ContentValues values = new ContentValues();
 
-            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME, PRODUCT_NAMES[i]);
-            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE, PRODUCT_PRICES[i]);
-            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION, PRODUCT_DESCRIPTIONS[i]);
+            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME, PRODUCT_NAMES.getResourceId(i, 0));
+            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE, PRODUCT_PRICES.getResourceId(i, 0));
+            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION, PRODUCT_DESCRIPTIONS.getResourceId(i, 0));
             values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_IMAGE, PRODUCT_IMAGES.getResourceId(i, 0));
             values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL, PRODUCT_THUMBNAILS.getResourceId(i, 0));
 
@@ -146,9 +146,11 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
             values.clear();
 
-
         }
 
+        PRODUCT_NAMES.recycle();
+        PRODUCT_PRICES.recycle();
+        PRODUCT_DESCRIPTIONS.recycle();
         PRODUCT_IMAGES.recycle();
         PRODUCT_THUMBNAILS.recycle();
 
