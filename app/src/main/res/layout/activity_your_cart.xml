@@ -41,7 +41,7 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/CartListView"
+        android:id="@+id/cart_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible" />

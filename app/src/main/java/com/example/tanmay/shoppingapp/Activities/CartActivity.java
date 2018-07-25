@@ -1,34 +1,23 @@
 package com.example.tanmay.shoppingapp.Activities;
 
+import android.content.CursorLoader;
+import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.app.LoaderManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
 
+import com.example.tanmay.shoppingapp.Adapters.CartCursorAdapter;
 import com.example.tanmay.shoppingapp.Data.BaseContract;
 import com.example.tanmay.shoppingapp.R;
 
-public class CartActivity extends AppCompatActivity {
+public class CartActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.your_cart_toolbar, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.clearCart:
-                return true;
-            case android.R.id.home:
-                finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+    CartCursorAdapter mCursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +40,11 @@ public class CartActivity extends AppCompatActivity {
 //            }
 //        });
 
-        String[] projection = {
-                BaseContract.CartEntry._ID,
-                BaseContract.CartEntry.COLUMN_NAME_PRODUCT_ID,
-                BaseContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY
-        };
-
-        // Retrieves the entire cart
-        Cursor cart = getContentResolver().query(BaseContract.CartEntry.CONTENT_URI, projection, null, null, null);
+        ListView cartListView = findViewById(R.id.cart_list_view);
+        View empty_view = findViewById(R.id.activity_cart_empty_view);
+        cartListView.setEmptyView(empty_view);
+        mCursorAdapter = new CartCursorAdapter(this, null);
+        cartListView.setAdapter(mCursorAdapter);
 
     }
 //    private void checkOut() {
@@ -96,5 +82,52 @@ public class CartActivity extends AppCompatActivity {
 //        }
 //        return subtotal;
 //    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.your_cart_toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.clearCart:
+                return true;
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+
+        String[] projection = {
+                BaseContract.CartEntry._ID,
+                BaseContract.CartEntry.COLUMN_NAME_PRODUCT_ID,
+                BaseContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY
+        };
+
+        return new CursorLoader(this,
+                BaseContract.CartEntry.CONTENT_URI,
+                projection,
+                null,
+                null,
+                null);
+
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        mCursorAdapter.swapCursor(cursor);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        mCursorAdapter.swapCursor(null);
+    }
 }
 
