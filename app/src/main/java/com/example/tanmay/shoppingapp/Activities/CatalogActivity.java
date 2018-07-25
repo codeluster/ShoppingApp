@@ -18,7 +18,6 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.tanmay.shoppingapp.Adapters.CatalogCursorAdapter;
 import com.example.tanmay.shoppingapp.Data.BaseContract;
@@ -164,7 +163,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         productListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int itemClicked, long clickedID) {
-                Intent intent = new Intent(CatalogActivity.this, ProductPage.class);
+                Intent intent = new Intent(CatalogActivity.this, ProductActivity.class);
                 // Uri of clicked product
                 Uri clickedProduct = ContentUris.withAppendedId(BaseContract.ProductEntry.CONTENT_URI, clickedID);
                 // Set Uri as data in intent
