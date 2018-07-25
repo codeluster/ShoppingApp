@@ -17,6 +17,7 @@ import com.example.tanmay.shoppingapp.R;
 
 public class CartActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    private static final int CART_LOADER = 0;
     CartCursorAdapter mCursorAdapter;
 
     @Override
@@ -45,6 +46,8 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
         cartListView.setEmptyView(empty_view);
         mCursorAdapter = new CartCursorAdapter(this, null);
         cartListView.setAdapter(mCursorAdapter);
+
+        getLoaderManager().initLoader(CART_LOADER, null, this);
 
     }
 //    private void checkOut() {
@@ -129,5 +132,6 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoaderReset(Loader<Cursor> loader) {
         mCursorAdapter.swapCursor(null);
     }
+
 }
 
