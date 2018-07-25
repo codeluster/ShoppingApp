@@ -68,7 +68,7 @@ public class CartActivity extends AppCompatActivity {
         }
 
         // Set an OnClickListener on the FAB
-        checkOutButton = findViewById(R.id.CartCheckOutFAB);
+        checkOutButton = findViewById(R.id.activity_cart_checkout_fab);
         checkOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

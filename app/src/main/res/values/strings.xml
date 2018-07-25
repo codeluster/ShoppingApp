@@ -38,4 +38,6 @@
     <string name="placeholder_description">Yahan pe description efiufbie eugih guiwuihg weguihg guhwi gh iughwuhiuh gr iyugoe ag rhgupairhgiu hgirughyuiuipy f iufh iaewg iu f eiugh iurehgoi hgiurphghiu gphaiuhgeiuwp aghuigerhpgiuhuiprahg uioghui rphguirghpuiagh reuighreiupghreuipghioweahjapeghguiergaruiphgaiohgajkgabiuvpd podhviu gh aiph guipare guih</string>
     <string name="placeholder_price">27983</string>
     <string name="default_initial_quantity">1</string>
+    <string name="empty_cart_header">Your Cart is empty</string>
+    <string name="empty_cart_message">Your shopping cart is made to be filled with all of your favourite products and helps you shop with ease.</string>
 </resources>
