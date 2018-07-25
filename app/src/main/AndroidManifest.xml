@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ProductPage"
+            android:name=".Activities.ProductPage"
             android:label="@string/title_activity_product_page"
             android:parentActivityName=".Activities.CatalogActivity"
             android:theme="@style/Theme.Tanmay">
