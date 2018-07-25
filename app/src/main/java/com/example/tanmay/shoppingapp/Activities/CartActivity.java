@@ -56,16 +56,12 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_cart);
 
-        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.YourCartToolBar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
-        // Display personalized message in Action Bar Title
-        SharedPreferences preferences = getSharedPreferences("UserInformation", MODE_PRIVATE);
-        if (preferences.getString("FirstName", null) != null) {
-            toolbar.setTitle(preferences.getString("FirstName", null) + "'s Cart");
-        }
+//
+//        // Display personalized message in Action Bar Title
+//        SharedPreferences preferences = getSharedPreferences("UserInformation", MODE_PRIVATE);
+//        if (preferences.getString("FirstName", null) != null) {
+//            toolbar.setTitle(preferences.getString("FirstName", null) + "'s Cart");
+//        }
 
         // Set an OnClickListener on the FAB
         checkOutButton = findViewById(R.id.activity_cart_checkout_fab);
@@ -78,26 +74,13 @@ public class CartActivity extends AppCompatActivity {
 
         String[] projection = {
                 BaseContract.CartEntry._ID,
+                BaseContract.CartEntry.COLUMN_NAME_PRODUCT_ID,
                 BaseContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY
         };
 
         // Retrieves the entire cart
         Cursor cart = getContentResolver().query(BaseContract.CartEntry.CONTENT_URI, projection, null, null, null);
 
-        // Display sa message if cart is empty
-        if (cart.getCount() == 0) {
-            TextView title = findViewById(R.id.cart_empty_title);
-            TextView text = findViewById(R.id.cart_empty_text);
-            title.setVisibility(View.VISIBLE);
-            text.setVisibility(View.VISIBLE);
-        }
-
-        // If the cart is not empty set the adapter
-        else {
-            ListView cartList = findViewById(R.id.CartListView);
-            cartList.setVisibility(View.VISIBLE);
-            cartList.setAdapter(new cartAdapter(CartActivity.this, cart));
-        }
     }
 
     private void checkOut() {
