@@ -23,18 +23,18 @@
     <string name="product3Description">Coming in at just under 16g, it’s not just our most secure and sweat-resistant earbud, it’s also one of the lightest wireless Sport earbuds on the market.6-hour battery life and sweat resistant build keep you and your earbuds going in more ways than one.Switch up the playlist to stay motivated, or take calls using the convenient microphone and remote.</string>
 
     <!-- Array containing the Names of the products -->
-    <integer-array name="product_Names">
+    <string-array name="product_Names">
         <item>@string/product1Name</item>
         <item>@string/product2Name</item>
         <item>@string/product3Name</item>
-    </integer-array>
+    </string-array>
 
     <!-- Array containing the Descriptions of the products -->
-    <integer-array name="product_Descriptions">
+    <string-array name="product_Descriptions">
         <item>@string/product1Description</item>
         <item>@string/product2Description</item>
         <item>@string/product3Description</item>
-    </integer-array>
+    </string-array>
 
     <!-- Array containing the Prices of the products -->
     <integer-array name="product_Prices">
@@ -44,17 +44,17 @@
     </integer-array>
 
     <!-- Array containing the Images of the products -->
-    <integer-array name="product_Images">
+    <array name="product_Images">
         <item>@drawable/product1image</item>
         <item>@drawable/product2image</item>
         <item>@drawable/product3image</item>
-    </integer-array>
+    </array>
 
     <!-- Array containing the Thumbnails of the products -->
-    <integer-array name="product_Thumbnails">
+    <array name="product_Thumbnails">
         <item>@drawable/product1thumbnail</item>
         <item>@drawable/product2thumbnail</item>
         <item>@drawable/product3thumbnail</item>
-    </integer-array>
+    </array>
 
 </resources>

@@ -20,8 +20,12 @@ public class BaseContract {
 
     public static class ProductEntry implements BaseColumns {
 
+        // Refers to this particular database
+        public static final String PRODUCT_CONTENT_AUTHORITY = BaseContract.CONTENT_AUTHORITY + ".Data.ProductList.ProductProvider";
+        public static final Uri PRODUCT_CONTENT_URI = Uri.parse("content://" + PRODUCT_CONTENT_AUTHORITY);
+
         //  Uri pointing to this particular table
-        public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, ProductEntry.TABLE_NAME);
+        public static final Uri CONTENT_URI = Uri.withAppendedPath(PRODUCT_CONTENT_URI, ProductEntry.TABLE_NAME);
         //MIME type
         public static final String CONTENT_LIST_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PRODUCT_LIST;
         public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_PRODUCT_LIST;
@@ -41,8 +45,12 @@ public class BaseContract {
 
     public static class CartEntry implements BaseColumns {
 
+        // Refers to this particular database
+        public static final String CART_CONTENT_AUTHORITY = BaseContract.CONTENT_AUTHORITY + ".Data.Cart.CartProvider";
+        public static final Uri CART_CONTENT_URI = Uri.parse("content://" + CART_CONTENT_AUTHORITY);
+
         //Uri pointing to this particular table
-        public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, CartEntry.TABLE_NAME);
+        public static final Uri CONTENT_URI = Uri.withAppendedPath(CART_CONTENT_URI, CartEntry.TABLE_NAME);
         //MIME type
         public static final String CONTENT_LIST_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_CART;
         public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_CART;

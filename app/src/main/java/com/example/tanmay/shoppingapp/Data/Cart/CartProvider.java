@@ -21,8 +21,8 @@ public class CartProvider extends ContentProvider {
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        sUriMatcher.addURI(BaseContract.CONTENT_AUTHORITY, BaseContract.CartEntry.TABLE_NAME, CART);
-        sUriMatcher.addURI(BaseContract.CONTENT_AUTHORITY, BaseContract.CartEntry.TABLE_NAME + "/#", CART_ID);
+        sUriMatcher.addURI(BaseContract.CartEntry.CART_CONTENT_AUTHORITY, BaseContract.CartEntry.TABLE_NAME, CART);
+        sUriMatcher.addURI(BaseContract.CartEntry.CART_CONTENT_AUTHORITY, BaseContract.CartEntry.TABLE_NAME + "/#", CART_ID);
     }
 
     private CartDbHelper mDbHelper;

@@ -1,5 +1,8 @@
 package com.example.tanmay.shoppingapp.Activities;
 
+import android.content.ContentValues;
+import android.content.SharedPreferences;
+import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,6 +11,7 @@ import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ListView;
 
 import com.example.tanmay.shoppingapp.Adapters.CatalogCursorAdapter;
 import com.example.tanmay.shoppingapp.Data.BaseContract;
@@ -19,8 +23,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 //    TextView name;
 //    ImageView thumbnail;
 //    DrawerLayout mDrawerLayout;
-//
-//    Cursor cursorNew;
+
 //
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
@@ -69,12 +72,12 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_catalog);
 
 //        linearLayout = findViewById(R.id.d68f8);
 
-//        SharedPreferences preferences = getSharedPreferences("ApplicationState", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = preferences.edit();
+        SharedPreferences first_run = getSharedPreferences("ApplicationState", MODE_PRIVATE);
+        SharedPreferences.Editor editor = first_run.edit();
 
         //Adding custom toolbar
 //        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.homePageToolBar);
@@ -120,30 +123,44 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 //        });
 
 
-//        if (!preferences.getBoolean("ProductListCreated", false)) {
-//
-//            insertProduct();
-//
+//        if (!first_run.getBoolean("ProductListCreated", false)) {
+
+        String[] PRODUCT_NAMES = getResources().getStringArray(R.array.product_Names);
+        int[] PRODUCT_PRICES = getResources().getIntArray(R.array.product_Prices);
+        String[] PRODUCT_DESCRIPTIONS = getResources().getStringArray(R.array.product_Descriptions);
+        TypedArray PRODUCT_IMAGES = getResources().obtainTypedArray(R.array.product_Images);
+        TypedArray PRODUCT_THUMBNAILS = getResources().obtainTypedArray(R.array.product_Thumbnails);
+
+
+        for (int i = 0; i < PRODUCT_NAMES.length; i++) {
+
+            ContentValues values = new ContentValues();
+
+            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME, PRODUCT_NAMES[i]);
+            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE, PRODUCT_PRICES[i]);
+            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION, PRODUCT_DESCRIPTIONS[i]);
+            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_IMAGE, PRODUCT_IMAGES.getResourceId(i, 0));
+            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL, PRODUCT_THUMBNAILS.getResourceId(i, 0));
+
+            getContentResolver().insert(BaseContract.ProductEntry.CONTENT_URI, values);
+
+            values.clear();
+
+
+        }
+
+        PRODUCT_IMAGES.recycle();
+        PRODUCT_THUMBNAILS.recycle();
+
 //            editor.putBoolean("ProductListCreated", true);
 //            editor.apply();
 //        }
 
+        ListView productListView = findViewById(R.id.catalog_list_view);
 
-        //Projection is just the name of the columns we would like to receive
-//        String[] projection = {
-//
-//                ProductEntry._ID,
-//                ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL,
-//                ProductEntry.COLUMN_NAME_PRODUCT_NAME
-//
-//        };
-//
-//        //gets the entire productList
-//        cursorNew = getContentResolver().query(ProductEntry.CONTENT_URI, projection, null, null, null);
-//
-//        ListView listView = findViewById(R.id.productList_homepage);
-//        listView.setAdapter(new productListAdapter(CatalogActivity.this, cursorNew));
-//
+        productListView.setAdapter(mCursorAdapter);
+
+
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> adapterView, View view, int itemClicked, long l) {
@@ -176,57 +193,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 //
 //    }
 
-//    // Only runs on first launch
-//    private void insertProduct() {
-//
-//        ContentValues values = new ContentValues();
-//
-//        final Product PRODUCT_LIST[] = ProductDatabase.getProductList();
-//
-//        for (Product x : PRODUCT_LIST) {
-//
-//            values.put(ProductEntry.COLUMN_NAME_PRODUCT_NAME, x.getProduct_name());
-//            values.put(ProductEntry.COLUMN_NAME_PRODUCT_NAME, x.getProduct_price());
-//            values.put(ProductEntry.COLUMN_NAME_PRODUCT_NAME, x.getProduct_thumbnail());
-//            values.put(ProductEntry.COLUMN_NAME_PRODUCT_NAME, x.getProduct_image());
-//            values.put(ProductEntry.COLUMN_NAME_PRODUCT_NAME, x.getProduct_description());
-//
-//            getContentResolver().insert(ProductEntry.CONTENT_URI, values);
-//
-//            values.clear();
-//        }
-//
-//    }
-
-//
-//    private class productListAdapter extends CursorAdapter {
-//
-//        private productListAdapter(Context context, Cursor c) {
-//            super(context, c);
-//        }
-//
-//        //Returns a new blank view
-//        @Override
-//        public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-//            return LayoutInflater.from(context).inflate(R.layout.item_catalog, viewGroup, false);
-//        }
-//
-//        //Actually responsible for the data binding
-//        @Override
-//        public void bindView(View view, Context context, Cursor cursor) {
-//
-//            name = view.findViewById(R.id.productListElementProductNameTextView);
-//            thumbnail = view.findViewById(R.id.catalog_item_product_thumbnail);
-//
-//            TextView id = view.findViewById(R.id.f249873);
-//            Integer geihl = cursor.getInt(cursor.getColumnIndexOrThrow(ProductEntry._ID));
-//
-//            name.setText(cursor.getInt(cursor.getColumnIndexOrThrow(ProductEntry.COLUMN_NAME_PRODUCT_NAME)));
-//            thumbnail.setImageResource(cursor.getInt(cursor.getColumnIndexOrThrow(ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL)));
-//            id.setText(geihl.toString());
-//
-//        }
-//
 
         getLoaderManager().initLoader(PRODUCT_LOADER, null, this);
 

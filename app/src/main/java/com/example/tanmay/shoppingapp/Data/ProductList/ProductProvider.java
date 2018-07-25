@@ -21,8 +21,8 @@ public class ProductProvider extends ContentProvider {
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        sUriMatcher.addURI(BaseContract.CONTENT_AUTHORITY, BaseContract.PATH_PRODUCT_LIST, PRODUCTS);
-        sUriMatcher.addURI(BaseContract.CONTENT_AUTHORITY, BaseContract.PATH_PRODUCT_LIST + "/#", PRODUCTS_ID);
+        sUriMatcher.addURI(BaseContract.ProductEntry.PRODUCT_CONTENT_AUTHORITY, BaseContract.PATH_PRODUCT_LIST, PRODUCTS);
+        sUriMatcher.addURI(BaseContract.ProductEntry.PRODUCT_CONTENT_AUTHORITY, BaseContract.PATH_PRODUCT_LIST + "/#", PRODUCTS_ID);
     }
 
     private ProductDbHelper mDbHelper;
