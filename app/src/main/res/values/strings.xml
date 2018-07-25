@@ -31,4 +31,11 @@
     <string name="next">Next</string>
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
+    <string name="quantity">Quantity</string>
+    <string name="buy_now">Buy Now</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="see_less">SEE LESS</string>
+    <string name="placeholder_description">Yahan pe description efiufbie eugih guiwuihg weguihg guhwi gh iughwuhiuh gr iyugoe ag rhgupairhgiu hgirughyuiuipy f iufh iaewg iu f eiugh iurehgoi hgiurphghiu gphaiuhgeiuwp aghuigerhpgiuhuiprahg uioghui rphguirghpuiagh reuighreiupghreuipghioweahjapeghguiergaruiphgaiohgajkgabiuvpd podhviu gh aiph guipare guih</string>
+    <string name="placeholder_price">27983</string>
+    <string name="default_initial_quantity">1</string>
 </resources>

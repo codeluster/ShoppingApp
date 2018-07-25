@@ -37,14 +37,15 @@
                 android:layout_marginRight="4dp"
                 android:text="@string/rupee"
                 android:textColor="#000000"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:layout_marginEnd="4dp" />
 
             <TextView
                 android:id="@+id/ProductPageProductPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:text="27983"
+                android:text="@string/placeholder_price"
                 android:textColor="#000000"
                 android:textSize="32sp"
                 android:textStyle="bold" />
@@ -65,7 +66,7 @@
                 android:minHeight="48dp"
                 android:minWidth="48dp"
                 android:padding="8dp"
-                android:text="SEE LESS"
+                android:text="@string/see_less"
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"
@@ -80,7 +81,7 @@
                 android:maxLines="5"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:text="Yahan pe description efiufbie eugih guiwuihg weguihg guhwi gh iughwuhiuh gr iyugoe ag rhgupairhgiu hgirughyuiuipy f iufh iaewg iu f eiugh iurehgoi hgiurphghiu gphaiuhgeiuwp aghuigerhpgiuhuiprahg uioghui rphguirghpuiagh reuighreiupghreuipghioweahjapeghguiergaruiphgaiohgajkgabiuvpd podhviu gh aiph guipare guih"
+                android:text="@string/placeholder_description"
                 android:textSize="18sp" />
 
             <TextView
@@ -92,53 +93,12 @@
                 android:minHeight="48dp"
                 android:minWidth="48dp"
                 android:paddingRight="8dp"
-                android:text="SEE MORE"
+                android:text="@string/see_more"
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/QuantitySlider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/select_quantity"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp">
-
-                <SeekBar
-                    android:id="@+id/ProductPageProductQuantitySeekBar"
-                    style="@style/Widget.AppCompat.SeekBar"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="6"
-                    android:max="10"
-                    android:progress="1" />
-
-                <TextView
-                    android:id="@+id/ProductPageProductQuantityTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="1"
-                    android:textSize="28sp" />
-
-            </LinearLayout>
+                android:textSize="14sp"
+                android:paddingEnd="8dp" />
 
         </LinearLayout>
 
@@ -151,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="Quantity"
+                android:text="@string/quantity"
                 android:textSize="20sp" />
 
             <Button
@@ -160,7 +120,7 @@
                 android:layout_height="32dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorAccent"
                 android:elevation="4dp"
                 android:text="-" />
 
@@ -170,8 +130,9 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorAccent"
                 android:inputType="number"
+                android:gravity="center_horizontal"
                 android:minWidth="48dp"
-                android:text="1"
+                android:text="@string/default_initial_quantity"
                 android:textAlignment="center" />
 
             <Button
@@ -180,7 +141,7 @@
                 android:layout_height="32dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorAccent"
                 android:elevation="4dp"
                 android:text="+" />
 
@@ -193,9 +154,9 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorAccentDark"
             android:elevation="4dp"
-            android:text="Buy Now" />
+            android:text="@string/buy_now" />
 
         <Button
             android:id="@+id/add_to_cart"
@@ -205,9 +166,9 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="4dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorAccent"
             android:elevation="4dp"
-            android:text="Add to Cart" />
+            android:text="@string/add_to_cart" />
 
     </LinearLayout>
 

@@ -43,10 +43,8 @@ public class ProductActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_page);
-//        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.productPageToolBar);
-//        setSupportActionBar(toolbar);
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        // Get the intent passed on item click in catalog activity
         Intent intent = getIntent();
         currentProductUri = intent.getData();
 
@@ -177,11 +175,6 @@ public class ProductActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-
-            case android.R.id.home:
-                finish();
-                return true;
-
             case R.id.YourCartAppBar:
                 startActivity(new Intent(ProductActivity.this, YourCart.class));
         }
