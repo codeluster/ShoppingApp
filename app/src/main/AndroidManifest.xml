@@ -29,7 +29,7 @@
                 android:value="com.example.tanmay.shoppingapp.Activities.CatalogActivity" />
         </activity>
         <activity
-            android:name=".YourCart"
+            android:name=".Activities.CartActivity"
             android:label="@string/title_activity_your_cart"
             android:parentActivityName=".Activities.CatalogActivity"
             android:theme="@style/Theme.Tanmay.AppTheme">

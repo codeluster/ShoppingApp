@@ -13,8 +13,10 @@ import android.support.annotation.Nullable;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -30,31 +32,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 //    ImageView thumbnail;
 //    DrawerLayout mDrawerLayout;
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home_page_toolbar, menu);
-        return true;
-    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//
-//        switch (item.getItemId()) {
-//
-//            case R.id.YourCartAppBar:
-//                startActivity(new Intent(CatalogActivity.this, YourCart.class));
-//                return true;
-//
-//            case android.R.id.home:
-//                mDrawerLayout.openDrawer(GravityCompat.START);
-//                return true;
-//
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-//
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //
@@ -106,7 +83,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 //                        break;
 //
 //                    case R.id.homepage_drawer_your_cart:
-//                        startActivity(new Intent(CatalogActivity.this, YourCart.class));
+//                        startActivity(new Intent(CatalogActivity.this, CartActivity.class));
 //                        break;
 //
 //                    case R.id.homepage_drawer_account:
@@ -197,6 +174,30 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
         getLoaderManager().initLoader(PRODUCT_LOADER, null, this);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.home_page_toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.YourCartAppBar:
+                startActivity(new Intent(CatalogActivity.this, CartActivity.class));
+                return true;
+
+//            case android.R.id.home:
+//                mDrawerLayout.openDrawer(GravityCompat.START);
+//                return true;
+
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @NonNull

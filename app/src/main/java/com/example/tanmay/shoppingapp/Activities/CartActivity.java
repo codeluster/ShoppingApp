@@ -1,4 +1,4 @@
-package com.example.tanmay.shoppingapp;
+package com.example.tanmay.shoppingapp.Activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,8 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tanmay.shoppingapp.Data.BaseContract;
+import com.example.tanmay.shoppingapp.R;
 
-public class YourCart extends AppCompatActivity {
+public class CartActivity extends AppCompatActivity {
 
     TextView prodName;
     TextView prodPrice;
@@ -95,7 +96,7 @@ public class YourCart extends AppCompatActivity {
         else {
             ListView cartList = findViewById(R.id.CartListView);
             cartList.setVisibility(View.VISIBLE);
-            cartList.setAdapter(new cartAdapter(YourCart.this, cart));
+            cartList.setAdapter(new cartAdapter(CartActivity.this, cart));
         }
     }
 

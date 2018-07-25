@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,15 +13,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tanmay.shoppingapp.Data.BaseContract;
 import com.example.tanmay.shoppingapp.R;
-import com.example.tanmay.shoppingapp.YourCart;
 
 public class ProductActivity extends AppCompatActivity {
 
+    ScrollView parentView;
     TextView prodPrice;
     TextView prodDesc;
     ImageView prodImage;
@@ -54,6 +56,7 @@ public class ProductActivity extends AppCompatActivity {
         decrease = findViewById(R.id.productPageQuantityDecrease);
         increase = findViewById(R.id.productPageQuantityIncrease);
         quantityBox = findViewById(R.id.productPageQuantity);
+        parentView = findViewById(R.id.activity_product_parent_scroll_view);
 
         prodDesc = findViewById(R.id.ProductPageProductDescription);
         prodPrice = findViewById(R.id.ProductPageProductPrice);
@@ -99,6 +102,7 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 addToCart();
+                Snackbar.make(parentView, "Added to Cart", Snackbar.LENGTH_SHORT).show();
             }
         });
 
@@ -166,7 +170,6 @@ public class ProductActivity extends AppCompatActivity {
 
         getContentResolver().insert(BaseContract.CartEntry.CONTENT_URI, values);
 
-        finish();
         values.clear();
 
     }
@@ -182,7 +185,7 @@ public class ProductActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.YourCartAppBar:
-                startActivity(new Intent(ProductActivity.this, YourCart.class));
+                startActivity(new Intent(ProductActivity.this, CartActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
