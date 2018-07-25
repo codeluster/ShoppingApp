@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import static com.example.tanmay.shoppingapp.Data.BaseContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY;
+import static com.example.tanmay.shoppingapp.Data.BaseContract.CartEntry.COLUMN_NAME_PRODUCT_ID;
 import static com.example.tanmay.shoppingapp.Data.BaseContract.CartEntry.TABLE_NAME;
 import static com.example.tanmay.shoppingapp.Data.BaseContract.CartEntry._ID;
 
@@ -26,6 +27,7 @@ public class CartDbHelper extends SQLiteOpenHelper {
     //All columns contain integers because they contain ID and quantity
     private static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + TABLE_NAME + " (" +
             _ID + " INTEGER NOT NULL, " +
+            COLUMN_NAME_PRODUCT_ID + " INTEGER, " +
             COLUMN_NAME_ORDERED_QUANTITY + " INTEGER);";
 
     //Checks if  a particular table already exists and then deletes it

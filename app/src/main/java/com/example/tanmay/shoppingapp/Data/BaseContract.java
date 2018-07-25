@@ -59,7 +59,8 @@ public class BaseContract {
         public static final String TABLE_NAME = "cart";
 
         //Name of various columns
-        public static final String _ID = "_id";
+        public static final String _ID = BaseColumns._ID;
+        public static final String COLUMN_NAME_PRODUCT_ID = "productID";
         public static final String COLUMN_NAME_ORDERED_QUANTITY = "quantity";
 
     }

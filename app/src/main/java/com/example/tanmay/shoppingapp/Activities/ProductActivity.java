@@ -1,5 +1,6 @@
 package com.example.tanmay.shoppingapp.Activities;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -29,14 +30,13 @@ public class ProductActivity extends AppCompatActivity {
     Button decrease;
     Button increase;
     EditText quantityBox;
+    int productID;
 
-    int prodID;
     int quantity;
 
     private Uri currentProductUri;
 
     Boolean descExpanded = false;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +70,7 @@ public class ProductActivity extends AppCompatActivity {
         Cursor currentProductCursor = getContentResolver().query(currentProductUri, projection, null, null, null);
 
         if (currentProductCursor.moveToFirst()) {
+            productID = currentProductCursor.getInt(currentProductCursor.getColumnIndexOrThrow(BaseContract.ProductEntry._ID));
             setTitle(getString(currentProductCursor.getInt(currentProductCursor.getColumnIndexOrThrow(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME))));
             prodDesc.setText(currentProductCursor.getInt(currentProductCursor.getColumnIndexOrThrow(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION)));
             prodPrice.setText(currentProductCursor.getInt(currentProductCursor.getColumnIndexOrThrow(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE)));
@@ -94,20 +95,12 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
 
-//        addToCart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                ContentValues values = new ContentValues();
-//
-//                values.put(BaseContract.CartEntry._ID, prodID);
-//                values.put(BaseContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY, quantity);
-//
-//                getContentResolver().insert(BaseContract.CartEntry.CONTENT_URI, values);
-//
-//                finish();
-//            }
-//        });
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addToCart();
+            }
+        });
 
         quantity = 1;
 
@@ -139,7 +132,6 @@ public class ProductActivity extends AppCompatActivity {
 
     }
 
-
     //Expand is true when view to be expanded and false when view to be collapsed
     private void toggleDescriptionLength(final Boolean expand) {
 
@@ -162,6 +154,20 @@ public class ProductActivity extends AppCompatActivity {
             ExpandToggle.setVisibility(View.VISIBLE);
 
         }
+
+    }
+
+    private void addToCart() {
+
+        ContentValues values = new ContentValues();
+
+        values.put(BaseContract.CartEntry.COLUMN_NAME_PRODUCT_ID, productID);
+        values.put(BaseContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY, quantity);
+
+        getContentResolver().insert(BaseContract.CartEntry.CONTENT_URI, values);
+
+        finish();
+        values.clear();
 
     }
 
