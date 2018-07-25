@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    style="@style/Theme.Tanmay.AppTheme"
     tools:context="com.example.tanmay.shoppingapp.Activities.CatalogActivity">
 
     <LinearLayout
@@ -13,17 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <!--       <android.support.v7.widget.Toolbar
-                   android:id="@+id/homePageToolBar"
-                   android:layout_width="match_parent"
-                   android:layout_height="?attr/actionBarSize"
-                   android:background="?attr/colorPrimary"
-                   android:elevation="4dp"
-                   android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-                   app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                   app:title="Home"
-                   tools:targetApi="lollipop" />-->
+<!--
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/homePageToolBar"
+            style="@style/Widget.Tanmay.AppBar"
+            android:elevation="4dp"
+            tools:targetApi="lollipop" />-->
 
         <ListView
             android:id="@+id/catalog_list_view"

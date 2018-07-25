@@ -1,6 +1,7 @@
 package com.example.tanmay.shoppingapp.Activities;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.database.Cursor;
@@ -11,7 +12,11 @@ import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.tanmay.shoppingapp.Adapters.CatalogCursorAdapter;
 import com.example.tanmay.shoppingapp.Data.BaseContract;
@@ -24,15 +29,12 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 //    ImageView thumbnail;
 //    DrawerLayout mDrawerLayout;
 
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//
-//        getMenuInflater().inflate(R.menu.home_page_toolbar, menu);
-//
-//        return true;
-//
-//    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.home_page_toolbar, menu);
+        return true;
+    }
 //
 //    @Override
 //    public boolean onOptionsItemSelected(MenuItem item) {
@@ -79,12 +81,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         SharedPreferences first_run = getSharedPreferences("ApplicationState", MODE_PRIVATE);
         SharedPreferences.Editor editor = first_run.edit();
 
-        //Adding custom toolbar
-//        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.homePageToolBar);
-//        setSupportActionBar(toolbar);
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-//        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 
         //Adding Navigation Drawer
 //        mDrawerLayout = findViewById(R.id.home_page_drawer);
@@ -125,34 +121,34 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
         if (!first_run.getBoolean("ProductListCreated", false)) {
 
-        TypedArray PRODUCT_NAMES = getResources().obtainTypedArray(R.array.product_Names);
-        TypedArray PRODUCT_PRICES = getResources().obtainTypedArray(R.array.product_Prices);
-        TypedArray PRODUCT_DESCRIPTIONS = getResources().obtainTypedArray(R.array.product_Descriptions);
-        TypedArray PRODUCT_IMAGES = getResources().obtainTypedArray(R.array.product_Images);
-        TypedArray PRODUCT_THUMBNAILS = getResources().obtainTypedArray(R.array.product_Thumbnails);
+            TypedArray PRODUCT_NAMES = getResources().obtainTypedArray(R.array.product_Names);
+            TypedArray PRODUCT_PRICES = getResources().obtainTypedArray(R.array.product_Prices);
+            TypedArray PRODUCT_DESCRIPTIONS = getResources().obtainTypedArray(R.array.product_Descriptions);
+            TypedArray PRODUCT_IMAGES = getResources().obtainTypedArray(R.array.product_Images);
+            TypedArray PRODUCT_THUMBNAILS = getResources().obtainTypedArray(R.array.product_Thumbnails);
 
 
-        for (int i = 0; PRODUCT_NAMES.hasValue(i); i++) {
+            for (int i = 0; PRODUCT_NAMES.hasValue(i); i++) {
 
-            ContentValues values = new ContentValues();
+                ContentValues values = new ContentValues();
 
-            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME, PRODUCT_NAMES.getResourceId(i, 0));
-            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE, PRODUCT_PRICES.getResourceId(i, 0));
-            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION, PRODUCT_DESCRIPTIONS.getResourceId(i, 0));
-            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_IMAGE, PRODUCT_IMAGES.getResourceId(i, 0));
-            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL, PRODUCT_THUMBNAILS.getResourceId(i, 0));
+                values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME, PRODUCT_NAMES.getResourceId(i, 0));
+                values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE, PRODUCT_PRICES.getResourceId(i, 0));
+                values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION, PRODUCT_DESCRIPTIONS.getResourceId(i, 0));
+                values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_IMAGE, PRODUCT_IMAGES.getResourceId(i, 0));
+                values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL, PRODUCT_THUMBNAILS.getResourceId(i, 0));
 
-            getContentResolver().insert(BaseContract.ProductEntry.CONTENT_URI, values);
+                getContentResolver().insert(BaseContract.ProductEntry.CONTENT_URI, values);
 
-            values.clear();
+                values.clear();
 
-        }
+            }
 
-        PRODUCT_NAMES.recycle();
-        PRODUCT_PRICES.recycle();
-        PRODUCT_DESCRIPTIONS.recycle();
-        PRODUCT_IMAGES.recycle();
-        PRODUCT_THUMBNAILS.recycle();
+            PRODUCT_NAMES.recycle();
+            PRODUCT_PRICES.recycle();
+            PRODUCT_DESCRIPTIONS.recycle();
+            PRODUCT_IMAGES.recycle();
+            PRODUCT_THUMBNAILS.recycle();
 
             editor.putBoolean("ProductListCreated", true);
             editor.apply();
@@ -163,15 +159,15 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         productListView.setAdapter(mCursorAdapter);
 
 
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int itemClicked, long l) {
-//                Intent intent = new Intent(CatalogActivity.this, ProductPage.class);
-//                TextView fhu = view.findViewById(R.id.f249873);
-//                intent.putExtra("itemClicked", fhu.getText().toString());
-//                startActivityForResult(intent, 1);
-//            }
-//        });
+        productListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int itemClicked, long l) {
+                Intent intent = new Intent(CatalogActivity.this, ProductPage.class);
+                TextView fhu = view.findViewById(R.id.f249873);
+                intent.putExtra("itemClicked", fhu.getText().toString());
+                startActivity(intent);
+            }
+        });
 
 //        //Will crash app if API level < 25
 //        //Useless shortcut that opens google

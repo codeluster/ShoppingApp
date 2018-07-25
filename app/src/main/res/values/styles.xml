@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="Theme.Tanmay" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.Tanmay.AppTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -37,5 +37,13 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/buttonTextColor</item>
     </style>
+
+<!--
+    <style name="Widget.Tanmay.AppBar" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">@color/actionBarColorPrimary</item>
+    </style>
+-->
 
 </resources>

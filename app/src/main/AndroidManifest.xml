@@ -8,10 +8,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Tanmay">
+        android:theme="@style/Theme.Tanmay.AppTheme">
         <activity
             android:name=".Activities.CatalogActivity"
-            android:label="Catalog">
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.Tanmay.AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +23,7 @@
             android:name=".Activities.ProductPage"
             android:label="@string/title_activity_product_page"
             android:parentActivityName=".Activities.CatalogActivity"
-            android:theme="@style/Theme.Tanmay">
+            android:theme="@style/Theme.Tanmay.AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.tanmay.shoppingapp.Activities.CatalogActivity" />
@@ -31,7 +32,7 @@
             android:name=".YourCart"
             android:label="@string/title_activity_your_cart"
             android:parentActivityName=".Activities.CatalogActivity"
-            android:theme="@style/Theme.Tanmay">
+            android:theme="@style/Theme.Tanmay.AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.tanmay.shoppingapp.Activities.CatalogActivity" />
