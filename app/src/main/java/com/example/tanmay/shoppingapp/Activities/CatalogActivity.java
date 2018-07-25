@@ -123,7 +123,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 //        });
 
 
-//        if (!first_run.getBoolean("ProductListCreated", false)) {
+        if (!first_run.getBoolean("ProductListCreated", false)) {
 
         TypedArray PRODUCT_NAMES = getResources().obtainTypedArray(R.array.product_Names);
         TypedArray PRODUCT_PRICES = getResources().obtainTypedArray(R.array.product_Prices);
@@ -154,12 +154,12 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         PRODUCT_IMAGES.recycle();
         PRODUCT_THUMBNAILS.recycle();
 
-//            editor.putBoolean("ProductListCreated", true);
-//            editor.apply();
-//        }
+            editor.putBoolean("ProductListCreated", true);
+            editor.apply();
+        }
 
         ListView productListView = findViewById(R.id.catalog_list_view);
-
+        mCursorAdapter = new CatalogCursorAdapter(this, null);
         productListView.setAdapter(mCursorAdapter);
 
 
