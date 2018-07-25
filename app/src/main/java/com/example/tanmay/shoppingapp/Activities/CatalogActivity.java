@@ -1,10 +1,12 @@
 package com.example.tanmay.shoppingapp.Activities;
 
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -161,10 +163,12 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
         productListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int itemClicked, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int itemClicked, long clickedID) {
                 Intent intent = new Intent(CatalogActivity.this, ProductPage.class);
-                TextView fhu = view.findViewById(R.id.f249873);
-                intent.putExtra("itemClicked", fhu.getText().toString());
+                // Uri of clicked product
+                Uri clickedProduct = ContentUris.withAppendedId(BaseContract.ProductEntry.CONTENT_URI, clickedID);
+                // Set Uri as data in intent
+                intent.setData(clickedProduct);
                 startActivity(intent);
             }
         });
