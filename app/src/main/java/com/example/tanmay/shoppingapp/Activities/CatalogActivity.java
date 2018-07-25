@@ -208,7 +208,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 //        //Returns a new blank view
 //        @Override
 //        public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-//            return LayoutInflater.from(context).inflate(R.layout.product_list_element, viewGroup, false);
+//            return LayoutInflater.from(context).inflate(R.layout.item_catalog, viewGroup, false);
 //        }
 //
 //        //Actually responsible for the data binding
@@ -216,7 +216,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 //        public void bindView(View view, Context context, Cursor cursor) {
 //
 //            name = view.findViewById(R.id.productListElementProductNameTextView);
-//            thumbnail = view.findViewById(R.id.productListElementImageView);
+//            thumbnail = view.findViewById(R.id.catalog_item_product_thumbnail);
 //
 //            TextView id = view.findViewById(R.id.f249873);
 //            Integer geihl = cursor.getInt(cursor.getColumnIndexOrThrow(ProductEntry._ID));

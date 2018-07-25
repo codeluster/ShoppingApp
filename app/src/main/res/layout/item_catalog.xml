@@ -6,7 +6,7 @@
     android:padding="4dp">
 
     <ImageView
-        android:id="@+id/productListElementImageView"
+        android:id="@+id/catalog_item_product_thumbnail"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="center_vertical"
@@ -21,7 +21,7 @@
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/productListElementProductNameTextView"
+        android:id="@+id/catalog_item_product_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
