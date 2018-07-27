@@ -68,6 +68,7 @@ public class ProductActivity extends AppCompatActivity {
                 BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_IMAGE
         };
 
+
         Cursor currentProductCursor = getContentResolver().query(currentProductUri, projection, null, null, null);
 
         if (currentProductCursor.moveToFirst()) {

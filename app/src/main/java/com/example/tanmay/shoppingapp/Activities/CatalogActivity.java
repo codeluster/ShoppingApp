@@ -13,6 +13,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,16 +23,18 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.tanmay.shoppingapp.Activities.SignUp.SignUp;
 import com.example.tanmay.shoppingapp.Adapters.CatalogCursorAdapter;
 import com.example.tanmay.shoppingapp.Data.BaseContract;
 import com.example.tanmay.shoppingapp.R;
+import com.example.tanmay.shoppingapp.UserAccount;
 
 public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-//    LinearLayout linearLayout;
+    //    LinearLayout linearLayout;
 //    TextView name;
 //    ImageView thumbnail;
-//    DrawerLayout mDrawerLayout;
+    DrawerLayout mDrawerLayout;
 
     // Identifier for the product data loader
     private static final int PRODUCT_LOADER = 0;
@@ -44,46 +49,52 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
         setTitle(R.string.title_activity_catalog);
 
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
+        }
 //        linearLayout = findViewById(R.id.d68f8);
 
         final SharedPreferences first_run = getSharedPreferences("ApplicationState", MODE_PRIVATE);
 
 
         //Adding Navigation Drawer
-//        mDrawerLayout = findViewById(R.id.navigation_drawer_activity_catalog);
+        mDrawerLayout = findViewById(R.id.navigation_drawer_activity_catalog);
 
 //        SharedPreferences userInfo = getSharedPreferences("UserInformation", MODE_PRIVATE);
 
-//        NavigationView navigationView = findViewById(R.id.home_page_nav_view);
+        NavigationView navigationView = findViewById(R.id.navigation_view_activity_catalog);
 
 //        View header = navigationView.getHeaderView(navigationView.getHeaderCount());
 //        TextView username = header.findViewById(R.id.nav_drawer_header_username);
 //        String nameString = userInfo.getString("FirstName", "") + userInfo.getString("LastName", "");
 //        username.setText(nameString);
 
-//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//
-//                switch (item.getItemId()) {
-//
-//                    case R.id.nav_drawer_sign_up:
-//                        startActivity(new Intent(CatalogActivity.this, SignUp.class));
-//                        break;
-//
-//                    case R.id.homepage_drawer_your_cart:
-//                        startActivity(new Intent(CatalogActivity.this, CartActivity.class));
-//                        break;
-//
-//                    case R.id.homepage_drawer_account:
-//                        startActivity(new Intent(CatalogActivity.this, UserAccount.class));
-//                        break;
-//                }
-//
-//                mDrawerLayout.closeDrawer(GravityCompat.START);
-//                return true;
-//            }
-//        });
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+
+                    case R.id.nav_drawer_sign_up:
+                        startActivity(new Intent(CatalogActivity.this, SignUp.class));
+                        break;
+
+                    case R.id.homepage_drawer_your_cart:
+                        startActivity(new Intent(CatalogActivity.this, CartActivity.class));
+                        break;
+
+                    case R.id.homepage_drawer_account:
+                        startActivity(new Intent(CatalogActivity.this, UserAccount.class));
+                        break;
+
+                }
+
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
 
         Thread onFirstRun = new Thread(new Runnable() {
             @Override
@@ -125,16 +136,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 //                .build();
 //
 //        shortcutManager.setDynamicShortcuts(Arrays.asList(shortcut));
-
-//        Button button = findViewById(R.id.djid);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(CatalogActivity.this, SignUp.class));
-//            }
-//        });
-//
-//    }
 
         getLoaderManager().initLoader(PRODUCT_LOADER, null, this);
 
@@ -187,10 +188,9 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
             case R.id.YourCartAppBar:
                 startActivity(new Intent(CatalogActivity.this, CartActivity.class));
                 return true;
-
-//            case android.R.id.home:
-//                mDrawerLayout.openDrawer(GravityCompat.START);
-//                return true;
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
 
         }
 
