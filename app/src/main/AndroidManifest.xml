@@ -46,7 +46,7 @@
             android:authorities="com.example.tanmay.shoppingapp.Data.ProductList.ProductProvider"
             android:exported="false" />
 
-        <activity android:name=".SignUp" />
+        <activity android:name=".Activities.SignUp.SignUp" />
         <activity android:name=".UserAccount"/>
     </application>
 

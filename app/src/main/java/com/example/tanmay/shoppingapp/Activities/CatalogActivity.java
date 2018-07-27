@@ -31,19 +31,11 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 //    ImageView thumbnail;
 //    DrawerLayout mDrawerLayout;
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//
-//        if (requestCode == 1 && resultCode == RESULT_OK) {
-//
-//            Snackbar snackbar = Snackbar.make(linearLayout, "Added to Cart", Snackbar.LENGTH_LONG);
-//            snackbar.show();
-//
-//        }
-//    }
-
     // Identifier for the product data loader
     private static final int PRODUCT_LOADER = 0;
+
+    // Shared preferences editor
+    SharedPreferences first_run;
 
     // Adapter for the list view
     CatalogCursorAdapter mCursorAdapter;
@@ -55,10 +47,9 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
         setTitle(R.string.title_activity_catalog);
 
-//        linearLayout = findViewById(R.id.d68f8);https://github.com/codeluster/AB-Music-Player.git
+//        linearLayout = findViewById(R.id.d68f8);
 
-        SharedPreferences first_run = getSharedPreferences("ApplicationState", MODE_PRIVATE);
-        SharedPreferences.Editor editor = first_run.edit();
+        final SharedPreferences first_run = getSharedPreferences("ApplicationState", MODE_PRIVATE);
 
 
         //Adding Navigation Drawer
@@ -97,46 +88,22 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 //            }
 //        });
 
-
-        if (!first_run.getBoolean("ProductListCreated", false)) {
-
-            TypedArray PRODUCT_NAMES = getResources().obtainTypedArray(R.array.product_Names);
-            TypedArray PRODUCT_PRICES = getResources().obtainTypedArray(R.array.product_Prices);
-            TypedArray PRODUCT_DESCRIPTIONS = getResources().obtainTypedArray(R.array.product_Descriptions);
-            TypedArray PRODUCT_IMAGES = getResources().obtainTypedArray(R.array.product_Images);
-            TypedArray PRODUCT_THUMBNAILS = getResources().obtainTypedArray(R.array.product_Thumbnails);
-
-
-            for (int i = 0; PRODUCT_NAMES.hasValue(i); i++) {
-
-                ContentValues values = new ContentValues();
-
-                values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME, PRODUCT_NAMES.getResourceId(i, 0));
-                values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE, PRODUCT_PRICES.getResourceId(i, 0));
-                values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION, PRODUCT_DESCRIPTIONS.getResourceId(i, 0));
-                values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_IMAGE, PRODUCT_IMAGES.getResourceId(i, 0));
-                values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL, PRODUCT_THUMBNAILS.getResourceId(i, 0));
-
-                getContentResolver().insert(BaseContract.ProductEntry.CONTENT_URI, values);
-
-                values.clear();
-
+        Thread onFirstRun = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                initializeDatabase();
+                SharedPreferences.Editor editor = first_run.edit();
+                editor.putBoolean("ProductListCreated", true);
+                editor.apply();
             }
+        });
 
-            PRODUCT_NAMES.recycle();
-            PRODUCT_PRICES.recycle();
-            PRODUCT_DESCRIPTIONS.recycle();
-            PRODUCT_IMAGES.recycle();
-            PRODUCT_THUMBNAILS.recycle();
-
-            editor.putBoolean("ProductListCreated", true);
-            editor.apply();
-        }
+        // Executed when the app is run for the first time
+        if (!first_run.getBoolean("ProductListCreated", false)) onFirstRun.start();
 
         ListView productListView = findViewById(R.id.catalog_list_view);
         mCursorAdapter = new CatalogCursorAdapter(this, null);
         productListView.setAdapter(mCursorAdapter);
-
 
         productListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -172,8 +139,40 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 //
 //    }
 
-
         getLoaderManager().initLoader(PRODUCT_LOADER, null, this);
+
+    }
+
+    private void initializeDatabase() {
+
+        TypedArray PRODUCT_NAMES = getResources().obtainTypedArray(R.array.product_Names);
+        TypedArray PRODUCT_PRICES = getResources().obtainTypedArray(R.array.product_Prices);
+        TypedArray PRODUCT_DESCRIPTIONS = getResources().obtainTypedArray(R.array.product_Descriptions);
+        TypedArray PRODUCT_IMAGES = getResources().obtainTypedArray(R.array.product_Images);
+        TypedArray PRODUCT_THUMBNAILS = getResources().obtainTypedArray(R.array.product_Thumbnails);
+
+
+        for (int i = 0; PRODUCT_NAMES.hasValue(i); i++) {
+
+            ContentValues values = new ContentValues();
+
+            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME, PRODUCT_NAMES.getResourceId(i, 0));
+            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE, PRODUCT_PRICES.getResourceId(i, 0));
+            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION, PRODUCT_DESCRIPTIONS.getResourceId(i, 0));
+            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_IMAGE, PRODUCT_IMAGES.getResourceId(i, 0));
+            values.put(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_THUMBNAIL, PRODUCT_THUMBNAILS.getResourceId(i, 0));
+
+            getContentResolver().insert(BaseContract.ProductEntry.CONTENT_URI, values);
+
+            values.clear();
+
+        }
+
+        PRODUCT_NAMES.recycle();
+        PRODUCT_PRICES.recycle();
+        PRODUCT_DESCRIPTIONS.recycle();
+        PRODUCT_IMAGES.recycle();
+        PRODUCT_THUMBNAILS.recycle();
 
     }
 
