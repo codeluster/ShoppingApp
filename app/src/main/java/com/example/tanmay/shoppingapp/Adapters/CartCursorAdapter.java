@@ -44,8 +44,8 @@ public class CartCursorAdapter extends CursorAdapter {
 
         Cursor product = context.getContentResolver().query(productUri, projection, null, null, null);
 
-        try {
-            product.moveToFirst();
+
+        if (product != null && product.moveToFirst()) {
 
             String productName = context.getString(product.getInt(product.getColumnIndexOrThrow(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME)));
             Integer productPrice = context.getResources().getInteger(product.getInt(product.getColumnIndexOrThrow(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE)));
@@ -53,13 +53,11 @@ public class CartCursorAdapter extends CursorAdapter {
 
             nameTextView.setText(productName);
             priceTextView.setText(productPrice.toString());
-            quantityTextView.append(quantityOrdered.toString());
 
-        } catch (NullPointerException e) {
-            Log.e(CartCursorAdapter.class.getSimpleName(), "Product cursor NPE");
-        }
+            String quantityString = context.getString(R.string.quantity_multipiler);
+            quantityTextView.setText(quantityString.concat(quantityOrdered.toString()));
 
-        if (product != null) {
+
             product.close();
         }
     }

@@ -1,14 +1,18 @@
 package com.example.tanmay.shoppingapp.Activities;
 
+import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,6 +60,8 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
                 gotoProduct(l);
             }
         });
+
+        registerForContextMenu(cartListView);
 
         getLoaderManager().initLoader(CART_LOADER, null, this);
 
@@ -133,13 +139,82 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        if (v.getId() == R.id.cart_list_view) {
+            getMenuInflater().inflate(R.menu.cart_context_menu, menu);
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        // Get information about the menu that is created
+        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int selectID = menuInfo.position;
+        switch (item.getItemId()) {
+            case R.id.action_delete_cart_entry:
+                showDeleteConfirmationDialog(selectID);
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+
+
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
             case R.id.clearCart:
+                showDeleteAllConfirmationDialog();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showDeleteConfirmationDialog(final int position) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.remove_from_cart_dialog_message);
+        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Uri uri = ContentUris.withAppendedId(BaseContract.CartEntry.CONTENT_URI, position + 1);
+                getContentResolver().delete(uri, null, null);
+
+            }
+        });
+        builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (dialogInterface != null) dialogInterface.dismiss();
+            }
+        });
+        builder.create().show();
+
+    }
+
+    private void showDeleteAllConfirmationDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(R.string.empty_cart_dialog_message);
+        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                getContentResolver().delete(BaseContract.CartEntry.CONTENT_URI, null, null);
+            }
+        });
+        builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (dialogInterface != null) dialogInterface.dismiss();
+            }
+        });
+        builder.create().show();
+
     }
 
     @Override
