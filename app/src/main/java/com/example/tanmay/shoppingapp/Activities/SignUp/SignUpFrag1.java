@@ -17,6 +17,7 @@ import com.example.tanmay.shoppingapp.R;
 public class SignUpFrag1 extends Fragment {
 
     View rootView;
+    MaterialButton cancel;
     MaterialButton next;
     SignUp signUp;
 
@@ -32,6 +33,7 @@ public class SignUpFrag1 extends Fragment {
         rootView = inflater.inflate(R.layout.sign_up_fragment_1, container, false);
 
         next = rootView.findViewById(R.id.sign_up_fragment_1_button_next);
+        cancel = rootView.findViewById(R.id.sign_up_fragment_1_button_cancel);
         signUp = (SignUp) getActivity();
         return rootView;
 
@@ -56,6 +58,12 @@ public class SignUpFrag1 extends Fragment {
             }
         });
 
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signUp.onBackPressed();
+            }
+        });
     }
 
     private void restoreState(Bundle bundle, View view) {

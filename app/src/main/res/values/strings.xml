@@ -5,42 +5,62 @@
 
     <!-- Title of Catalog Activity -->
     <string name="title_activity_catalog">@string/app_name</string>
+    <!-- Title of Product Activity -->
     <string name="title_activity_product">Product Page</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="cart">Cart</string>
-    <string name="listitem">Placeholder</string>
-    <string name="thumbnail_photo_of_product">Thumbnail photo of Product</string>
+    <!-- Title of Cart Activity -->
+    <string name="title_activity_your_cart">Cart</string>
+    <!-- Title of Sign Up Activity-->
+    <string name="title_activity_sign_up">Sign Up</string>
 
-    <string name="title_activity_your_cart">YourCart</string>
+    <!-- IDK app doesn't compile w/o this  -->
+    <string name="thumbnail_photo_of_product">Thumbnail photo of Product</string>
 
     <!-- Symbol or acronym of currency being used -->
     <string name="currency_symbol">₹</string>
     <string name="select_quantity">Select Quantity</string>
+
+    <!-- Toggle to change number of lines in description of product -->
     <string name="see_more">See More</string>
+    <!-- Toggle to change number of lines in description of product -->
     <string name="see_less">See Less</string>
+
+    <!-- Hint Texts in Sign Up Activity -->
     <string name="first_name">First Name</string>
-    <string name="john">John</string>
     <string name="last_name">Last Name</string>
-    <string name="other">Other</string>
-    <string name="male">Male</string>
-    <string name="female">Female</string>
-    <string name="doe">Doe</string>
     <string name="user_name">User Name</string>
     <string name="super_secure_password_here">Super secure password here</string>
-    <string name="confirm_password">Confirm Password</string>
-    <string name="password">Password</string>
-    <string name="unique_username_here">Unique username here</string>
     <string name="re_enter_super_secure_password">Re-enter super secure password</string>
-    <string name="subtotal">Subtotal</string>
+    <string name="unique_username_here">Unique username here</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+
+    <!--Gender options in Sign Up Activity-->
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other">Other</string>
+
+    <!-- Default First Name in Sign Up Activity-->
+    <string name="john">John</string>
+    <!-- Default Last Name in Sign Up Activity-->
+    <string name="doe">Doe</string>
+
+    <!-- Go back to previous step button text-->
     <string name="previous">Previous</string>
+    <!-- Go to next step button text -->
     <string name="next">Next</string>
+    <!-- Cancel Signing Up button text -->
     <string name="cancel">Cancel</string>
+    <!-- Finished signing up button text -->
     <string name="done">Done</string>
+
+    <!-- Title of quantity selection in product activity -->
     <string name="quantity">Quantity</string>
+    <!-- Button text to proceed to check out without adding to cart -->
     <string name="buy_now">Buy Now</string>
+    <!-- Button text to add item to cart -->
     <string name="add_to_cart">Add to Cart</string>
+    <!-- Heading where bill subtotal is displayed -->
+    <string name="subtotal">Subtotal</string>
 
     <!-- Placeholder text to ease designing -->
     <string name="placeholder_description" translatable="false">Yahan pe description efiufbie eugih guiwuihg weguihg guhwi gh iughwuhiuh gr iyugoe ag rhgupairhgiu hgirughyuiuipy f iufh iaewg iu f eiugh iurehgoi hgiurphghiu gphaiuhgeiuwp aghuigerhpgiuhuiprahg uioghui rphguirghpuiagh reuighreiupghreuipghioweahjapeghguiergaruiphgaiohgajkgabiuvpd podhviu gh aiph guipare guih</string>
@@ -53,25 +73,18 @@
 
     <!-- Header of empty view when cart is empty -->
     <string name="empty_cart_header">Your Cart is empty</string>
-
     <!-- Message in empty view when cart is empty -->
     <string name="empty_cart_message">Your shopping cart is made to be filled with all of your favourite products and helps you shop with ease.</string>
-
     <!-- Dialog message when removing from cart -->
     <string name="remove_from_cart_dialog_message">Are you sure you want to remove this item from your cart?</string>
-
     <!-- Dialog message when emptying cart -->
     <string name="empty_cart_dialog_message">Are you sure you want to empty your cart?</string>
-
     <!-- Title in context menu when removing single item from cart -->
     <string name="remove_from_cart">Remove this item</string>
-
     <!-- Symbol to represent quantity ordered eg X 2 or X 5 -->
-    <string name="quantity_multipiler" translatable="false">X</string>
-
+    <string name="quantity_multiplier" translatable="false">X</string>
     <!-- Button text to reduce quantity -->
     <string name="reduce_quantity" translatable="false">-</string>
-
     <!-- Button text to increase quantity -->
     <string name="increase_quantity" translatable="false">+</string>
 

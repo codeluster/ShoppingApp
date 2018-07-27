@@ -12,11 +12,11 @@
             app:actionViewClass="android.support.v7.widget.SearchView"
             app:showAsAction="always|collapseActionView" />
 
-        <item
+      <!--  <item
             android:id="@+id/YourCartAppBar"
             android:icon="@drawable/ic_shopping_cart_black_24dp"
             android:title="Cart"
-            app:showAsAction="never" />
+            app:showAsAction="never" />-->
 
     </group>
 

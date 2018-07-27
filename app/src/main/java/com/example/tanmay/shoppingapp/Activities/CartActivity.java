@@ -1,6 +1,6 @@
 package com.example.tanmay.shoppingapp.Activities;
 
-import android.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentUris;
 import android.content.CursorLoader;
@@ -155,7 +155,7 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private void showDeleteConfirmationDialog(final int position) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
         builder.setMessage(R.string.remove_from_cart_dialog_message);
         builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
             @Override
@@ -177,7 +177,7 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private void showDeleteAllConfirmationDialog() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
 
         builder.setMessage(R.string.empty_cart_dialog_message);
         builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {

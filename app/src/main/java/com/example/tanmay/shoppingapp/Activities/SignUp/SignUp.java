@@ -7,31 +7,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.example.tanmay.shoppingapp.R;
+
 public class SignUp extends AppCompatActivity {
 
     Bundle step1Bundle;
     Bundle step2Bundle;
-
-    @Override
-    public void onBackPressed() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(SignUp.this);
-
-        builder.setTitle("Cancel SignUp")
-                .setMessage("Are you sure you want to cancel signing up?")
-                .setPositiveButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if (dialogInterface != null) dialogInterface.dismiss();
-                    }
-                })
-                .setNegativeButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        finish();
-                    }
-                }).create().show();
-    }
+    boolean edited;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,10 +95,32 @@ public class SignUp extends AppCompatActivity {
 
         editor.apply();
 
-        Toast.makeText(SignUp.this, "Welcome, " + step1Bundle.getString("firstName"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(SignUp.this, step1Bundle.getString("firstName") + ", welcome to " + getString(R.string.app_name), Toast.LENGTH_SHORT).show();
 
         finish();
 
     }
+
+
+    @Override
+    public void onBackPressed() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(SignUp.this);
+
+        builder.setMessage("All unsaved changes will be lost")
+                .setPositiveButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (dialogInterface != null) dialogInterface.dismiss();
+                    }
+                })
+                .setNegativeButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                }).create().show();
+    }
+
 
 }

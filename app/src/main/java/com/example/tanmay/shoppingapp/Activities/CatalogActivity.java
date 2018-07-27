@@ -27,7 +27,6 @@ import com.example.tanmay.shoppingapp.Activities.SignUp.SignUp;
 import com.example.tanmay.shoppingapp.Adapters.CatalogCursorAdapter;
 import com.example.tanmay.shoppingapp.Data.BaseContract;
 import com.example.tanmay.shoppingapp.R;
-import com.example.tanmay.shoppingapp.UserAccount;
 
 public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -85,9 +84,9 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
                         startActivity(new Intent(CatalogActivity.this, CartActivity.class));
                         break;
 
-                    case R.id.homepage_drawer_account:
+                 /* case R.id.homepage_drawer_account:
                         startActivity(new Intent(CatalogActivity.this, UserAccount.class));
-                        break;
+                        break;*/
 
                 }
 
@@ -185,9 +184,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
         switch (item.getItemId()) {
 
-            case R.id.YourCartAppBar:
-                startActivity(new Intent(CatalogActivity.this, CartActivity.class));
-                return true;
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;

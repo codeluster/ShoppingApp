@@ -2,28 +2,28 @@
 <resources>
 
     <!-- Product 1 -->
-    <string name="product1Name">Beats Solo3 Wireless</string>
+    <string name="product1Name" translatable="false">Beats Solo3 Wireless</string>
     <integer name="product1Price">
         15357
     </integer>
     <string name="product1Description">With up to 40 hours of battery life, Beats Solo3 Wireless is your perfect everyday headphone. Get the most out of your music with an award-winning, emotionally charged Beats listening experience. Beats and Apple are changing the way you listen to music with the introduction of Apple W1 technology in Beats Solo3 Wireless. Incorporating the incredible W1 chip brings seamless setup and switching for your Apple devices, amazing battery life, and 5-minute Fast Fuel charging.</string>
 
     <!-- Product 2 -->
-    <string name="product2Name">BeatsX</string>
+    <string name="product2Name" translatable="false">BeatsX</string>
     <integer name="product2Price">
         7669
     </integer>
     <string name="product2Description">Fit for your life, Beatsx earphones are the perfect wireless companion. With up to 8 hours of battery life and Fast Fuel technology, you can experience authentic, clear sound throughout your day.With Fast Fuel, 5 minutes of charging gets you 2 hours of playback when battery is low. With Siri-compatible RemoteTalk, you can take calls with an on-cable mic and play music with easy-to-use controls, seamlessly switching back and forth as you go about your day. </string>
 
     <!--Product 3-->
-    <string name="product3Name">XTfree BT Sport Earbud</string>
+    <string name="product3Name" translatable="false">XTfree BT Sport Earbud</string>
     <integer name="product3Price">
         5999
     </integer>
     <string name="product3Description">Coming in at just under 16g, it’s not just our most secure and sweat-resistant earbud, it’s also one of the lightest wireless Sport earbuds on the market.6-hour battery life and sweat resistant build keep you and your earbuds going in more ways than one.Switch up the playlist to stay motivated, or take calls using the convenient microphone and remote.</string>
 
     <!-- Product 4 -->
-    <string name="product4Name">AirPods</string>
+    <string name="product4Name" translatable="false">AirPods</string>
     <integer name="product4Price">10999</integer>
     <string name="product4Description">Just take them out and they’re ready to use with all your devices. Put them in your ears and they connect instantly. Speak into them and your voice sounds clear. Introducing AirPods. Simplicity and technology, together like never before. The result is completely magical.</string>
 

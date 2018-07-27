@@ -214,7 +214,7 @@ public class ProductActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_activity_catalog, menu);
+        getMenuInflater().inflate(R.menu.toolbar_activity_product, menu);
         return true;
     }
 
@@ -222,7 +222,7 @@ public class ProductActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.YourCartAppBar:
+            case R.id.action_open_cart:
                 startActivity(new Intent(ProductActivity.this, CartActivity.class));
         }
 

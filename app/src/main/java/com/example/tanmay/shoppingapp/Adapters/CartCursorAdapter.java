@@ -4,7 +4,6 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,9 +53,8 @@ public class CartCursorAdapter extends CursorAdapter {
             nameTextView.setText(productName);
             priceTextView.setText(productPrice.toString());
 
-            String quantityString = context.getString(R.string.quantity_multipiler);
+            String quantityString = context.getString(R.string.quantity_multiplier);
             quantityTextView.setText(quantityString.concat(quantityOrdered.toString()));
-
 
             product.close();
         }
