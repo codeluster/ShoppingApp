@@ -10,6 +10,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -27,12 +28,14 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
     private static final int CART_LOADER = 0;
     CartCursorAdapter mCursorAdapter;
     private static int numCart = 0;
+    FloatingActionButton checkOutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_cart);
 
+        checkOutButton = findViewById(R.id.activity_cart_checkout_fab);
 //        // Display personalized message in Action Bar Title
 //        SharedPreferences preferences = getSharedPreferences("UserInformation", MODE_PRIVATE);
 //        if (preferences.getString("FirstName", null) != null) {
@@ -137,7 +140,9 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
     protected void onStart() {
         super.onStart();
         // If the cart is empty then halt creation of menu
-        if (numCart == 0) invalidateOptionsMenu();
+        if (numCart == 0) {
+            invalidateOptionsMenu();
+        }
     }
 
     @Override
@@ -146,6 +151,7 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
         if (numCart == 0) {
             MenuItem clearCart = menu.findItem(R.id.action_clear_cart);
             clearCart.setVisible(false);
+            checkOutButton.setVisibility(View.GONE);
         }
         return true;
     }

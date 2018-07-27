@@ -22,11 +22,17 @@
     </integer>
     <string name="product3Description">Coming in at just under 16g, it’s not just our most secure and sweat-resistant earbud, it’s also one of the lightest wireless Sport earbuds on the market.6-hour battery life and sweat resistant build keep you and your earbuds going in more ways than one.Switch up the playlist to stay motivated, or take calls using the convenient microphone and remote.</string>
 
+    <!-- Product 4 -->
+    <string name="product4Name">AirPods</string>
+    <integer name="product4Price">10999</integer>
+    <string name="product4Description">Just take them out and they’re ready to use with all your devices. Put them in your ears and they connect instantly. Speak into them and your voice sounds clear. Introducing AirPods. Simplicity and technology, together like never before. The result is completely magical.</string>
+
     <!-- Array containing the Names of the products -->
     <array name="product_Names">
         <item>@string/product1Name</item>
         <item>@string/product2Name</item>
         <item>@string/product3Name</item>
+        <item>@string/product4Name</item>
     </array>
 
     <!-- Array containing the Descriptions of the products -->
@@ -34,6 +40,7 @@
         <item>@string/product1Description</item>
         <item>@string/product2Description</item>
         <item>@string/product3Description</item>
+        <item>@string/product4Description</item>
     </array>
 
     <!-- Array containing the Prices of the products -->
@@ -41,6 +48,7 @@
         <item>@integer/product1Price</item>
         <item>@integer/product2Price</item>
         <item>@integer/product3Price</item>
+        <item>@integer/product4Price</item>
     </array>
 
     <!-- Array containing the Images of the products -->
@@ -48,6 +56,7 @@
         <item>@drawable/product1image</item>
         <item>@drawable/product2image</item>
         <item>@drawable/product3image</item>
+        <item>@drawable/product4image</item>
     </array>
 
     <!-- Array containing the Thumbnails of the products -->
@@ -55,6 +64,7 @@
         <item>@drawable/product1thumbnail</item>
         <item>@drawable/product2thumbnail</item>
         <item>@drawable/product3thumbnail</item>
+        <item>@drawable/product4thumbnail</item>
     </array>
 
 </resources>
