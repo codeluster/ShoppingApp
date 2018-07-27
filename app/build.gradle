@@ -5,7 +5,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.tanmay.shoppingapp"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
         versionName "Alpha"

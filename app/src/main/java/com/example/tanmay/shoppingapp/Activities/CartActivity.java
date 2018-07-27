@@ -1,14 +1,18 @@
 package com.example.tanmay.shoppingapp.Activities;
 
 import android.app.LoaderManager;
+import android.content.ContentUris;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.tanmay.shoppingapp.Adapters.CartCursorAdapter;
@@ -46,7 +50,44 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
         mCursorAdapter = new CartCursorAdapter(this, null);
         cartListView.setAdapter(mCursorAdapter);
 
+        cartListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                gotoProduct(l);
+            }
+        });
+
         getLoaderManager().initLoader(CART_LOADER, null, this);
+
+    }
+
+    private void gotoProduct(long itemClicked) {
+
+        Intent viewProduct = new Intent(CartActivity.this, ProductActivity.class);
+
+        // Get the Uri of the product in cart
+        Uri cartUri = ContentUris.withAppendedId(BaseContract.CartEntry.CONTENT_URI, itemClicked);
+
+        String[] projection = {
+                BaseContract.CartEntry._ID,
+                BaseContract.CartEntry.COLUMN_NAME_PRODUCT_ID
+        };
+
+        // This cursor contains one element corresponding to the product clicked
+        Cursor fuhgvh = getContentResolver().query(cartUri, projection, null, null, null, null);
+
+        fuhgvh.moveToFirst();
+
+        // This is the ID of the product in the products database
+        int productID = fuhgvh.getInt(fuhgvh.getColumnIndexOrThrow(BaseContract.CartEntry.COLUMN_NAME_PRODUCT_ID));
+
+        fuhgvh.close();
+
+        // This Uri corresponds to row in product database containing required product
+        Uri productUri = ContentUris.withAppendedId(BaseContract.ProductEntry.CONTENT_URI, productID);
+
+        viewProduct.setData(productUri);
+        startActivity(viewProduct);
 
     }
 //    private void checkOut() {
@@ -96,9 +137,6 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
 
         switch (item.getItemId()) {
             case R.id.clearCart:
-                return true;
-            case android.R.id.home:
-                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
