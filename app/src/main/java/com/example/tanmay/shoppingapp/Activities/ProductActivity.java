@@ -1,5 +1,6 @@
 package com.example.tanmay.shoppingapp.Activities;
 
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -37,8 +38,6 @@ public class ProductActivity extends AppCompatActivity {
     int quantity;
 
     private Uri currentProductUri;
-
-    Boolean descExpanded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,15 +162,53 @@ public class ProductActivity extends AppCompatActivity {
 
     private void addToCart() {
 
-        ContentValues values = new ContentValues();
+        String[] projection = {
+                BaseContract.CartEntry._ID,
+                BaseContract.CartEntry.COLUMN_NAME_PRODUCT_ID,
+                BaseContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY
+        };
 
-        values.put(BaseContract.CartEntry.COLUMN_NAME_PRODUCT_ID, productID);
-        values.put(BaseContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY, quantity);
+        String selection = BaseContract.CartEntry.COLUMN_NAME_PRODUCT_ID + "=?";
 
-        getContentResolver().insert(BaseContract.CartEntry.CONTENT_URI, values);
+        String[] selectionArgs = {String.valueOf(productID)};
 
-        values.clear();
+        // Get a cursor requesting an existing entry of current product
+        Cursor cart = getContentResolver().query(BaseContract.CartEntry.CONTENT_URI, projection, selection, selectionArgs, null);
 
+        // If cart already has an entry
+        // update it's quantity
+        if (cart != null && cart.moveToFirst()) {
+
+            int cartQuantity = cart.getInt(cart.getColumnIndexOrThrow(BaseContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY));
+            int cartID = cart.getInt(cart.getColumnIndexOrThrow(BaseContract.CartEntry._ID));
+            Uri cartUri = ContentUris.withAppendedId(BaseContract.CartEntry.CONTENT_URI, cartID);
+
+            ContentValues values = new ContentValues();
+            values.put(BaseContract.CartEntry._ID, cartID);
+            values.put(BaseContract.CartEntry.COLUMN_NAME_PRODUCT_ID, productID);
+            values.put(BaseContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY, cartQuantity + quantity);
+
+            getContentResolver().update(cartUri, values, null, null);
+
+            values.clear();
+
+        } else {
+
+            // If cart doesn't already have this product
+            // add a new entry
+
+            ContentValues values = new ContentValues();
+
+            values.put(BaseContract.CartEntry.COLUMN_NAME_PRODUCT_ID, productID);
+            values.put(BaseContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY, quantity);
+
+            getContentResolver().insert(BaseContract.CartEntry.CONTENT_URI, values);
+
+            values.clear();
+
+        }
+
+        cart.close();
     }
 
     @Override
