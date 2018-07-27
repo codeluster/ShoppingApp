@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:text="X 3" />
+            android:text="X " />
 
         <TextView
             android:layout_width="wrap_content"

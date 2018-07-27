@@ -1,7 +1,9 @@
 package com.example.tanmay.shoppingapp.Adapters;
 
+import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,23 +40,20 @@ public class CartCursorAdapter extends CursorAdapter {
                 BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE
         };
 
-        String selection = BaseContract.ProductEntry._ID;
+        Uri productUri = ContentUris.withAppendedId(BaseContract.ProductEntry.CONTENT_URI, productID);
 
-        String[] selectionArgs = {Integer.toString(productID)};
-
-        Cursor product = context.getContentResolver().query(BaseContract.ProductEntry.CONTENT_URI, projection, selection, selectionArgs, null);
+        Cursor product = context.getContentResolver().query(productUri, projection, null, null, null);
 
         try {
             product.moveToFirst();
 
-
             String productName = context.getString(product.getInt(product.getColumnIndexOrThrow(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME)));
             Integer productPrice = context.getResources().getInteger(product.getInt(product.getColumnIndexOrThrow(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE)));
-            int quantityOrdered = cursor.getInt(cursor.getColumnIndexOrThrow(BaseContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY));
+            Integer quantityOrdered = cursor.getInt(cursor.getColumnIndexOrThrow(BaseContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY));
 
             nameTextView.setText(productName);
             priceTextView.setText(productPrice.toString());
-            quantityTextView.setText("X " + quantityOrdered);
+            quantityTextView.append(quantityOrdered.toString());
 
         } catch (NullPointerException e) {
             Log.e(CartCursorAdapter.class.getSimpleName(), "Product cursor NPE");
