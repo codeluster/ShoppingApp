@@ -54,7 +54,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalog);
 
-//        linearLayout = findViewById(R.id.d68f8);
+//        linearLayout = findViewById(R.id.d68f8);https://github.com/codeluster/AB-Music-Player.git
 
         SharedPreferences first_run = getSharedPreferences("ApplicationState", MODE_PRIVATE);
         SharedPreferences.Editor editor = first_run.edit();
