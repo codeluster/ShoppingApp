@@ -34,7 +34,6 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_cart);
-
         checkOutButton = findViewById(R.id.activity_cart_checkout_fab);
 
 //        // Display personalized message in Action Bar Title

@@ -71,6 +71,7 @@ public class ProductActivity extends AppCompatActivity {
         Cursor currentProductCursor = getContentResolver().query(currentProductUri, projection, null, null, null);
 
         if (currentProductCursor.moveToFirst()) {
+
             productID = currentProductCursor.getInt(currentProductCursor.getColumnIndexOrThrow(BaseContract.ProductEntry._ID));
             setTitle(getString(currentProductCursor.getInt(currentProductCursor.getColumnIndexOrThrow(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME))));
             prodDesc.setText(currentProductCursor.getInt(currentProductCursor.getColumnIndexOrThrow(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_DESCRIPTION)));

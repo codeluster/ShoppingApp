@@ -8,4 +8,5 @@
     <color name="textColorPrimary">#000000</color>
     <color name="toolbarColorPrimary">@color/colorPrimary</color>
     <color name="buttonTextColor">@color/textColorPrimary</color>
+    <color name="backgroundColor">#FFFFFF</color>
 </resources>
