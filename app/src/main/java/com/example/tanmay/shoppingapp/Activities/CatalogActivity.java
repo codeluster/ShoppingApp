@@ -34,9 +34,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     // Identifier for the product data loader
     private static final int PRODUCT_LOADER = 0;
 
-    // Shared preferences editor
-    SharedPreferences first_run;
-
     // Adapter for the list view
     CatalogCursorAdapter mCursorAdapter;
 
