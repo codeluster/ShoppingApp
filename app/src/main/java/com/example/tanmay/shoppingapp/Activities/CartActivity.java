@@ -36,20 +36,12 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_your_cart);
 
         checkOutButton = findViewById(R.id.activity_cart_checkout_fab);
+
 //        // Display personalized message in Action Bar Title
 //        SharedPreferences preferences = getSharedPreferences("UserInformation", MODE_PRIVATE);
 //        if (preferences.getString("FirstName", null) != null) {
 //            toolbar.setTitle(preferences.getString("FirstName", null) + "'s Cart");
 //        }
-
-//        // Set an OnClickListener on the FAB
-//        checkOutButton = findViewById(R.id.activity_cart_checkout_fab);
-//        checkOutButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                checkOut();
-//            }
-//        });
 
         ListView cartListView = findViewById(R.id.cart_list_view);
         View empty_view = findViewById(R.id.activity_cart_empty_view);
@@ -99,42 +91,6 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
         startActivity(viewProduct);
 
     }
-//    private void checkOut() {
-//
-//        Intent intent = new Intent(Intent.ACTION_SENDTO);
-//        intent.putExtra(Intent.EXTRA_EMAIL, "tanmaysingal2013@gmail.com");
-//        intent.putExtra(Intent.EXTRA_SUBJECT, "Email sent from Shopping App");
-//
-//        if (intent.resolveActivity(getPackageManager()) != null) {
-//            startActivity(intent);
-//        } else {
-//            Toast.makeText(this, "No email client available", Toast.LENGTH_SHORT).show();
-//        }
-//
-//    }
-//
-//    // Graveyard
-//    private int getSubtotal(Cursor cart, Cursor productList) {
-//
-//        int subtotal = 0;
-//        int cartCounter = 1;
-//
-//        //Travereses the cart
-//        while (!cart.isLast()) {
-//
-//            cart.move(cartCounter);
-//            int quan = cart.getInt(cart.getColumnIndexOrThrow(BaseContract.CartEntry.COLUMN_NAME_ORDERED_QUANTITY));
-//
-//            //Traverses the productList
-//            //Moves to location as given by the cart ID field
-//            productList.move(cart.getInt(cart.getColumnIndexOrThrow(BaseContract.CartEntry._ID)));
-//
-//            subtotal += quan * getResources().getInteger(productList.getInt(productList.getColumnIndexOrThrow(BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_PRICE)));
-//            cartCounter++;
-//        }
-//        return subtotal;
-//    }
-
 
     @Override
     protected void onStart() {
@@ -158,7 +114,7 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.your_cart_toolbar, menu);
+        getMenuInflater().inflate(R.menu.toolbar_activity_cart, menu);
         return true;
     }
 
@@ -166,7 +122,7 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         if (v.getId() == R.id.cart_list_view) {
-            getMenuInflater().inflate(R.menu.cart_context_menu, menu);
+            getMenuInflater().inflate(R.menu.contextual_activty_cart, menu);
         }
     }
 

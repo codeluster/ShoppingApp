@@ -43,6 +43,6 @@
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/home_page_drawer_header"
-            app:menu="@menu/home_page_drawer" />-->
+            app:menu="@menu/navigation_drawer_activity_catalog" />-->
 
 </android.support.v4.widget.DrawerLayout>

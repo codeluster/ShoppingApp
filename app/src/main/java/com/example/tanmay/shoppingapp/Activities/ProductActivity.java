@@ -212,7 +212,7 @@ public class ProductActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home_page_toolbar, menu);
+        getMenuInflater().inflate(R.menu.toolbar_activity_catalog, menu);
         return true;
     }
 

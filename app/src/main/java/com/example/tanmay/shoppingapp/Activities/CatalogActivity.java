@@ -62,7 +62,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
 
         //Adding Navigation Drawer
-//        mDrawerLayout = findViewById(R.id.home_page_drawer);
+//        mDrawerLayout = findViewById(R.id.navigation_drawer_activity_catalog);
 
 //        SharedPreferences userInfo = getSharedPreferences("UserInformation", MODE_PRIVATE);
 
@@ -179,7 +179,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home_page_toolbar, menu);
+        getMenuInflater().inflate(R.menu.toolbar_activity_catalog, menu);
         return true;
     }
 
