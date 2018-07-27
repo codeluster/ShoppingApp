@@ -25,7 +25,6 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_cart);
 
-//
 //        // Display personalized message in Action Bar Title
 //        SharedPreferences preferences = getSharedPreferences("UserInformation", MODE_PRIVATE);
 //        if (preferences.getString("FirstName", null) != null) {
