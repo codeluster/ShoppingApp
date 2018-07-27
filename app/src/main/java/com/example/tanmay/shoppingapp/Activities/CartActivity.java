@@ -3,7 +3,6 @@ package com.example.tanmay.shoppingapp.Activities;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentUris;
-import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,6 +26,7 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private static final int CART_LOADER = 0;
     CartCursorAdapter mCursorAdapter;
+    private static int numCart = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +132,24 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
 //        return subtotal;
 //    }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // If the cart is empty then halt creation of menu
+        if (numCart == 0) invalidateOptionsMenu();
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        if (numCart == 0) {
+            MenuItem clearCart = menu.findItem(R.id.action_clear_cart);
+            clearCart.setVisible(false);
+        }
+        return true;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.your_cart_toolbar, menu);
@@ -167,7 +185,7 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.clearCart:
+            case R.id.action_clear_cart:
                 showDeleteAllConfirmationDialog();
                 return true;
         }
@@ -238,6 +256,7 @@ public class CartActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         mCursorAdapter.swapCursor(cursor);
+        numCart = cursor.getCount();
     }
 
     @Override

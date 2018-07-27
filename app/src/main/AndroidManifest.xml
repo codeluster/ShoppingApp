@@ -11,7 +11,7 @@
         android:theme="@style/Theme.Tanmay.AppTheme">
         <activity
             android:name=".Activities.CatalogActivity"
-            android:label="@string/title_activity_main"
+            android:label="@string/title_activity_catalog"
             android:theme="@style/Theme.Tanmay.AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +20,7 @@
         </activity>
         <activity
             android:name=".Activities.ProductActivity"
-            android:label="@string/title_activity_product_page"
+            android:label="@string/title_activity_product"
             android:parentActivityName=".Activities.CatalogActivity"
             android:theme="@style/Theme.Tanmay.AppTheme">
             <meta-data

@@ -4,14 +4,15 @@
     <string name="app_name">MCXI</string>
 
     <!-- Title of Catalog Activity -->
-    <string name="title_activity_main">@string/app_name</string>
+    <string name="title_activity_catalog">@string/app_name</string>
+    <string name="title_activity_product">Product Page</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="cart">Cart</string>
     <string name="listitem">Placeholder</string>
     <string name="thumbnail_photo_of_product">Thumbnail photo of Product</string>
-    <string name="title_activity_product_page">ProductPage</string>
+
     <string name="title_activity_your_cart">YourCart</string>
 
     <!-- Symbol or acronym of currency being used -->
