@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -32,7 +31,7 @@ public class ProductActivity extends AppCompatActivity {
     Button addToCart;
     Button decrease;
     Button increase;
-    EditText quantityBox;
+    TextView quantityBox;
     int productID;
 
     int quantity;
@@ -208,7 +207,7 @@ public class ProductActivity extends AppCompatActivity {
 
         }
 
-        cart.close();
+        if (cart != null) cart.close();
     }
 
     @Override

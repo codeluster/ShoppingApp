@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_product_parent_scroll_view"
     android:layout_width="match_parent"
@@ -34,11 +33,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
                 android:layout_marginRight="4dp"
                 android:text="@string/currency_symbol"
                 android:textColor="#000000"
-                android:textSize="18sp"
-                android:layout_marginEnd="4dp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/ProductPageProductPrice"
@@ -92,13 +91,13 @@
                 android:gravity="center"
                 android:minHeight="48dp"
                 android:minWidth="48dp"
+                android:paddingEnd="8dp"
                 android:paddingRight="8dp"
                 android:text="@string/see_more"
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"
-                android:textSize="14sp"
-                android:paddingEnd="8dp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -124,16 +123,16 @@
                 android:elevation="4dp"
                 android:text="@string/reduce_quantity" />
 
-            <EditText
+            <TextView
                 android:id="@+id/productPageQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorAccent"
-                android:inputType="number"
                 android:gravity="center_horizontal"
-                android:minWidth="48dp"
+                android:padding="8dp"
                 android:text="@string/default_initial_quantity"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Button
                 android:id="@+id/productPageQuantityIncrease"
