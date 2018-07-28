@@ -30,15 +30,15 @@ import com.example.tanmay.shoppingapp.R;
 
 public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    //    LinearLayout linearLayout;
-//    TextView name;
-//    ImageView thumbnail;
+    //  LinearLayout linearLayout;
+    //  TextView name;
+    //  ImageView thumbnail;
     DrawerLayout mDrawerLayout;
 
-    // Identifier for the product data loader
+    //  Identifier for the product data loader
     private static final int PRODUCT_LOADER = 0;
 
-    // Adapter for the list view
+    //  Adapter for the list view
     CatalogCursorAdapter mCursorAdapter;
 
     @Override
@@ -53,22 +53,20 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
         }
-//        linearLayout = findViewById(R.id.d68f8);
+    //  linearLayout = findViewById(R.id.d68f8);
 
         final SharedPreferences first_run = getSharedPreferences("ApplicationState", MODE_PRIVATE);
-
-
-        //Adding Navigation Drawer
+    //  Adding Navigation Drawer
         mDrawerLayout = findViewById(R.id.navigation_drawer_activity_catalog);
 
-//        SharedPreferences userInfo = getSharedPreferences("UserInformation", MODE_PRIVATE);
+    //  SharedPreferences userInfo = getSharedPreferences("UserInformation", MODE_PRIVATE);
 
         NavigationView navigationView = findViewById(R.id.navigation_view_activity_catalog);
 
-//        View header = navigationView.getHeaderView(navigationView.getHeaderCount());
-//        TextView username = header.findViewById(R.id.nav_drawer_header_username);
-//        String nameString = userInfo.getString("FirstName", "") + userInfo.getString("LastName", "");
-//        username.setText(nameString);
+    //  View header = navigationView.getHeaderView(navigationView.getHeaderCount());
+    //  TextView username = header.findViewById(R.id.nav_drawer_header_username);
+    //  String nameString = userInfo.getString("FirstName", "") + userInfo.getString("LastName", "");
+    //  username.setText(nameString);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -105,7 +103,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
             }
         });
 
-        // Executed when the app is run for the first time
+    //  Executed when the app is run for the first time
         if (!first_run.getBoolean("ProductListCreated", false)) onFirstRun.start();
 
         ListView productListView = findViewById(R.id.catalog_list_view);
@@ -116,25 +114,25 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int itemClicked, long clickedID) {
                 Intent intent = new Intent(CatalogActivity.this, ProductActivity.class);
-                // Uri of clicked product
+                //  Uri of clicked product
                 Uri clickedProduct = ContentUris.withAppendedId(BaseContract.ProductEntry.CONTENT_URI, clickedID);
-                // Set Uri as data in intent
+                //  Set Uri as data in intent
                 intent.setData(clickedProduct);
                 startActivity(intent);
             }
         });
 
-//        //Will crash app if API level < 25
-//        //Useless shortcut that opens google
-//        ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
-//        ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "id1")
-//                .setShortLabel("Your Cart")
-//                .setLongLabel("Open your cart")
-//                .setIcon(Icon.createWithResource(this, R.drawable.ic_add_shopping_cart_black_24dp))
-//                .setIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/")))
-//                .build();
+//  //  Will crash app if API level < 25
+//  //  Useless shortcut that opens google
+//      ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
+//      ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "id1")
+//          .setShortLabel("Your Cart")
+//          .setLongLabel("Open your cart")
+//          .setIcon(Icon.createWithResource(this, R.drawable.ic_add_shopping_cart_black_24dp))
+//          .setIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/")))
+//          .build();
 //
-//        shortcutManager.setDynamicShortcuts(Arrays.asList(shortcut));
+//      shortcutManager.setDynamicShortcuts(Arrays.asList(shortcut));
 
         getLoaderManager().initLoader(PRODUCT_LOADER, null, this);
 
@@ -147,7 +145,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         TypedArray PRODUCT_DESCRIPTIONS = getResources().obtainTypedArray(R.array.product_Descriptions);
         TypedArray PRODUCT_IMAGES = getResources().obtainTypedArray(R.array.product_Images);
         TypedArray PRODUCT_THUMBNAILS = getResources().obtainTypedArray(R.array.product_Thumbnails);
-
 
         for (int i = 0; PRODUCT_NAMES.hasValue(i); i++) {
 
@@ -197,7 +194,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
 
-        // Define a projection to specify the rows needed
+    //  Define a projection to specify the rows needed
         String[] projection = {
                 BaseContract.ProductEntry._ID,
                 BaseContract.ProductEntry.COLUMN_NAME_PRODUCT_NAME,
@@ -215,13 +212,13 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
-        // Update the cursor with new data
+    //  Update the cursor with new data
         mCursorAdapter.swapCursor(data);
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-        // Callback when the data needs to be deleted
+    //  Callback when the data needs to be deleted
         mCursorAdapter.swapCursor(null);
     }
 }
