@@ -29,7 +29,6 @@ import com.example.tanmay.shoppingapp.Data.BaseContract;
 import com.example.tanmay.shoppingapp.R;
 
 public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
-
     //  LinearLayout linearLayout;
     //  TextView name;
     //  ImageView thumbnail;
